@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connor Annand — Producer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'GayaTrial';src:url('Fonts/gayatrial-regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Retrofia';src:url('Fonts/Retrofia-PERSONAL-USE-ONLY.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+
+:root{
+  --title-font:'GayaTrial','Garamond',Georgia,serif;
+  --body-font:'Instrument Sans','DM Sans',sans-serif;
+
+  --bone:     #EDE8DE;
+  --bone-mid: #E2DDD3;
+  --bone-dim: #C8C3B8;
+  --cobalt:   #1B3CC4;
+  --cobalt-lt:#3E5FD4;
+  --ink:      #0D0F1A;
+  --ink-mid:  #3A3D52;
+  --ink-mute: #6A6D82;
+  --white:    #FAF8F4;
+  --dark:     #0A0C14;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bone);color:var(--ink);font-family:var(--body-font);font-weight:300;overflow-x:hidden;line-height:1.6;}
+
+.title-font{font-family:var(--title-font);}
+
+.page{display:none;}
+.page.active{display:block;}
+
+/* ── NAV ──────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 3rem;height:64px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,border-color 0.4s;}
+nav.solid{background:rgba(237,232,222,0.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,195,184,0.5);}
+nav.clear{background:transparent;border-bottom:none;}
+.nav-logo{font-family:var(--title-font);font-size:1.45rem;font-weight:400;text-decoration:none;cursor:pointer;transition:color 0.3s;line-height:1;letter-spacing:0.02em;}
+nav.clear .nav-logo{color:var(--white);}
+nav.solid .nav-logo{color:var(--ink);}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:color 0.2s;}
+nav.clear .nav-links a{color:rgba(250,248,244,0.72);}
+nav.clear .nav-links a:hover{color:var(--white);}
+nav.solid .nav-links a{color:var(--ink-mute);}
+nav.solid .nav-links a:hover,nav.solid .nav-links a.active{color:var(--cobalt);}
+.nav-cta{padding:0.45rem 1.3rem;}
+nav.clear .nav-cta{border:1px solid rgba(250,248,244,0.38);color:var(--white)!important;}
+nav.clear .nav-cta:hover{background:rgba(250,248,244,0.1);}
+nav.solid .nav-cta{background:var(--cobalt);color:var(--white)!important;}
+nav.solid .nav-cta:hover{background:#0f2490;}
+
+/* ── HERO ─────────────────────────── */
+/* ── HERO — split photo layout ─── */
+#hero{
+  position:relative;
+  min-height:100vh;
+  background:var(--bone);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  padding-top:64px;
+}
+.hero-name-row{
+  position:relative;
+  z-index:3;
+  padding:3.5rem 3rem 0;
+  display:flex;
+  flex-direction:column;
+  gap:0.75rem;
+}
+.hero-name{
+  font-family:var(--title-font);
+  font-size:clamp(5rem,13vw,13rem);
+  font-weight:400;
+  line-height:0.88;
+  letter-spacing:0.01em;
+  color:var(--ink);
+  opacity:0;
+  animation:up 1s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hero-photos-row{
+  position:relative;
+  z-index:2;
+  display:flex;
+  gap:1rem;
+  padding:2rem 3rem 0;
+  align-items:flex-end;
+  flex:1;
+}
+.hero-photo{
+  overflow:hidden;
+  flex-shrink:0;
+}
+.hero-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  opacity:0;
+  animation:fade 1.1s 0.5s forwards;
+}
+.hero-photo-a{
+  width:42%;
+  height:clamp(340px,52vh,520px);
+}
+.hero-photo-b{
+  width:28%;
+  height:clamp(240px,38vh,380px);
+  margin-bottom:1rem;
+}
+.hero-tagline-sub{
+  position:relative;z-index:3;
+  font-family:var(--title-font);
+  font-size:clamp(1.5rem,3.5vw,3rem);
+  font-style:italic;
+  font-weight:400;
+  color:var(--ink-mid);
+  line-height:1.2;
+  letter-spacing:0.01em;
+  opacity:0;
+  animation:up 0.8s 0.45s forwards;
+}
+.hero-bottom-row{
+  position:relative;z-index:3;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  padding:1.75rem 3rem 2.5rem;
+}
+.hero-sub{
+  font-family:var(--body-font);
+  font-size:0.72rem;
+  font-weight:500;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  opacity:0;
+  animation:up 0.8s 0.75s forwards;
+}
+.hero-tagline{
+  font-family:var(--title-font);
+  font-size:clamp(0.9rem,1.6vw,1.2rem);
+  font-style:italic;
+  color:var(--ink-mid);
+  opacity:0;
+  animation:fade 0.8s 0.9s forwards;
+}
+.hero-scroll-cue{
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  opacity:0;animation:fade 1s 1.3s forwards;
+}
+.hero-scroll-cue span{font-family:var(--body-font);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mute);}
+.scroll-line{width:1px;height:32px;background:var(--bone-dim);overflow:hidden;position:relative;}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--cobalt);animation:drop 2s 1.5s ease-in-out infinite;}
+@keyframes drop{from{top:-100%;}to{top:200%;}}
+@media(max-width:768px){
+  .hero-name{font-size:clamp(3.5rem,14vw,7rem);}
+  .hero-name-row{padding:2rem 1.25rem 0;}
+  .hero-photos-row{padding:1.5rem 1.25rem 0;gap:0.5rem;}
+  .hero-photo-a{width:55%;height:clamp(220px,40vh,360px);}
+  .hero-photo-b{width:35%;height:clamp(160px,28vh,260px);}
+  .hero-bottom-row{padding:1.25rem 1.25rem 2rem;flex-wrap:wrap;gap:1rem;}
+}
+
+/* ── HOME CONTENT ─────────────────── */
+.intro-strip{padding:4rem 3rem 3rem;max-width:860px;}
+.producer-line{padding:0 3rem 3rem;border-bottom:1px solid rgba(255,255,255,0.07);}
+.producer-line-inner{display:flex;align-items:center;gap:1rem;}
+.producer-line-rule{flex:1;height:1px;background:var(--bone-dim);}
+.producer-line-text{font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-mute);white-space:nowrap;}
+.eyebrow{font-family:var(--body-font);font-size:0.67rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--cobalt);display:flex;align-items:center;gap:0.6rem;margin-bottom:2rem;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--cobalt);flex-shrink:0;}
+.intro-text{font-family:var(--title-font);font-size:clamp(1.8rem,3.5vw,2.9rem);font-weight:400;line-height:1.4;letter-spacing:0.01em;color:var(--ink);}
+.intro-text em{font-style:italic;color:var(--cobalt);}
+
+/* ── HOME MOODBOARD ───────────────── */
+.home-work{background:var(--dark);padding:0 0 5rem;}
+.hw-bar{display:flex;justify-content:space-between;align-items:baseline;padding:2.5rem 3rem 1.75rem;border-bottom:1px solid rgba(255,255,255,0.07);margin-bottom:2rem;}
+.hw-label{font-family:var(--body-font);font-size:0.67rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,244,0.35);}
+.hw-all{font-family:var(--body-font);font-size:0.67rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--cobalt-lt);cursor:pointer;display:flex;align-items:center;gap:0.35rem;transition:gap 0.2s,color 0.2s;}
+.hw-all:hover{gap:0.6rem;color:var(--white);}
+.hw-all svg{width:11px;height:11px;}
+.home-masonry{columns:3;column-gap:6px;padding:0 6px;width:100%;}
+@media(max-width:768px){.home-masonry{columns:2;}}
+@media(max-width:480px){.home-masonry{columns:1;}}
+
+/* No fade — hard edge bone → dark is intentional */
+.home-work-fade{display:none;}
+/* gradient swatches shared across all moodboards */
+.g1{background:linear-gradient(140deg,#1B3CC4 0%,#060916 100%);}
+.g2{background:linear-gradient(140deg,#0f2490 0%,#1a2040 100%);}
+.g3{background:linear-gradient(140deg,#0a1670 0%,#040820 100%);}
+.g4{background:linear-gradient(140deg,#2a3ea0 0%,#0d1535 100%);}
+.g5{background:linear-gradient(140deg,#112060 0%,#050810 100%);}
+.g6{background:linear-gradient(140deg,#1a3080 0%,#080d2a 100%);}
+.g7{background:linear-gradient(140deg,#0e2470 0%,#030612 100%);}
+.g8{background:linear-gradient(140deg,#243a8a 0%,#0a1040 100%);}
+
+/* home moodboard cards clickable to work category */
+.hm-card{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;background:var(--ink);display:block;}
+.hm-card-vis{width:100%;display:block;transition:transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);}
+.hm-card:hover .hm-card-vis{transform:scale(1.04);}
+.hm-card-vis.tall{aspect-ratio:3/4;}
+.hm-card-vis.wide{aspect-ratio:16/9;}
+.hm-card-vis.sq{aspect-ratio:1/1;}
+.hm-card-vis.short{aspect-ratio:5/3;}
+.hm-card-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,31,0.92) 0%,rgba(8,12,31,0.1) 55%,transparent 100%);transition:opacity 0.3s;}
+.hm-card-info{position:absolute;bottom:0;left:0;right:0;padding:1.25rem 1.1rem;}
+.hm-card-tag{font-family:var(--body-font);font-size:0.57rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--cobalt-lt);margin-bottom:0.3rem;opacity:0;transform:translateY(5px);transition:opacity 0.3s,transform 0.3s;}
+.hm-card-title{font-family:var(--title-font);font-size:clamp(0.9rem,1.8vw,1.25rem);font-weight:400;color:var(--white);line-height:1.2;opacity:0;transform:translateY(5px);transition:opacity 0.3s 0.04s,transform 0.3s 0.04s;}
+.hm-card:hover .hm-card-tag,.hm-card:hover .hm-card-title{opacity:1;transform:translateY(0);}
+
+/* always-visible category pill bottom-left */
+.hm-card-pill{position:absolute;top:0.9rem;left:0.9rem;font-family:var(--body-font);font-size:0.55rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,248,244,0.6);background:rgba(8,12,31,0.55);padding:0.28rem 0.65rem;backdrop-filter:blur(4px);}
+
+/* floating on home moodboard — every card gets one */
+.hf-a{animation:floatA 6.2s ease-in-out infinite;}
+.hf-b{animation:floatB 7.1s ease-in-out 0.6s infinite;}
+.hf-c{animation:floatC 5.8s ease-in-out 1.4s infinite;}
+.hf-d{animation:floatD 8.2s ease-in-out 0.2s infinite;}
+.hf-e{animation:floatE 6.8s ease-in-out 1.1s infinite;}
+.hf-f{animation:floatF 7.4s ease-in-out 1.9s infinite;}
+.hf-g{animation:floatA 5.5s ease-in-out 2.4s infinite;}
+.hf-h{animation:floatB 6.6s ease-in-out 0.9s infinite;}
+.hm-card:hover{animation-play-state:paused;}
+
+/* ── WORK PAGE ────────────────────── */
+#page-work{padding-top:64px;}
+.page-hero{padding:4.5rem 3rem 2.5rem;border-bottom:1px solid var(--bone-dim);}
+.page-hero h1{font-family:var(--title-font);font-size:clamp(3rem,8vw,7rem);font-weight:400;line-height:0.95;letter-spacing:0.02em;color:var(--ink);margin-top:0.75rem;}
+.page-hero h1 em{font-style:italic;color:var(--cobalt);}
+
+.work-cats{padding:0 3rem;display:flex;gap:0;border-bottom:1px solid var(--bone-dim);overflow-x:auto;scrollbar-width:none;}
+.work-cats::-webkit-scrollbar{display:none;}
+.wcat{font-family:var(--body-font);font-size:0.67rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-mute);padding:1rem 1.4rem;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.2s,border-color 0.2s;background:none;border-top:none;border-left:none;border-right:none;}
+.wcat:hover{color:var(--ink);}
+.wcat.active{color:var(--cobalt);border-bottom-color:var(--cobalt);}
+
+.cat-panel{display:none;}
+.cat-panel.active{display:block;}
+
+/* ── MOODBOARD DARK ───────────────── */
+.moodboard-panel{padding:3rem 3rem 6rem;background:var(--dark);}
+.mb-header{margin-bottom:2.5rem;}
+.mb-title{font-family:var(--title-font);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;color:var(--white);line-height:1.1;letter-spacing:0.02em;}
+.mb-title em{font-style:italic;color:var(--cobalt-lt);}
+.mb-desc{font-family:var(--body-font);font-size:0.85rem;line-height:1.8;color:rgba(250,248,244,0.45);margin-top:0.75rem;max-width:640px;}
+
+/* ── MASONRY ──────────────────────── */
+.masonry{columns:4;column-gap:8px;}
+@media(max-width:1100px){.masonry{columns:3;}}
+@media(max-width:768px){.masonry{columns:2;}}
+@media(max-width:480px){.masonry{columns:1;}}
+
+/* Dark cards */
+.mb-card{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;background:var(--ink);display:block;}
+.mb-card-vis{width:100%;display:block;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);}
+.mb-card:hover .mb-card-vis{transform:scale(1.04);}
+.mb-card-vis.tall{aspect-ratio:3/4;}
+.mb-card-vis.wide{aspect-ratio:16/9;}
+.mb-card-vis.sq{aspect-ratio:1/1;}
+.mb-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,31,0.88) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;}
+.mb-card:hover .mb-card-overlay{opacity:1;}
+.mb-card-label{position:absolute;bottom:0.85rem;left:0.9rem;right:0.9rem;font-family:var(--body-font);font-size:0.6rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,248,244,0.88);opacity:0;transform:translateY(4px);transition:opacity 0.3s,transform 0.3s;}
+.mb-card:hover .mb-card-label{opacity:1;transform:translateY(0);}
+.mb-card-desc{padding:0.85rem 1rem 1rem;background:rgba(13,15,26,0.97);}
+.mb-card-desc-title{font-family:var(--title-font);font-size:0.98rem;font-weight:400;color:var(--white);margin-bottom:0.25rem;letter-spacing:0.01em;}
+.mb-card-desc-text{font-family:var(--body-font);font-size:0.75rem;line-height:1.6;color:rgba(250,248,244,0.48);}
+
+/* ── VIDEO MODAL ──────────────────────────────── */
+.modal-backdrop{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(5,7,18,0.92);
+  backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+  padding:2rem;
+}
+.modal-backdrop.open{display:flex;}
+.modal-box{
+  position:relative;
+  background:var(--dark);
+  width:100%;max-width:900px;
+  max-height:90vh;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.modal-video-wrap{
+  position:relative;width:100%;
+  background:#000;flex-shrink:0;
+}
+.modal-video-wrap video{
+  width:100%;display:block;max-height:55vh;object-fit:contain;
+}
+.modal-video-wrap .modal-vis-placeholder{
+  width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(140deg,#1B3CC4 0%,#060916 100%);
+}
+.modal-vis-placeholder span{font-family:var(--body-font);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(250,248,244,0.3);}
+.modal-controls{
+  position:absolute;bottom:0.75rem;right:0.75rem;
+  display:flex;gap:0.5rem;
+}
+.modal-btn{
+  width:36px;height:36px;
+  background:rgba(8,12,31,0.7);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(250,248,244,0.8);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s;
+  flex-shrink:0;
+}
+.modal-btn:hover{background:var(--cobalt);}
+.modal-btn svg{width:16px;height:16px;pointer-events:none;}
+.modal-close{
+  position:absolute;top:0.75rem;right:0.75rem;
+  width:36px;height:36px;
+  background:rgba(8,12,31,0.7);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(250,248,244,0.8);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s;
+  z-index:2;
+}
+.modal-close:hover{background:#a32d2d;}
+.modal-close svg{width:14px;height:14px;pointer-events:none;}
+.modal-info{
+  padding:1.5rem 1.75rem 2rem;
+  overflow-y:auto;
+}
+.modal-tag{
+  font-family:var(--body-font);font-size:0.6rem;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--cobalt-lt);margin-bottom:0.6rem;
+}
+.modal-title{
+  font-family:var(--title-font);font-size:clamp(1.3rem,2.5vw,1.9rem);
+  font-weight:400;color:var(--white);line-height:1.15;
+  margin-bottom:1.1rem;
+}
+.modal-body{
+  font-family:var(--body-font);font-size:0.85rem;
+  line-height:1.85;color:rgba(250,248,244,0.6);
+}
+.modal-body strong{color:rgba(250,248,244,0.85);font-weight:500;}
+
+/* Floating animations — broadcast uses these same dark cards but with float */
+@keyframes floatA{0%,100%{transform:translateY(0px);}50%{transform:translateY(-9px);}}
+@keyframes floatB{0%,100%{transform:translateY(0px);}50%{transform:translateY(-13px);}}
+@keyframes floatC{0%,100%{transform:translateY(0px);}50%{transform:translateY(-7px);}}
+@keyframes floatD{0%,100%{transform:translateY(0px);}50%{transform:translateY(-11px);}}
+@keyframes floatE{0%,100%{transform:translateY(0px);}50%{transform:translateY(-15px);}}
+@keyframes floatF{0%,100%{transform:translateY(0px);}50%{transform:translateY(-8px);}}
+
+.float-a{animation:floatA 6s ease-in-out infinite;}
+.float-b{animation:floatB 7s ease-in-out 0.8s infinite;}
+.float-c{animation:floatC 5.5s ease-in-out 1.5s infinite;}
+.float-d{animation:floatD 8s ease-in-out 0.3s infinite;}
+.float-e{animation:floatE 6.5s ease-in-out 1.2s infinite;}
+.float-f{animation:floatF 7.5s ease-in-out 2s infinite;}
+.mb-card:hover{animation-play-state:paused;}
+
+/* ── RESUME ───────────────────────── */
+#page-resume{padding-top:64px;}
+.resume-hdr{padding:4.5rem 3rem 3rem;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--bone-dim);}
+.resume-hdr h1{font-family:var(--title-font);font-size:clamp(3rem,8vw,7rem);font-weight:400;line-height:0.95;letter-spacing:0.02em;color:var(--ink);margin-top:0.75rem;}
+.resume-hdr h1 em{font-style:italic;color:var(--cobalt);}
+.dl-btn{display:inline-flex;align-items:center;gap:0.6rem;padding:0.8rem 1.85rem;background:var(--cobalt);color:var(--white);text-decoration:none;font-family:var(--body-font);font-size:0.7rem;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;transition:background 0.2s;white-space:nowrap;flex-shrink:0;margin-left:2rem;margin-bottom:0.2rem;}
+.dl-btn:hover{background:#0f2490;}
+.dl-btn svg{width:12px;height:12px;}
+
+.resume-body{display:grid;grid-template-columns:2fr 1fr;}
+.r-main{padding:4rem 4rem 6rem 3rem;border-right:1px solid var(--bone-dim);}
+.r-side{padding:4rem 3rem 6rem;}
+.r-sec-label{font-family:var(--body-font);font-size:0.63rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--cobalt);display:flex;align-items:center;gap:0.6rem;margin-bottom:2rem;}
+.r-sec-label::before{content:'';width:18px;height:1px;background:var(--cobalt);}
+
+.r-exp{display:grid;grid-template-columns:56px 1fr;gap:1.5rem;padding:2rem 0;border-bottom:1px solid var(--bone-dim);}
+.r-exp:first-of-type{border-top:1px solid var(--bone-dim);}
+.r-logo{width:56px;height:56px;border:1px solid var(--bone-dim);background:var(--bone-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.1rem;overflow:hidden;}
+.r-logo img{width:100%;height:100%;object-fit:contain;padding:6px;}
+.r-logo-text{font-family:var(--body-font);font-size:0.52rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-mute);text-align:center;line-height:1.35;padding:5px;}
+.r-date{font-family:var(--body-font);font-size:0.62rem;font-weight:400;letter-spacing:0.04em;color:var(--bone-dim);line-height:1.6;margin-bottom:0.3rem;}
+.r-role{font-family:var(--title-font);font-size:1.1rem;font-weight:400;color:var(--ink);letter-spacing:0.01em;}
+.r-co{font-family:var(--body-font);font-size:0.66rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--cobalt);margin:0.2rem 0 0.85rem;}
+.r-bullets{list-style:none;margin-top:0.6rem;}
+.r-bullets li{font-family:var(--body-font);font-size:0.83rem;line-height:1.78;color:var(--ink-mid);padding:0.25rem 0 0.25rem 1.1rem;position:relative;font-weight:300;}
+.r-bullets li::before{content:'—';position:absolute;left:0;color:var(--cobalt);font-size:0.75rem;}
+
+.side-blk{margin-bottom:2.75rem;}
+.side-lbl{font-family:var(--body-font);font-size:0.6rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mute);padding-bottom:0.75rem;border-bottom:1px solid var(--bone-dim);margin-bottom:1rem;}
+.side-row{font-family:var(--body-font);font-size:0.83rem;font-weight:300;color:var(--ink-mid);line-height:1.7;padding:0.38rem 0;border-bottom:1px solid rgba(200,195,184,0.35);display:flex;justify-content:space-between;align-items:center;}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--cobalt);flex-shrink:0;}
+.skill-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.25rem;}
+.schip{font-family:var(--body-font);padding:0.32rem 0.75rem;border:1px solid var(--bone-dim);font-size:0.64rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-mute);}
+
+/* ── CONTACT ──────────────────────── */
+#page-contact{padding-top:64px;min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:3rem;padding-right:3rem;}
+.ct-inner{max-width:580px;width:100%;text-align:center;padding-top:2rem;padding-bottom:5rem;}
+.ct-top-rule{width:40px;height:1px;background:var(--cobalt);margin:0 auto 2rem;}
+.ct-name{font-family:var(--title-font);font-size:clamp(3.5rem,9vw,7rem);font-weight:400;line-height:1;letter-spacing:0.03em;color:var(--ink);margin-bottom:1.5rem;}
+.ct-tagline{font-family:var(--title-font);font-size:clamp(1rem,2vw,1.4rem);font-weight:400;font-style:italic;color:var(--ink-mid);line-height:1.5;margin-bottom:2rem;}
+.thin-rule{width:100%;height:1px;background:var(--bone-dim);margin:2rem 0;}
+.ct-connect-label{font-family:var(--body-font);font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:0.75rem;}
+.ct-exp-line{font-family:var(--body-font);font-size:0.85rem;font-weight:300;color:var(--ink-mid);line-height:1.6;margin-bottom:2rem;}
+.ct-btns{display:flex;flex-direction:column;gap:0.85rem;align-items:center;}
+.ct-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;padding:0.95rem 2.5rem;font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,transform 0.15s,color 0.2s;width:280px;}
+.ct-btn.primary{background:var(--cobalt);color:var(--white);}
+.ct-btn.primary:hover{background:#0f2490;transform:translateY(-1px);}
+.ct-btn.secondary{background:transparent;color:var(--cobalt);border:1.5px solid var(--cobalt);}
+.ct-btn.secondary:hover{background:var(--cobalt);color:var(--white);transform:translateY(-1px);}
+.ct-btn svg{width:14px;height:14px;}
+.ct-footer-line{font-family:var(--body-font);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bone-dim);}
+
+/* ── ANIMATIONS ───────────────────── */
+@keyframes up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fade{from{opacity:0;}to{opacity:1;}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+/* ── MOBILE ───────────────────────── */
+@media(max-width:900px){
+  nav{padding:0 1.25rem;}
+  .nav-links li:nth-child(1){display:none;}
+  .intro-strip,.producer-line,.moodboard-panel,.resume-hdr,.work-cats{padding-left:1.25rem;padding-right:1.25rem;}
+  .hw-bar{padding-left:1.25rem;padding-right:1.25rem;}
+  .home-masonry{columns:2;}
+  .masonry{columns:2;}
+  .resume-body{grid-template-columns:1fr;}
+  .r-main{border-right:none;padding:2.5rem 1.25rem 3rem;}
+  .r-side{padding:2rem 1.25rem 3rem;}
+  .resume-hdr{flex-direction:column;align-items:flex-start;gap:1.25rem;padding-left:1.25rem;}
+  .dl-btn{margin-left:0;}
+  #page-contact{padding-left:1.25rem;padding-right:1.25rem;}
+}
+@media(max-width:480px){
+  .home-masonry{columns:1;}
+  .masonry{columns:1;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav" class="solid">
+  <a class="nav-logo" onclick="go('home')">Connor Annand</a>
+  <ul class="nav-links">
+    <li><a onclick="go('work')" data-p="work">Work</a></li>
+    <li><a onclick="go('resume')" data-p="resume">Resume</a></li>
+    <li><a onclick="go('contact')" data-p="contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════ HOME ════════════ -->
+<div id="page-home" class="page active">
+  <section id="hero">
+    <div class="hero-name-row">
+      <h1 class="hero-name">Connor Annand</h1>
+      <p class="hero-tagline-sub">A producer driven by more than the shoot day.</p>
+    </div>
+    <div class="hero-photos-row">
+      <div class="hero-photo hero-photo-a">
+        <img src="Hero_Photos/IMG_0834.jpg" alt="Connor Annand on set">
+      </div>
+      <div class="hero-photo hero-photo-b">
+        <img src="Hero_Photos/IMG_0677.jpg" alt="Connor Annand on set, camera monitor">
+      </div>
+    </div>
+    <div class="hero-bottom-row">
+      <p class="hero-sub">Producer &nbsp;·&nbsp; US &amp; UK</p>
+      <div class="hero-scroll-cue">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="home-work">
+    <div class="hw-bar">
+      <span class="hw-label">Selected Work</span>
+      <span class="hw-all" onclick="go('work')">All Projects <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5.5h9M6.5 2l4 3.5-4 3.5"/></svg></span>
+    </div>
+    <div class="home-masonry">
+
+      <div class="hm-card hf-a" onclick="goWork('broadcast')">
+        <video class="hm-card-vis tall" src="Broadcast/Dear_Friday_30_copy.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">Broadcast</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Toyota All TDA</p>
+          <p class="hm-card-title">Dear Friday, 30</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-b" onclick="goWork('social')">
+        <video class="hm-card-vis wide" src="Animation_Display_OOH/Redbulls.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">Social</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Drive Toyota</p>
+          <p class="hm-card-title">Organic Social Growth — 24K to 52K</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-c" onclick="goWork('ooh')">
+        <video class="hm-card-vis sq" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">OOH</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Portland Timbers · Toyota TDA</p>
+          <p class="hm-card-title">Portland Timbers — Animated LED</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-d" onclick="goWork('partners')">
+        <video class="hm-card-vis tall" src="Animation_Display_OOH/Timbers.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">Partnerships</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Rumble League Studios</p>
+          <p class="hm-card-title">Stance Socks x Paul George</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-e" onclick="goWork('branding')">
+        <video class="hm-card-vis wide" src="Branding/Cruisers_Hero_Branding_Video_.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">Branding</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Cruisers · Denver</p>
+          <p class="hm-card-title">Cruisers — Hero Branding Video</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-f" onclick="goWork('pr')">
+        <video class="hm-card-vis sq" src="Animation_Display_OOH/Yankees.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">PR</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Sony Pictures</p>
+          <p class="hm-card-title">Resident Evil — Game Informer</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ WORK ════════════ -->
+<div id="page-work" class="page">
+  <div class="page-hero">
+    <p class="eyebrow">Work</p>
+    <h1>The Work.</h1>
+  </div>
+  <div class="work-cats">
+    <button class="wcat active" data-cat="broadcast" onclick="switchCat('broadcast')">Broadcast Production</button>
+    <button class="wcat" data-cat="social" onclick="switchCat('social')">Social Media</button>
+    <button class="wcat" data-cat="partners" onclick="switchCat('partners')">Partner Launches</button>
+    <button class="wcat" data-cat="ooh" onclick="switchCat('ooh')">Animation, Display &amp; OOH</button>
+    <button class="wcat" data-cat="branding" onclick="switchCat('branding')">Branding</button>
+    <button class="wcat" data-cat="footage" onclick="switchCat('footage')">Footage Banks</button>
+    <button class="wcat" data-cat="pr" onclick="switchCat('pr')">PR Content Launches</button>
+  </div>
+
+  <!-- BROADCAST — dark moodboard with floating cards -->
+  <div class="cat-panel active moodboard-panel" id="cat-broadcast">
+    <div class="mb-header">
+      <h2 class="mb-title"><em>Commercial</em> Broadcast Production</h2>
+      <p class="mb-desc">Prep: Logistics, Scheduling, Talent Sourcing, Wardrobe, LP, &amp; Budgeting. Shoot: B Cam Producer, Arm Car Running Footage, Talent Direction and Management. Post: AVO Recording, Audio Sourcing.</p>
+    </div>
+    <div class="masonry">
+
+      <div class="mb-card float-a" onclick="openModal(this)">
+        <video class="mb-card-vis tall" src="Broadcast/Dear_Friday_30_copy.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Dear Friday, 30</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
+          <span class="m-title">Dear Friday, 30</span>
+          <span class="m-src">Dear Friday 30 copy.mp4</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-b" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Broadcast/Dear_Savvy_30_copy.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Dear Savvy, 30</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
+          <span class="m-title">Dear Savvy, 30</span>
+          <span class="m-src">Dear Savvy 30 copy.mp4</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-c" onclick="openModal(this)">
+        <video class="mb-card-vis sq" src="Broadcast/Dear_First_Place_30_copy.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Dear First Place, 30</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
+          <span class="m-title">Dear First Place, 30</span>
+          <span class="m-src">Dear First Place 30 copy.mp4</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-d" onclick="openModal(this)">
+        <video class="mb-card-vis tall" src="Broadcast/Dear_Crew_30_copy.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Dear Crew, 30</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
+          <span class="m-title">Dear Crew, 30</span>
+          <span class="m-src">Dear Crew 30 copy.mp4</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-e" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Broadcast/Dear_Snow_30.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Dear Snow, 30</p>
+          <p class="mb-card-desc-text">Regional broadcast and paid social campaign targeting the Denver market.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Denver Toyota TDA</span>
+          <span class="m-title">Dear Snow, 30</span>
+          <span class="m-src">Dear Snow 30.mp4</span>
+          <span class="m-body">Pre-production and shoot day for a regional broadcast and paid social campaign targeting the Denver market. <strong>Pre-production:</strong> Talent booking, location scouting, and agency liaison with the production company for all Talent, Wardrobe, Props, Animals. <strong>Shoot:</strong> Managing animal shots and overseeing special operations team.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-f" onclick="openModal(this)">
+        <video class="mb-card-vis sq" src="Broadcast/Parking_Spot_Face-Off.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Parking Spot Face-Off</p>
+          <p class="mb-card-desc-text">Las Vegas Knights x Denver Toyota TDA. Associate Producer.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Las Vegas Knights x Denver Toyota TDA</span>
+          <span class="m-title">Parking Spot Face-Off</span>
+          <span class="m-src">Parking Spot Face-Off.mp4</span>
+          <span class="m-body">Associate Producer. <strong>Pre-Production:</strong> Clearance for bumper sticker. <strong>Post:</strong> Booking AVO re-record, and standard post edits.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-a" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Broadcast/Zamboni_Machine.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Zamboni Machine</p>
+          <p class="mb-card-desc-text">Las Vegas Knights x Denver Toyota TDA. Associate Producer.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Las Vegas Knights x Denver Toyota TDA</span>
+          <span class="m-title">Zamboni Machine</span>
+          <span class="m-src">Zamboni Machine.mp4</span>
+          <span class="m-body">Associate Producer. <strong>Pre-Production:</strong> Clearance for bumper sticker. <strong>Post:</strong> Booking AVO re-record, and standard post edits.</span>
+        </template>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="cat-panel moodboard-panel" id="cat-social">
+    <div class="mb-header">
+      <h2 class="mb-title"><em>Social Media</em> Production</h2>
+      <p class="mb-desc">Stills, Video, Organic Social Page Growth, Social Trafficking. Drive Toyota Organic Social Lead Producer: Sourcing Footage, Stills, and Audio for organic activations across nine domestic markets.</p>
+    </div>
+    <div class="masonry">
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis tall" src="Social/organic_social_feed_1.jpg" style="object-fit:cover;object-position:top;" alt="Drive Toyota Organic Social">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Organic Growth: 24K → 52K</p><p class="mb-card-desc-text">Lead Producer across nine domestic markets. Sourcing all footage, stills, and audio.</p></div>
+        <template class="modal-data"><span class="m-tag">Drive Toyota — Organic Social Lead</span><span class="m-title">Organic Growth: 24K → 52K</span><span class="m-src">organic_social_feed_1.jpg</span><span class="m-body">Lead Producer across nine domestic markets. Responsible for sourcing all footage, stills, and audio for organic activations. Grew the account from ~24K to 52.6K followers.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Toyota NYR Eli Manning Social</p><p class="mb-card-desc-text">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</p></div>
+        <template class="modal-data"><span class="m-tag">Toyota NYR · Eli Manning x Red Bulls x NYR</span><span class="m-title">Toyota NYR Eli Manning Social</span><span class="m-src">V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4</span><span class="m-body">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis sq" src="Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Toyota NYR Eli Manning Social</p><p class="mb-card-desc-text">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</p></div>
+        <template class="modal-data"><span class="m-tag">Toyota NYR · Eli Manning x Red Bulls x NYR</span><span class="m-title">Toyota NYR Eli Manning Social</span><span class="m-src">V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4</span><span class="m-body">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Dear First Place Camry v Accord EN Social</p><p class="mb-card-desc-text">Post Production Social Resize.</p></div>
+        <template class="modal-data"><span class="m-tag">Dear First Place — Social Resize</span><span class="m-title">Dear First Place Camry v Accord EN Social</span><span class="m-src">First_Place_Camry_AWD_NP_15_1x1_02.mp4</span><span class="m-body">Dear First Place Camry v Accord EN Social: Post Production Social Resize. Adapting broadcast deliverables for social formats across all markets.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis tall" src="Social/TU_Winner_Ad.jpg" style="object-fit:cover;" alt="Paid Social Trafficking">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Paid Social Asset Trafficking</p><p class="mb-card-desc-text">Meta, Reddit, Snapchat, YouTube — coordinating across all teams and markets.</p></div>
+        <template class="modal-data"><span class="m-tag">Paid Social · Toyota TDA</span><span class="m-title">Paid Social Asset Trafficking</span><span class="m-src">TU_Winner_Ad.jpg</span><span class="m-body">Managing and trafficking paid social assets across Meta, Reddit, Snapchat, and YouTube while keeping all markets on schedule. Daily point of contact across media, creative, account, product, and legal teams.</span></template>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- OOH -->
+  <div class="cat-panel moodboard-panel" id="cat-ooh">
+    <div class="mb-header">
+      <h2 class="mb-title"><em>Animation, Digital Display</em> &amp; OOH</h2>
+      <p class="mb-desc">Onboarded a new vendor for creative execution on animations. Lead producer on all animation work across in-stadium LED and DED placements for Toyota TDA across all nine regions.</p>
+    </div>
+    <div class="masonry">
+
+      <div class="mb-card float-a" onclick="openModal(this)">
+        <video class="mb-card-vis tall" src="Animation_Display_OOH/Timbers.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Portland Timbers — Animated LED with Running Footage Edit</p>
+          <p class="mb-card-desc-text">Full production from budget approval, footage sourcing, edit &amp; animation revisions, partner clearing.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Portland Timbers · Toyota TDA</span>
+          <span class="m-title">Portland Timbers — Animated LED with Running Footage Edit</span>
+          <span class="m-src">Timbers.mp4</span>
+          <span class="m-body">Full production from budget approval, footage sourcing, edit &amp; animation revisions, partner clearing.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-b" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Redbulls.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Toyota NYR New York Red Bulls — Raging Bull</p>
+          <p class="mb-card-desc-text">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">New York Red Bulls · Toyota TDA</span>
+          <span class="m-title">Toyota NYR New York Red Bulls — Raging Bull</span>
+          <span class="m-src">Redbulls.mp4</span>
+          <span class="m-body">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-c" onclick="openModal(this)">
+        <video class="mb-card-vis sq" src="Animation_Display_OOH/Yankees.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Toyota NYR New York Yankees LEDs</p>
+          <p class="mb-card-desc-text">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">New York Yankees · Toyota TDA</span>
+          <span class="m-title">Toyota NYR New York Yankees LEDs</span>
+          <span class="m-src">Yankees.mp4</span>
+          <span class="m-body">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-d" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Las Vegas T-Mobile Fascia OOH</p>
+          <p class="mb-card-desc-text">Full production from budget approval, footage sourcing, edit &amp; animation revisions, partner clearing.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">T-Mobile Arena · Las Vegas · Toyota TDA</span>
+          <span class="m-title">Las Vegas T-Mobile Fascia OOH</span>
+          <span class="m-src">T-Mobile_Mesh.mp4</span>
+          <span class="m-body">Full production from budget approval, footage sourcing, edit &amp; animation revisions, partner clearing.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-e" onclick="openModal(this)">
+        <video class="mb-card-vis tall" src="Animation_Display_OOH/T-Mobile_Center.mov" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Las Vegas LED — New Vendor Onboarding</p>
+          <p class="mb-card-desc-text">Produced in-stadium LED and DED placement for Toyota Denver TDA at the T-Mobile Arena in Las Vegas, marking the first project with a newly onboarded vendor.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">T-Mobile Arena · Las Vegas · Toyota Denver TDA</span>
+          <span class="m-title">Las Vegas LED — New Vendor Onboarding</span>
+          <span class="m-src">T-Mobile_Center.mov</span>
+          <span class="m-body">Produced in-stadium LED and DED placement for Toyota Denver TDA at the T-Mobile Arena in Las Vegas, marking the first project with a newly onboarded vendor. Managed the full onboarding process and production process.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-f" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Minnesota Wild LED</p>
+          <p class="mb-card-desc-text">In-stadium LED placement for Toyota TDA at the Minnesota Wild Arena. Full production from budget approval through creative development and final delivery.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Minnesota Wild · Toyota TDA</span>
+          <span class="m-title">Minnesota Wild LED</span>
+          <span class="m-src">TOYOTA_LED_ColumnFascia_60x680.mp4</span>
+          <span class="m-body">In-stadium LED and DED placement for Toyota TDA for the Minnesota Wild Arena. Managed the full production process from budget approval through creative development and final delivery. Coordinated with Account, Product, Legal, and Creative teams.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-a" onclick="openModal(this)">
+        <video class="mb-card-vis sq" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Minnesota Wild DED</p>
+          <p class="mb-card-desc-text">In-stadium DED placement for Toyota TDA at the Minnesota Wild Arena. Full production from budget approval through creative development and final delivery.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Minnesota Wild · Toyota TDA</span>
+          <span class="m-title">Minnesota Wild DED</span>
+          <span class="m-src">Toyota_DED_1011_-_Truck.mp4</span>
+          <span class="m-body">In-stadium LED and DED placement for Toyota TDA for the Minnesota Wild Arena. Managed the full production process from budget approval through creative development and final delivery. Coordinated with Account, Product, Legal, and Creative teams.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-b" onclick="openModal(this)">
+        <video class="mb-card-vis tall" src="Animation_Display_OOH/Buffalo_Bills.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Buffalo Bills LED</p>
+          <p class="mb-card-desc-text">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Buffalo Bills · Toyota TDA</span>
+          <span class="m-title">Buffalo Bills LED</span>
+          <span class="m-src">Buffalo_Bills.mp4</span>
+          <span class="m-body">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</span>
+        </template>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTAGE BANKS -->
+  <div class="cat-panel moodboard-panel" id="cat-footage">
+    <div class="mb-header">
+      <h2 class="mb-title"><em>Footage</em> Banks</h2>
+      <p class="mb-desc">Produced social media footage banks for Toyota TDA — capturing primary source footage across multi-day shoots, cut down and repurposed across multiple social assets and campaigns.</p>
+    </div>
+    <div class="masonry">
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis tall" src="Footage_Banks/DAILIES1.mov" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Primary source footage captured across a four-day shoot, repurposed across multiple campaigns.</p></div>
+        <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">DAILIES1.mov</span><span class="m-body">Produced a social media footage bank for Toyota TDA over a four-day shoot, capturing primary source footage across the full production. Material was cut down and repurposed across multiple social assets and campaigns.</span></template>
+      </div>
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES2.mov" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Footage banks built to serve broadcast, social, and digital campaigns across all nine markets.</p></div>
+        <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">DAILIES2.mov</span><span class="m-body">Footage banks built to serve creative use across broadcast, social, and digital campaigns. Single shoot day used to generate assets for multiple markets and activation types.</span></template>
+      </div>
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis sq" src="Footage_Banks/DAILIES3.mov" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Running a parallel social unit alongside broadcast crew to maximize footage output.</p></div>
+        <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">DAILIES3.mov</span><span class="m-body">Running a dedicated parallel social unit alongside the broadcast crew — capturing supplementary footage, behind-the-scenes content, and social-first assets simultaneously to maximize footage output from every shoot day.</span></template>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTNERS -->
+  <div class="cat-panel moodboard-panel" id="cat-partners">
+    <div class="mb-header">
+      <h2 class="mb-title"><em>Partnership</em> Launches</h2>
+      <p class="mb-desc">Global Partnership Lead for Rumble League Studios — a Web3 video game startup. Grew partner catalog 450%, adding $300K in contract value.</p>
+    </div>
+    <div class="masonry">
+
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Partner_Launches/Stance_Video.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Stance Socks x Paul George — Launch Film</p><p class="mb-card-desc-text">Launch content produced alongside the Stance x RKL partnership campaign.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance Socks x Paul George — Launch Film</span><span class="m-src">Stance_Video.mp4</span><span class="m-body">Closed the Stance Socks partnership and produced the launch campaign alongside the creative team. Built a digital-physical QR code integration connecting a custom sock design to Paul George's Stance line with filmed launch content. Managed the relationship from deal close through production prep and launch execution.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis tall" src="Partner_Launches/Stance_Paul_George.jpg" style="object-fit:cover;object-position:top;" alt="Stance x Paul George">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Stance Socks x Paul George</p><p class="mb-card-desc-text">Digital-physical QR code integration tied to Paul George's Stance line.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance Socks x Paul George</span><span class="m-src">Stance_Paul_George.jpg</span><span class="m-body">Closed brand partnership with Stance Socks and transitioned into production, coordinating with the creative team on a digital-physical campaign concept connecting a custom QR code sock design to Paul George's Stance line with filmed launch content. Managed the relationship from deal close through production prep and launch execution.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis sq" src="Partner_Launches/Stance_Socks.jpg" style="object-fit:cover;" alt="Stance x RKL Socks">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Stance x RKL — Custom Sock Design</p><p class="mb-card-desc-text">Co-branded Stance x RKL sock packaging and product from the Paul George partnership launch.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance x RKL — Custom Sock Design</span><span class="m-src">Stance_Socks.jpg</span><span class="m-body">Co-branded Stance x RKL custom sock design produced as part of the Paul George partnership launch campaign. The product connected a custom QR code sock design to Paul George's Stance NFT line, bridging physical product and digital activation.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis tall" src="Partner_Launches/Crystal_Danger.jpeg" style="object-fit:cover;object-position:top;" alt="Crystal Dangerfield">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Crystal Dangerfield — RKL Co-Branded Shoes</p><p class="mb-card-desc-text">First WNBA Player to wear an NFT brand's branding on her shoes in a game.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Crystal Dangerfield</span><span class="m-title">Crystal Dangerfield — RKL Co-Branded Shoes</span><span class="m-src">Crystal_Danger.jpeg</span><span class="m-body">Crystal Dangerfield x RKL co-branded shoe collaboration — the first WNBA Player to wear an NFT brand's branding on her shoes in a game. Managed the partnership from signing through launch execution, including product coordination and in-game activation.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis tall" src="Partner_Launches/LDJDF9WRSwn_576.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Multi-year brand partnership launch with co-branded in-game wearables and interactive web experience.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL Teaser</span><span class="m-src">LDJDF9WRSwn_576.mp4</span><span class="m-body">Gatorade teaser for a multi-year brand partnership. Launched with an interactive web experience, including marketing support, co-branded in-game wearables, and brand support. Grew the partner catalog by 450% after onboarding 13 new partners. Added $300K in contract value and negotiated revenue split increases of 25% across active accounts.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis wide" src="Partner_Launches/Gatorade_Wearables_RKl_.png" style="object-fit:cover;" alt="Gatorade x RKL Wearables">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Co-branded in-game wearables launched as part of the Gatorade multi-year partnership.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">Gatorade_Wearables_RKl_.png</span><span class="m-body">Gatorade teasers for a multi-year brand partnership. Launched with an interactive web experience, including marketing support, co-branded in-game wearables, and brand support. Grew the partner catalog by 450% after onboarding 13 new partners. Added $300K in contract value and negotiated revenue split increases of 25% across active accounts.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis sq" src="Partner_Launches/gatorade_Wearables_RKL.png" style="object-fit:cover;" alt="Gatorade x RKL Wearable 2">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Legendary in-game wearable item from the Gatorade x RKL multi-year partnership.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">gatorade_Wearables_RKL.png</span><span class="m-body">Co-branded legendary in-game wearable item produced as part of the Gatorade x RKL multi-year brand partnership. Interactive web experience with co-branded in-game wearables bridging physical brand presence and digital gameplay.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis wide" src="Partner_Launches/gatorade_Werables_2_RKL.png" style="object-fit:cover;" alt="Gatorade x RKL Towel">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Co-branded in-game wearable from the Gatorade x RKL partnership launch.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">gatorade_Werables_2_RKL.png</span><span class="m-body">Co-branded in-game wearable produced as part of the Gatorade x RKL multi-year brand partnership — a common-tier wearable item in the RKL in-game wearable collection.</span></template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis sq" src="Partner_Launches/RKL_x_Round21_BB_.jpeg" style="object-fit:cover;" alt="Round21 x RKL Basketball">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Round21 x RKL GTM</p><p class="mb-card-desc-text">Co-branded basketball launch with marketing support and NFT NYC event activation.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios</span><span class="m-title">Round21 x RKL GTM</span><span class="m-src">RKL_x_Round21_BB_.jpeg</span><span class="m-body">Round21 x RKL partnership launch — GTM of co-branded basketball. Marketing support, live community discussions, and event support at NFT NYC.</span></template>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PR -->
+  <div class="cat-panel moodboard-panel" id="cat-pr">
+    <div class="mb-header">
+      <h2 class="mb-title">PR <em>Content</em> Launches</h2>
+      <p class="mb-desc">Public Relations work with Sony Pictures Entertainment NY office. Specializing in video game culture outlet pieces. Work spanning 900M UVMs, 4.5MM Circulation, and 3.2MM social reach.</p>
+    </div>
+    <div class="masonry">
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis tall" src="PR/Raccoon_City.jpg" style="object-fit:cover;" alt="Resident Evil Raccoon City">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Resident Evil: Welcome to Raccoon City</p><p class="mb-card-desc-text">Primary PR contact for Game Informer. Exclusive interviews, clip debut, roundtable junket.</p></div>
+        <template class="modal-data"><span class="m-tag">Sony Pictures — Game Informer</span><span class="m-title">Resident Evil: Welcome to Raccoon City</span><span class="m-src">Raccoon_City.jpg</span><span class="m-body">Served as the primary PR contact for Game Informer Magazine. Managed the full press relationship from outreach to execution: securing exclusive interviews, coordinating a clip debut, and organizing a roundtable junket ahead of the film's theatrical release to drive awareness within the gaming community.</span></template>
+      </div>
+      <div class="mb-card" onclick="openModal(this)">
+        <div class="mb-card-vis wide g6" style="position:relative;overflow:hidden;">
+          <img src="https://img.youtube.com/vi/m1LXzIaYZq8/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Nolan North Uncharted">
+        </div>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Nolan North Campaign</p><p class="mb-card-desc-text">Exclusive content releases drove 30K+ YouTube views and entertainment outlet pickup.</p></div>
+        <template class="modal-data"><span class="m-tag">Sony Pictures — Uncharted</span><span class="m-title">Nolan North Campaign</span><span class="m-src">yt:m1LXzIaYZq8</span><span class="m-body">Managed the press relationship with Nolan North (voice of Nathan Drake) in support of Sony Pictures' Uncharted theatrical release. Coordinated exclusive image releases and content teases to build anticipation ahead of the film's debut. The campaign drove 30K+ YouTube views along with additional pickup from entertainment outlets.</span></template>
+      </div>
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis sq" src="PR/Paul_Anderson_Raccoon_City_.jpg" style="object-fit:cover;" alt="Paul W.S. Anderson Monster Hunter">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Director Interview — Paul W.S. Anderson</p><p class="mb-card-desc-text">Post-release print interview for Monster Hunter home entertainment release.</p></div>
+        <template class="modal-data"><span class="m-tag">Sony Pictures — Monster Hunter</span><span class="m-title">Director Interview — Paul W.S. Anderson</span><span class="m-src">Paul_Anderson_Raccoon_City_.jpg</span><span class="m-body">Coordinated a print magazine interview with director Paul W.S. Anderson in support of Sony Pictures' Monster Hunter home entertainment release. Managed the full press placement from pitch to execution, targeting audiences ahead of the film's digital and DVD sales window.</span></template>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRANDING -->
+  <div class="cat-panel moodboard-panel" id="cat-branding">
+    <div class="mb-header">
+      <h2 class="mb-title"><em>Branding</em></h2>
+      <p class="mb-desc">Brand identity, visual system development, and campaign repositioning. Bringing fresh creative direction to established brands.</p>
+    </div>
+    <div class="masonry">
+
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis wide" src="Branding/Cruisers_Hero_Branding_Video_.mp4" muted playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Cruisers — Hero Branding Video</p>
+          <p class="mb-card-desc-text">Edited, Sound Direction, and Animation. Hero video for the Cruisers cycling community brand.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Cruisers · Denver Cycling Community</span>
+          <span class="m-title">Cruisers — Hero Branding Video</span>
+          <span class="m-src">Cruisers_Hero_Branding_Video_.mp4</span>
+          <span class="m-body">Edited, Sound Direction, and Animation for the Cruisers cycling community hero brand video. Built to capture the spirit of the Denver Tuesday evening ride culture and introduce the Cruisers visual identity.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
+        </template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis wide" src="Branding/Cruisers_Branding_1.jpg" style="object-fit:cover;" alt="Cruisers Branding">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Cruisers — Brand Identity</p>
+          <p class="mb-card-desc-text">Visual identity system including logo, typography, and color language for the Denver cycling community.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Cruisers · Brand Identity</span>
+          <span class="m-title">Cruisers — Brand Identity</span>
+          <span class="m-src"></span>
+          <span class="m-body">Visual identity system developed for Cruisers — a Denver-based cycling community. Work included logo development, typographic system, color language, and brand guidelines to create a cohesive look across digital and physical touchpoints.</span>
+        </template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis tall" src="Branding/Cruisers_Branding_.jpg" style="object-fit:cover;" alt="Cruisers Branding">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Cruisers — Brand Campaign</p>
+          <p class="mb-card-desc-text">Campaign creative and brand expression for the Cruisers cycling community.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Cruisers · Brand Campaign</span>
+          <span class="m-title">Cruisers — Brand Campaign</span>
+          <span class="m-src"></span>
+          <span class="m-body">Campaign creative and brand expression for the Cruisers cycling community — applying the visual identity system across photography, digital, and community-facing materials.</span>
+        </template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis sq" src="Branding/Cruisers_Strava_.jpg" style="object-fit:cover;" alt="Cruisers Strava Assets">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Cruisers — Strava Event Iconography</p>
+          <p class="mb-card-desc-text">Custom sketch-fill icon system for Strava event templates: weather, level, ride type, and special event icons.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Cruisers · Strava Assets</span>
+          <span class="m-title">Cruisers — Strava Event Iconography</span>
+          <span class="m-src"></span>
+          <span class="m-body">Designed a custom sketch-fill icon system for Cruisers Strava event templates. Icons cover weather (sun, rain), ride level (beginner, intermediate, advanced), ride type (gravel, weekend epic), women's events, and special occasions — all in a cohesive hand-drawn aesthetic matching the Cruisers brand.</span>
+        </template>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ RESUME ════════════ -->
+<div id="page-resume" class="page">
+  <div class="resume-hdr">
+    <div>
+      <p class="eyebrow">Resume</p>
+      <h1>Experience.</h1>
+    </div>
+    <a href="#" class="dl-btn">
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1v7M3 6l3 3 3-3M1 10.5h10"/></svg>
+      Download PDF
+    </a>
+  </div>
+  <div class="resume-body">
+    <div class="r-main">
+      <p class="r-sec-label">Professional Experience</p>
+      <div class="r-exp">
+        <div class="r-logo"><img src="Logos/saatchi_logo.jpeg" alt="Saatchi &amp; Saatchi"></div>
+        <div>
+          <p class="r-date">May 2023 – Aug 2023 (Contract) &nbsp;|&nbsp; Mar 2024 – Present</p>
+          <p class="r-role">Producer, Social, Digital &amp; Display</p>
+          <p class="r-co">Saatchi &amp; Saatchi — New York, NY</p>
+          <ul class="r-bullets">
+            <li>Took over Drive Toyota Organic Social as Lead Producer and grew the account from 24K to 52.6K followers across nine domestic markets. Responsible for sourcing all footage, stills, and audio for organic activations.</li>
+            <li>Manage the full production pipeline from brief to delivery on broadcast, social, digital, and OOH campaigns. Keep creative, legal, account, product, talent, and external vendors aligned and on schedule across every project.</li>
+            <li>Selected for a $2.4M Toyota TDA broadcast shoot, stepping from Social Producer into B Cam Producer from pre-production through post. Resulted in 4 broadcast spots and a social footage bank for creative use across multiple campaigns.</li>
+            <li>Producer on quarterly regional shoots with budgets up to $200K, managing talent bookings, still photography, special operations, and all creative needs on set.</li>
+            <li>Produce in-stadium LED and DED placements for Toyota TDA across all nine regions, helping to double client spend while leveling up the creative. Onboard new vendors and see each placement through budget approval, creative development, and final delivery.</li>
+            <li>Manage and traffic paid social assets across Meta, TikTok, Reddit, Snapchat, and YouTube while keeping all markets on schedule. Serve as the daily point of contact across media, creative, account, product, and legal teams.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="r-exp">
+        <div class="r-logo"><img src="Logos/rkl_logo.jpeg" alt="Rumble League Studios"></div>
+        <div>
+          <p class="r-date">April 2022 – May 2023</p>
+          <p class="r-role">Global Partnerships Lead</p>
+          <p class="r-co">Rumble League Studios — Remote, USA</p>
+          <ul class="r-bullets">
+            <li>Closed Stance Socks partnership and produced the launch campaign alongside the creative team. Built a digital-physical QR code integration tied to Paul George's Stance line with filmed launch content.</li>
+            <li>Grew the partner catalog by 450% after onboarding 13 new partners. Added $300K in contract value and negotiated revenue split increases of 25% across active accounts, including Gatorade and Stance Socks.</li>
+            <li>Owned go-to-market strategy and execution for multiple partner launches from signing through campaign delivery. Managed all account relationships throughout the full partnership lifecycle.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="r-exp">
+        <div class="r-logo"><img src="Logos/sony_logo.png" alt="Sony Pictures Entertainment"></div>
+        <div>
+          <p class="r-date">October 2019 – February 2022</p>
+          <p class="r-role">Global Publicity Coordinator</p>
+          <p class="r-co">Sony Pictures Entertainment — New York, NY</p>
+          <ul class="r-bullets">
+            <li>Built and maintained press relationships spanning 900M UVMs, 4.5MM in circulation, and 3.2MM in social reach across gaming outlets, long-lead magazines, comedy podcasts, and family bloggers.</li>
+            <li>Served as the primary PR contact for Game Informer Magazine on Resident Evil: Welcome to Raccoon City. Secured exclusive interviews, coordinated a clip debut, and organized a roundtable junket ahead of the theatrical release.</li>
+            <li>Managed talent PR for Nolan North on Uncharted, driving 30K+ YouTube views through coordinated exclusive content releases. Also placed a post-release print interview with director Paul W.S. Anderson for Monster Hunter.</li>
+            <li>Led talent logistics for red-carpet premiere events across major film campaigns, including Ghostbusters: Afterlife, Bad Boys for Life, Jumanji: The Next Level, Little Women, and Charlie's Angels.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="r-side">
+      <div class="side-blk">
+        <p class="side-lbl">Education</p>
+        <div class="side-row"><span><strong>Carroll University</strong> — Waukesha, WI</span></div>
+        <div class="side-row"><span style="font-size:0.8rem;color:var(--ink-mute);">B.S. Marketing, Minor in Communication</span></div>
+        <div class="side-row"><span style="font-size:0.8rem;color:var(--ink-mute);">Cum Laude &nbsp;·&nbsp; Men's Lacrosse Team Captain</span></div>
+      </div>
+      <div class="side-blk">
+        <p class="side-lbl">Contact</p>
+        <div class="side-row"><span>+1 917-613-3767</span><div class="dot"></div></div>
+        <div class="side-row"><span style="font-size:0.78rem;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e2a88d8a8c818d8c8c8d90838c8c838c86a2858f838b8ecc818d8f">[email&#160;protected]</a></span><div class="dot"></div></div>
+        <div class="side-row"><span>connorannand.com</span><div class="dot"></div></div>
+      </div>
+      <div class="side-blk">
+        <p class="side-lbl">Working Status</p>
+        <div class="side-row"><span>Legal to work in the US</span><div class="dot"></div></div>
+        <div class="side-row"><span>Legal to work in the UK</span><div class="dot"></div></div>
+      </div>
+      <div class="side-blk">
+        <p class="side-lbl">Skills</p>
+        <div class="skill-chips">
+          <span class="schip">Broadcast</span>
+          <span class="schip">Social &amp; Digital</span>
+          <span class="schip">OOH &amp; Display</span>
+          <span class="schip">Budget Mgmt</span>
+          <span class="schip">Vendor Onboarding</span>
+          <span class="schip">Talent Booking</span>
+          <span class="schip">Asset Trafficking</span>
+          <span class="schip">GTM Strategy</span>
+          <span class="schip">Brand Partnerships</span>
+          <span class="schip">Extreme Reach</span>
+          <span class="schip">Adobe CC</span>
+          <span class="schip">Salesforce</span>
+          <span class="schip">Claude (AI)</span>
+          <span class="schip">AI Workflow</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ CONTACT ════════════ -->
+<div id="page-contact" class="page">
+  <div class="ct-inner">
+    <div class="ct-top-rule"></div>
+    <h1 class="ct-name">Connor Annand</h1>
+    <p class="ct-tagline">A producer driven by more than the shoot day.</p>
+    <div class="thin-rule"></div>
+    <p class="ct-connect-label">Let's Connect</p>
+    <p class="ct-exp-line">5+ years of experience — always looking to connect.</p>
+    <div class="ct-btns">
+      <a href="/cdn-cgi/l/email-protection#7d371215131e121313120f1c13131c13193d1a101c1411531e1210420e081f17181e09403118095a0e584f4d2a120f16584f4d29121a180915180f" class="ct-btn primary">
+        <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="3" width="13" height="9" rx="1"/><path d="M1 4l6.5 5L14 4"/></svg>
+        Email Connor
+      </a>
+      <a href="https://www.linkedin.com/in/connor-annand-65248a106" target="_blank" rel="noopener" class="ct-btn secondary">
+        <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="13" height="13" rx="2"/><path d="M5 6.5V11M5 4.5v.01M7.5 11V8.5a1.5 1.5 0 013 0V11M7.5 8.5V6.5"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="thin-rule" style="margin-top:3rem;"></div>
+    <p class="ct-footer-line">connorannand.com &nbsp;·&nbsp; US &amp; UK</p>
+  </div>
+</div>
+
+
+<!-- VIDEO MODAL -->
+<div class="modal-backdrop" id="modal" onclick="handleBackdropClick(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+    <div class="modal-video-wrap" id="modal-video-wrap">
+      <div class="modal-vis-placeholder" id="modal-placeholder">
+        <span>Video Loading</span>
+      </div>
+      <video id="modal-video" muted playsinline style="display:none;"></video>
+      <div class="modal-controls">
+        <button class="modal-btn" id="mute-btn" onclick="toggleMute()">
+          <svg id="mute-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6H1v4h2l4 3V3L3 6z"/><path d="M10 5.5a4 4 0 010 5"/><path d="M12.5 3a7 7 0 010 10"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="modal-info">
+      <p class="modal-tag" id="modal-tag"></p>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <p class="modal-body" id="modal-body"></p>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const nav=document.getElementById('nav');
+
+function go(id){
+  closeModal();
+  ['home','work','resume','contact'].forEach(p=>{
+    document.getElementById('page-'+p).classList.toggle('active',p===id);
+  });
+  document.querySelectorAll('.nav-links a[data-p]').forEach(a=>{
+    a.classList.toggle('active',a.dataset.p===id);
+  });
+  if(id==='home'){nav.className='solid';window.addEventListener('scroll',onScroll);}
+  else{window.removeEventListener('scroll',onScroll);nav.className='solid';}
+  window.scrollTo(0,0);
+  setTimeout(initReveals,50);
+}
+
+function goWork(cat){go('work');setTimeout(()=>switchCat(cat),80);}
+
+function switchCat(id){
+  document.querySelectorAll('.wcat').forEach(el=>el.classList.toggle('active',el.dataset.cat===id));
+  document.querySelectorAll('.cat-panel').forEach(el=>el.classList.toggle('active',el.id==='cat-'+id));
+  window.scrollTo(0,0);
+}
+
+function onScroll(){
+  nav.className='solid';
+}
+
+function openModal(card){
+  const tmpl=card.querySelector('template.modal-data');
+  if(!tmpl)return;
+  const d=tmpl.content;
+  const tag=d.querySelector('.m-tag')?d.querySelector('.m-tag').textContent:'';
+  const title=d.querySelector('.m-title')?d.querySelector('.m-title').textContent:'';
+  const src=d.querySelector('.m-src')?d.querySelector('.m-src').textContent.trim():'';
+  const bodyEl=d.querySelector('.m-body');
+  const bodyHTML=bodyEl?bodyEl.innerHTML:'';
+
+  document.getElementById('modal-tag').textContent=tag;
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal-body').innerHTML=bodyHTML;
+
+  const vid=document.getElementById('modal-video');
+  const placeholder=document.getElementById('modal-placeholder');
+  const wrap=document.getElementById('modal-video-wrap');
+
+  // Remove any existing iframe
+  var oldIframe=wrap.querySelector('iframe');
+  if(oldIframe)oldIframe.remove();
+  document.getElementById('mute-btn').style.display='flex';
+
+  if(src.startsWith('yt:')){
+    var ytId=src.replace('yt:','');
+    var iframe=document.createElement('iframe');
+    iframe.src='https://www.youtube.com/embed/'+ytId+'?autoplay=1';
+    iframe.title='YouTube video';
+    iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen=true;
+    iframe.style.cssText='width:100%;aspect-ratio:16/9;border:none;display:block;';
+    vid.style.display='none';
+    placeholder.style.display='none';
+    document.getElementById('mute-btn').style.display='none';
+    wrap.appendChild(iframe);
+  } else if(src){
+    vid.src=src;
+    vid.style.display='block';
+    placeholder.style.display='none';
+    vid.muted=true;
+    vid.load();
+    vid.play().catch(function(){});
+    updateMuteIcon(true);
+  } else {
+    vid.style.display='none';
+    placeholder.style.display='flex';
+  }
+
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  const vid=document.getElementById('modal-video');
+  vid.pause();
+  vid.src='';
+  var wrap=document.getElementById('modal-video-wrap');
+  var iframe=wrap?wrap.querySelector('iframe'):null;
+  if(iframe)iframe.remove();
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function handleBackdropClick(e){
+  if(e.target===document.getElementById('modal'))closeModal();
+}
+
+function toggleMute(){
+  const vid=document.getElementById('modal-video');
+  vid.muted=!vid.muted;
+  updateMuteIcon(vid.muted);
+}
+
+function updateMuteIcon(muted){
+  const icon=document.getElementById('mute-icon');
+  if(muted){
+    icon.innerHTML='<path d="M3 6H1v4h2l4 3V3L3 6z"/><line x1="12" y1="6" x2="16" y2="10"/><line x1="16" y1="6" x2="12" y2="10"/>';
+  } else {
+    icon.innerHTML='<path d="M3 6H1v4h2l4 3V3L3 6z"/><path d="M10 5.5a4 4 0 010 5"/><path d="M12.5 3a7 7 0 010 10"/>';
+  }
+}
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+function initReveals(){
+  const els=document.querySelectorAll('.page.active .reveal');
+  const io=new IntersectionObserver(function(entries){
+    entries.forEa
