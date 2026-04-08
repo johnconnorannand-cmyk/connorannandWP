@@ -197,15 +197,24 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 .hw-all svg{width:11px;height:11px;}
 .home-masonry{
   display:grid;
-  grid-template-columns:1fr 2fr 2fr;
-  grid-template-rows:auto auto;
+  grid-template-columns:1fr 2fr;
+  grid-template-rows:auto auto auto;
   gap:8px;
   padding:0 6px;
   width:100%;
 }
-.hm-card.hf-b{grid-row:1/3;} /* organic social spans full height */
-.hm-card.hf-a,.hm-card.hf-c,.hm-card.hf-d,.hm-card.hf-e,.hm-card.hf-f{grid-column:auto;}
-@media(max-width:900px){.home-masonry{grid-template-columns:1fr 1fr;}.hm-card.hf-b{grid-row:auto;}}
+.hm-card.hf-b{grid-row:1/4;grid-column:1;} /* organic social full left wall */
+.hm-card.hf-a{grid-row:1;grid-column:2;}    /* dear friday top right */
+.hm-card.hf-d{grid-row:2;grid-column:2;}    /* stance video middle right */
+.hm-card.hf-e{grid-row:3;grid-column:1;}    /* cruisers — override organic */
+.hm-card.hf-f{grid-row:3;grid-column:2;}    /* raccoon city bottom right */
+.hm-card.hf-c{display:none;}                /* hide Timbers — not in layout */
+@media(max-width:900px){
+  .home-masonry{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .hm-card.hf-b{grid-row:auto;grid-column:auto;}
+  .hm-card.hf-a,.hm-card.hf-d,.hm-card.hf-e,.hm-card.hf-f{grid-row:auto;grid-column:auto;}
+  .hm-card.hf-c{display:block;}
+}
 @media(max-width:480px){.home-masonry{grid-template-columns:1fr;}}
 
 /* No fade — hard edge bone → dark is intentional */
@@ -228,10 +237,10 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 .hm-card-vis.wide{aspect-ratio:16/9;}
 .hm-card-vis.sq{aspect-ratio:1/1;}
 .hm-card{height:100%;}
-.hm-card-vis{width:100%;height:100%;min-height:260px;}
-.hm-card-vis.wide{aspect-ratio:unset;min-height:260px;}
-.hm-card-vis.vert{aspect-ratio:unset;min-height:520px;}
-.hm-card-vis.featured{aspect-ratio:unset;min-height:260px;}
+.hm-card-vis{width:100%;height:100%;display:block;}
+.hm-card-vis.wide{min-height:280px;aspect-ratio:16/9;}
+.hm-card-vis.vert{min-height:600px;width:100%;object-fit:cover;}
+.hm-card-vis.featured{min-height:280px;aspect-ratio:16/9;}
 .hm-card-vis.short{aspect-ratio:5/3;}
 .hm-card-vis.vert{aspect-ratio:9/16;}
 video.hm-card-vis{object-fit:cover;background:#0A0C14;}
@@ -289,6 +298,15 @@ img.hm-card-vis{object-fit:cover;}
 /* ── MASONRY ──────────────────────── */
 .masonry{columns:4;column-gap:8px;}
 #cat-broadcast .masonry{columns:2;column-gap:10px;}
+#cat-partners .masonry{columns:3;column-gap:8px;}
+#cat-partners .mb-card-vis.featured{min-height:320px;}
+#cat-ooh .masonry{columns:3;column-gap:8px;}
+#cat-ooh .mb-card-vis{aspect-ratio:16/9;object-fit:contain;background:#0A0C14;width:100%;display:block;}
+#cat-footage .masonry{columns:2;column-gap:8px;}
+#cat-footage .mb-card-vis{aspect-ratio:16/9;min-height:360px;object-fit:cover;}
+#cat-pr .masonry{columns:3;column-gap:8px;}
+#cat-pr .mb-card-vis.featured{min-height:400px;object-fit:cover;}
+#cat-pr .mb-card-vis.wide{min-height:280px;object-fit:cover;}
 @media(min-width:1400px){#cat-broadcast .masonry{columns:2;}}
 @media(max-width:1100px){.masonry{columns:3;}}
 @media(max-width:768px){.masonry{columns:2;}}
@@ -583,7 +601,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="hm-card hf-f" onclick="goWork('pr')">
-        <video class="hm-card-vis wide" src="PR/Raccoon_City.jpg" style="object-fit:cover;" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hm-card-vis wide" src="PR/Raccoon_City.jpg" style="object-fit:cover;width:100%;height:100%;" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">PR</span>
         <div class="hm-card-info">
@@ -829,7 +847,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" style="object-position:center 40%;object-fit:cover;" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="mb-card-vis wide led" style="object-position:50% 35%;object-fit:cover;" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
