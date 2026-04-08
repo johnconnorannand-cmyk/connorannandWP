@@ -199,15 +199,15 @@ nav.solid .nav-cta:hover{background:#0f2490;}
   display:grid;
   grid-template-columns:1fr 2fr;
   grid-template-rows:auto auto auto;
-  gap:8px;
-  padding:0 6px;
+  gap:10px;
+  padding:0 2rem;
   width:100%;
 }
 .hm-card.hf-b{grid-row:1/4;grid-column:1;} /* organic social full left wall */
 .hm-card.hf-a{grid-row:1;grid-column:2;}    /* dear friday top right */
 .hm-card.hf-d{grid-row:2;grid-column:2;}    /* stance video middle right */
-.hm-card.hf-e{grid-row:3;grid-column:1;}    /* cruisers — override organic */
-.hm-card.hf-f{grid-row:3;grid-column:2;}    /* raccoon city bottom right */
+.hm-card.hf-e{grid-row:3;grid-column:2;}    /* cruisers bottom right */
+.hm-card.hf-f{grid-row:3;grid-column:1;}    /* resident evil bottom left */
 .hm-card.hf-c{display:none;}                /* hide Timbers — not in layout */
 @media(max-width:900px){
   .home-masonry{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
@@ -301,12 +301,20 @@ img.hm-card-vis{object-fit:cover;}
 #cat-partners .masonry{columns:3;column-gap:8px;}
 #cat-partners .mb-card-vis.featured{min-height:320px;}
 #cat-ooh .masonry{columns:3;column-gap:8px;}
-#cat-ooh .mb-card-vis{aspect-ratio:16/9;object-fit:contain;background:#0A0C14;width:100%;display:block;}
-#cat-footage .masonry{columns:2;column-gap:8px;}
-#cat-footage .mb-card-vis{aspect-ratio:16/9;min-height:360px;object-fit:cover;}
+#cat-ooh video.mb-card-vis{width:100%;display:block;background:#0A0C14;object-fit:contain;}
+#cat-ooh .mb-card-desc{padding:0.5rem 0.75rem 0.6rem;}
+#cat-ooh .mb-card{margin-bottom:8px;}
+#cat-ooh .mb-card-vis.wide{aspect-ratio:21/9;}
+#cat-ooh .mb-card-vis.featured{aspect-ratio:16/9;}
+#cat-footage .masonry{columns:3;column-gap:8px;}
+#cat-footage .mb-card-vis{aspect-ratio:16/9;min-height:220px;object-fit:cover;}
 #cat-pr .masonry{columns:3;column-gap:8px;}
 #cat-pr .mb-card-vis.featured{min-height:400px;object-fit:cover;}
 #cat-pr .mb-card-vis.wide{min-height:280px;object-fit:cover;}
+#cat-branding .masonry{display:grid;grid-template-columns:3fr 2fr;gap:8px;}
+#cat-branding .mb-card:nth-child(1){grid-row:1/3;}
+#cat-branding .mb-card:nth-child(4){grid-column:1/3;}
+#cat-branding .mb-card-vis{width:100%;display:block;object-fit:cover;}
 @media(min-width:1400px){#cat-broadcast .masonry{columns:2;}}
 @media(max-width:1100px){.masonry{columns:3;}}
 @media(max-width:768px){.masonry{columns:2;}}
@@ -600,14 +608,22 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </div>
       </div>
 
-      <div class="hm-card hf-f" onclick="goWork('pr')">
-        <video class="hm-card-vis wide" src="PR/Raccoon_City.jpg" style="object-fit:cover;width:100%;height:100%;" autoplay muted loop playsinline preload="auto"></video>
+      <div class="hm-card hf-f" onclick="openModal(this)" style="cursor:pointer;">
+        <div class="hm-card-vis wide" style="position:relative;overflow:hidden;background:#0A0C14;">
+          <img src="https://img.youtube.com/vi/1b_bc6B6v7Q/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Resident Evil Interview">
+        </div>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">PR</span>
         <div class="hm-card-info">
           <p class="hm-card-tag">Sony Pictures</p>
-          <p class="hm-card-title">Resident Evil — Game Informer</p>
+          <p class="hm-card-title">Resident Evil — Interview Piece</p>
         </div>
+        <template class="modal-data">
+          <span class="m-tag">Sony Pictures — Game Informer</span>
+          <span class="m-title">Resident Evil: Welcome to Raccoon City — Interview Piece</span>
+          <span class="m-src">yt:1b_bc6B6v7Q</span>
+          <span class="m-body">Press interview piece coordinated for Resident Evil: Welcome to Raccoon City. Managed the full press relationship from outreach to execution as the primary PR contact for Game Informer Magazine.</span>
+        </template>
       </div>
 
     </div>
@@ -638,7 +654,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card float-a">
+      <div class="mb-card float-a" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -654,7 +670,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </template>
       </div>
 
-      <div class="mb-card float-b">
+      <div class="mb-card float-b" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Broadcast/Dear_Savvy_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -670,7 +686,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </template>
       </div>
 
-      <div class="mb-card float-c">
+      <div class="mb-card float-c" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Broadcast/Dear_First_Place_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -686,39 +702,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </template>
       </div>
 
-      <div class="mb-card float-d">
-        <video class="mb-card-vis featured" src="Broadcast/Dear_Crew_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Dear Crew, 30</p>
-          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
-          <span class="m-title">Dear Crew, 30</span>
-          <span class="m-src">Broadcast/Dear_Crew_30_copy.mp4</span>
-          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
-        </template>
-      </div>
-
-      <div class="mb-card float-e">
-        <video class="mb-card-vis featured" src="Broadcast/Dear_Snow_30.mp4" autoplay muted loop playsinline preload="auto"></video>
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Dear Snow, 30</p>
-          <p class="mb-card-desc-text">Regional broadcast and paid social campaign targeting the Denver market.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Denver Toyota TDA</span>
-          <span class="m-title">Dear Snow, 30</span>
-          <span class="m-src">Broadcast/Dear_Snow_30.mp4</span>
-          <span class="m-body">Pre-production and shoot day for a regional broadcast and paid social campaign targeting the Denver market. <strong>Pre-production:</strong> Talent booking, location scouting, and agency liaison with the production company for all Talent, Wardrobe, Props, Animals. <strong>Shoot:</strong> Managing animal shots and overseeing special operations team.</span>
-        </template>
-      </div>
-
-      <div class="mb-card float-f">
+      <div class="mb-card float-f" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Broadcast/Parking_Spot_Face-Off.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -734,7 +718,39 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </template>
       </div>
 
-      <div class="mb-card float-a">
+      <div class="mb-card float-e" onclick="openModal(this)">
+        <video class="mb-card-vis featured" src="Broadcast/Dear_Snow_30.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Dear Snow, 30</p>
+          <p class="mb-card-desc-text">Regional broadcast and paid social campaign targeting the Denver market.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Denver Toyota TDA</span>
+          <span class="m-title">Dear Snow, 30</span>
+          <span class="m-src">Broadcast/Dear_Snow_30.mp4</span>
+          <span class="m-body">Pre-production and shoot day for a regional broadcast and paid social campaign targeting the Denver market. <strong>Pre-production:</strong> Talent booking, location scouting, and agency liaison with the production company for all Talent, Wardrobe, Props, Animals. <strong>Shoot:</strong> Managing animal shots and overseeing special operations team.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-d" onclick="openModal(this)">
+        <video class="mb-card-vis featured" src="Broadcast/Dear_Crew_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Dear Crew, 30</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
+          <span class="m-title">Dear Crew, 30</span>
+          <span class="m-src">Broadcast/Dear_Crew_30_copy.mp4</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
+        </template>
+      </div>
+
+      <div class="mb-card float-a" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Broadcast/Zamboni_Machine.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -761,7 +777,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis vert" src="Social/organic_social_feed_1.jpg" style="object-fit:cover;object-position:top;" alt="Drive Toyota Organic Social">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -770,7 +786,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Drive Toyota — Organic Social Lead</span><span class="m-title">Organic Growth: 24K → 52K</span><span class="m-src">Social/organic_social_feed_1.jpg</span><span class="m-body">Lead Producer across nine domestic markets. Responsible for sourcing all footage, stills, and audio for organic activations. Grew the account from ~24K to 52.6K followers.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis vert" src="Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -778,7 +794,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Toyota NYR · Eli Manning x Red Bulls x NYR</span><span class="m-title">Toyota NYR Eli Manning Social</span><span class="m-src">Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4</span><span class="m-body">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis vert" src="Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -786,7 +802,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Toyota NYR · Eli Manning x Red Bulls x NYR</span><span class="m-title">Toyota NYR Eli Manning Social</span><span class="m-src">Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4</span><span class="m-body">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis sq" src="Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -794,7 +810,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Dear First Place — Social Resize</span><span class="m-title">Dear First Place Camry v Accord EN Social</span><span class="m-src">Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4</span><span class="m-body">Dear First Place Camry v Accord EN Social: Post Production Social Resize. Adapting broadcast deliverables for social formats across all markets.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis tall" src="Social/TU_Winner_Ad.jpg" style="object-fit:cover;" alt="Paid Social Trafficking">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -847,7 +863,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" style="object-position:50% 35%;object-fit:cover;" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -952,21 +968,21 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       <p class="mb-desc">Produced social media footage banks for Toyota TDA — capturing primary source footage across multi-day shoots, cut down and repurposed across multiple social assets and campaigns.</p>
     </div>
     <div class="masonry">
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Footage_Banks/DAILIES1.mov" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Primary source footage captured across a four-day shoot, repurposed across multiple campaigns.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES1.mov</span><span class="m-body">Produced a social media footage bank for Toyota TDA over a four-day shoot, capturing primary source footage across the full production. Material was cut down and repurposed across multiple social assets and campaigns.</span></template>
       </div>
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Footage_Banks/DAILIES2.mov" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Footage banks built to serve broadcast, social, and digital campaigns across all nine markets.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES2.mov</span><span class="m-body">Footage banks built to serve creative use across broadcast, social, and digital campaigns. Single shoot day used to generate assets for multiple markets and activation types.</span></template>
       </div>
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Footage_Banks/DAILIES3.mov" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -984,7 +1000,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -992,7 +1008,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance Socks x Paul George — Launch Film</span><span class="m-src">Partner_Launches/Stance_Video.mp4</span><span class="m-body">Closed the Stance Socks partnership and produced the launch campaign alongside the creative team. Built a digital-physical QR code integration connecting a custom sock design to Paul George's Stance line with filmed launch content. Managed the relationship from deal close through production prep and launch execution.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis tall" src="Partner_Launches/Stance_Paul_George.jpg" style="object-fit:cover;object-position:top;" alt="Stance x Paul George">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1001,7 +1017,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance Socks x Paul George</span><span class="m-src">Partner_Launches/Stance_Paul_George.jpg</span><span class="m-body">Closed brand partnership with Stance Socks and transitioned into production, coordinating with the creative team on a digital-physical campaign concept connecting a custom QR code sock design to Paul George's Stance line with filmed launch content. Managed the relationship from deal close through production prep and launch execution.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis sq" src="Partner_Launches/Stance_Socks.jpg" style="object-fit:cover;" alt="Stance x RKL Socks">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1010,7 +1026,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance x RKL — Custom Sock Design</span><span class="m-src">Partner_Launches/Stance_Socks.jpg</span><span class="m-body">Co-branded Stance x RKL custom sock design produced as part of the Paul George partnership launch campaign. The product connected a custom QR code sock design to Paul George's Stance NFT line, bridging physical product and digital activation.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis tall" src="Partner_Launches/Crystal_Danger.jpeg" style="object-fit:cover;object-position:top;" alt="Crystal Dangerfield">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1019,7 +1035,14 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Crystal Dangerfield</span><span class="m-title">Crystal Dangerfield — RKL Co-Branded Shoes</span><span class="m-src">Partner_Launches/Crystal_Danger.jpeg</span><span class="m-body">Crystal Dangerfield x RKL co-branded shoe collaboration — the first WNBA Player to wear an NFT brand's branding on her shoes in a game. Managed the partnership from signing through launch execution, including product coordination and in-game activation.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis featured" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Multi-year brand partnership launch with co-branded in-game wearables and interactive web experience.</p></div>
+        <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL Teaser</span><span class="m-src">Partner_Launches/LDJDF9WRSwn_576.mp4</span><span class="m-body">Gatorade teaser for a multi-year brand partnership. Launched with an interactive web experience, including marketing support, co-branded in-game wearables, and brand support. Grew the partner catalog by 450% after onboarding 13 new partners. Added $300K in contract value and negotiated revenue split increases of 25% across active accounts.</span></template>
+      </div>
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1027,7 +1050,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL Teaser</span><span class="m-src">Partner_Launches/LDJDF9WRSwn_576.mp4</span><span class="m-body">Gatorade teaser for a multi-year brand partnership. Launched with an interactive web experience, including marketing support, co-branded in-game wearables, and brand support. Grew the partner catalog by 450% after onboarding 13 new partners. Added $300K in contract value and negotiated revenue split increases of 25% across active accounts.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis wide" src="Partner_Launches/Gatorade_Wearables_RKl_.png" style="object-fit:cover;" alt="Gatorade x RKL Wearables">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1036,7 +1059,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">Partner_Launches/Gatorade_Wearables_RKl_.png</span><span class="m-body">Gatorade teasers for a multi-year brand partnership. Launched with an interactive web experience, including marketing support, co-branded in-game wearables, and brand support. Grew the partner catalog by 450% after onboarding 13 new partners. Added $300K in contract value and negotiated revenue split increases of 25% across active accounts.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis sq" src="Partner_Launches/gatorade_Wearables_RKL.png" style="object-fit:cover;" alt="Gatorade x RKL Wearable 2">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1045,7 +1068,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">Partner_Launches/gatorade_Wearables_RKL.png</span><span class="m-body">Co-branded legendary in-game wearable item produced as part of the Gatorade x RKL multi-year brand partnership. Interactive web experience with co-branded in-game wearables bridging physical brand presence and digital gameplay.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis wide" src="Partner_Launches/gatorade_Werables_2_RKL.png" style="object-fit:cover;" alt="Gatorade x RKL Towel">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1054,7 +1077,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">Partner_Launches/gatorade_Werables_2_RKL.png</span><span class="m-body">Co-branded in-game wearable produced as part of the Gatorade x RKL multi-year brand partnership — a common-tier wearable item in the RKL in-game wearable collection.</span></template>
       </div>
 
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis sq" src="Partner_Launches/RKL_x_Round21_BB_.jpeg" style="object-fit:cover;" alt="Round21 x RKL Basketball">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1073,7 +1096,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       <p class="mb-desc">Public Relations work with Sony Pictures Entertainment NY office. Specializing in video game culture outlet pieces. Work spanning 900M UVMs, 4.5MM Circulation, and 3.2MM social reach.</p>
     </div>
     <div class="masonry">
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis featured" src="PR/Raccoon_City.jpg" style="object-fit:cover;object-position:center;width:100%;height:100%;" alt="Resident Evil Raccoon City">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1111,7 +1134,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
           <span class="m-body">Press interview piece coordinated for Resident Evil: Welcome to Raccoon City. Managed the full press relationship from outreach to execution as the primary PR contact for Game Informer Magazine.</span>
         </template>
       </div>
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <div class="mb-card-vis wide g6" style="position:relative;overflow:hidden;">
           <img src="https://img.youtube.com/vi/m1LXzIaYZq8/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Nolan North Uncharted">
         </div>
@@ -1119,7 +1142,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         <div class="mb-card-desc"><p class="mb-card-desc-title">Nolan North Campaign</p><p class="mb-card-desc-text">Exclusive content releases drove 30K+ YouTube views and entertainment outlet pickup.</p></div>
         <template class="modal-data"><span class="m-tag">Sony Pictures — Uncharted</span><span class="m-title">Nolan North Campaign</span><span class="m-src">yt:m1LXzIaYZq8</span><span class="m-body">Managed the press relationship with Nolan North (voice of Nathan Drake) in support of Sony Pictures' Uncharted theatrical release. Coordinated exclusive image releases and content teases to build anticipation ahead of the film's debut. The campaign drove 30K+ YouTube views along with additional pickup from entertainment outlets.</span></template>
       </div>
-      <div class="mb-card">
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis wide" src="PR/Paul_Anderson_Raccoon_City_.jpg" style="object-fit:cover;object-position:center top;width:100%;height:100%;" alt="Paul W.S. Anderson Monster Hunter">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1138,7 +1161,8 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card">
+
+      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1154,7 +1178,8 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </template>
       </div>
 
-      <div class="mb-card">
+
+      <div class="mb-card" onclick="openModal(this)">
         <img class="mb-card-vis wide" src="Branding/Cruisers_Branding_1.jpg" style="object-fit:cover;" alt="Cruisers Branding">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1171,25 +1196,9 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </template>
       </div>
 
-      <div class="mb-card">
-        <img class="mb-card-vis featured" src="Branding/Cruisers_Branding_.jpg" style="object-fit:cover;" alt="Cruisers Branding">
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Cruisers — Brand Campaign</p>
-          <p class="mb-card-desc-text">Campaign creative and brand expression for the Cruisers cycling community.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Cruisers · Brand Campaign</span>
-          <span class="m-title">Cruisers — Brand Campaign</span>
-          <span class="m-src"></span>
-          <span class="m-body">Campaign creative and brand expression for the Cruisers cycling community — applying the visual identity system across photography, digital, and community-facing materials.</span>
-        </template>
-      </div>
 
-      <div class="mb-card">
-        <img class="mb-card-vis sq" src="Branding/Cruisers_Strava_.jpg" style="object-fit:cover;" alt="Cruisers Strava Assets">
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis wide" src="Branding/Cruisers_Strava_.jpg" style="object-fit:cover;" alt="Cruisers Strava Assets">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
@@ -1202,6 +1211,24 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
           <span class="m-title">Cruisers — Strava Event Iconography</span>
           <span class="m-src"></span>
           <span class="m-body">Designed a custom sketch-fill icon system for Cruisers Strava event templates. Icons cover weather (sun, rain), ride level (beginner, intermediate, advanced), ride type (gravel, weekend epic), women's events, and special occasions — all in a cohesive hand-drawn aesthetic matching the Cruisers brand.</span>
+        </template>
+      </div>
+
+
+      <div class="mb-card" onclick="openModal(this)">
+        <img class="mb-card-vis wide" src="Branding/Cruisers_Branding_.jpg" style="object-fit:cover;" alt="Cruisers Branding">
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Cruisers — Brand Campaign</p>
+          <p class="mb-card-desc-text">Campaign creative and brand expression for the Cruisers cycling community.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Cruisers · Brand Campaign</span>
+          <span class="m-title">Cruisers — Brand Campaign</span>
+          <span class="m-src"></span>
+          <span class="m-body">Campaign creative and brand expression for the Cruisers cycling community — applying the visual identity system across photography, digital, and community-facing materials.</span>
         </template>
       </div>
 
@@ -1225,7 +1252,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     <div class="r-main">
       <p class="r-sec-label">Professional Experience</p>
       <div class="r-exp">
-        <div class="r-logo"><img src="Logos/saatchi_logo.jpeg" alt="Saatchi &amp; Saatchi"></div>
+        <div class="r-logo"><img src="Logos/we_are_saatchi_logo.jpeg" alt="Saatchi &amp; Saatchi"></div>
         <div>
           <p class="r-date">May 2023 – Aug 2023 (Contract) &nbsp;|&nbsp; Mar 2024 – Present</p>
           <p class="r-role">Producer, Social, Digital &amp; Display</p>
@@ -1241,7 +1268,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </div>
       </div>
       <div class="r-exp">
-        <div class="r-logo"><img src="Logos/rkl_logo.jpeg" alt="Rumble League Studios"></div>
+        <div class="r-logo"><img src="Logos/rkl_logo_black_transparent_bg-2012103092.jpeg" alt="Rumble League Studios"></div>
         <div>
           <p class="r-date">April 2022 – May 2023</p>
           <p class="r-role">Global Partnerships Lead</p>
@@ -1254,7 +1281,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
         </div>
       </div>
       <div class="r-exp">
-        <div class="r-logo"><img src="Logos/sony_logo.png" alt="Sony Pictures Entertainment"></div>
+        <div class="r-logo"><img src="Logos/sony-pictures-entertainment-vector-logo-11574039107zxdxtsgrni-4235092807.png" alt="Sony Pictures Entertainment"></div>
         <div>
           <p class="r-date">October 2019 – February 2022</p>
           <p class="r-role">Global Publicity Coordinator</p>
@@ -1319,7 +1346,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     <p class="ct-connect-label">Let's Connect</p>
     <p class="ct-exp-line">5+ years of experience — always looking to connect.</p>
     <div class="ct-btns">
-      <a id="contact-email-btn" href="/cdn-cgi/l/email-protection#5a103532343935343435283b34343b343e1a3d373b33367439353765292f38303f392e67163f2e7f686d297f686a0d3528317f686a0e353d3f2e323f28" class="ct-btn primary">
+      <a id="contact-email-btn" href="mailto:Johnconnorannand@gmail.com?subject=Let%27s%20Work%20Together" class="ct-btn primary">
         <svg viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="10" rx="1.5"/><path d="M1 3l6 4 6-4"/></svg>
         Email Connor
       </a>
