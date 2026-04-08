@@ -211,6 +211,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 .hm-card-vis.wide{aspect-ratio:16/9;}
 .hm-card-vis.sq{aspect-ratio:1/1;}
 .hm-card-vis.short{aspect-ratio:5/3;}
+.hm-card-vis.vert{aspect-ratio:9/16;}
 video.hm-card-vis{object-fit:cover;background:#0A0C14;}
 img.hm-card-vis{object-fit:cover;}
 .hm-card-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,31,0.92) 0%,rgba(8,12,31,0.1) 55%,transparent 100%);transition:opacity 0.3s;}
@@ -250,6 +251,14 @@ img.hm-card-vis{object-fit:cover;}
 
 /* ── MOODBOARD DARK ───────────────── */
 .moodboard-panel{padding:3rem 3rem 6rem;background:var(--dark);overflow:hidden;}
+/* Click shield — sits over card, lets video play underneath, captures click for modal */
+.mb-card{position:relative;}
+.mb-card-shield{
+  position:absolute;inset:0;z-index:10;cursor:pointer;
+  background:transparent;
+}
+.mb-card-desc{position:relative;z-index:11;}
+
 .mb-header{margin-bottom:2.5rem;}
 .mb-title{font-family:var(--title-font);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;color:var(--white);line-height:1.1;letter-spacing:0.02em;}
 .mb-title em{font-style:italic;color:var(--cobalt-lt);}
@@ -266,10 +275,11 @@ img.hm-card-vis{object-fit:cover;}
 .mb-card-vis{width:100%;display:block;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);}
 .mb-card:hover .mb-card-vis{transform:scale(1.04);}
 .mb-card-vis.tall{aspect-ratio:3/4;}
+.mb-card-vis.vert{aspect-ratio:9/16;}
 .mb-card-vis.wide{aspect-ratio:16/9;}
 .mb-card-vis.sq{aspect-ratio:1/1;}
-video.mb-card-vis{object-fit:cover;background:#0A0C14;}
-img.mb-card-vis{object-fit:cover;}
+video.mb-card-vis{object-fit:cover;background:#0A0C14;min-height:80px;}
+img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 .mb-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,31,0.88) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;}
 .mb-card:hover .mb-card-overlay{opacity:1;}
 .mb-card-label{position:absolute;bottom:0.85rem;left:0.9rem;right:0.9rem;font-family:var(--body-font);font-size:0.6rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,248,244,0.88);opacity:0;transform:translateY(4px);transition:opacity 0.3s,transform 0.3s;}
@@ -471,10 +481,10 @@ img.mb-card-vis{object-fit:cover;}
     </div>
     <div class="hero-photos-row">
       <div class="hero-photo hero-photo-a">
-        <img src="Hero_Photos/IMG_0834.jpg" alt="Connor Annand on set">
+        <img src="Hero_Photos/IMG_0834.jpg" alt="Connor Annand on set" loading="eager" onerror="this.style.background='#C8C3B8'">
       </div>
       <div class="hero-photo hero-photo-b">
-        <img src="Hero_Photos/IMG_0677.jpg" alt="Connor Annand on set, camera monitor">
+        <img src="Hero_Photos/IMG_0677.jpg" alt="Connor Annand on set, camera monitor" loading="eager" onerror="this.style.background='#C8C3B8'">
       </div>
     </div>
     <div class="hero-bottom-row">
@@ -494,7 +504,7 @@ img.mb-card-vis{object-fit:cover;}
     <div class="home-masonry">
 
       <div class="hm-card hf-a" onclick="goWork('broadcast')">
-        <video class="hm-card-vis tall" src="Broadcast/Dear_Friday_30_copy.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <video class="hm-card-vis tall" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Broadcast</span>
         <div class="hm-card-info">
@@ -504,7 +514,7 @@ img.mb-card-vis{object-fit:cover;}
       </div>
 
       <div class="hm-card hf-b" onclick="goWork('social')">
-        <video class="hm-card-vis wide" src="Animation_Display_OOH/Redbulls.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <video class="hm-card-vis wide" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Social</span>
         <div class="hm-card-info">
@@ -514,7 +524,7 @@ img.mb-card-vis{object-fit:cover;}
       </div>
 
       <div class="hm-card hf-c" onclick="goWork('ooh')">
-        <video class="hm-card-vis sq" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <video class="hm-card-vis sq" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">OOH</span>
         <div class="hm-card-info">
@@ -524,7 +534,7 @@ img.mb-card-vis{object-fit:cover;}
       </div>
 
       <div class="hm-card hf-d" onclick="goWork('partners')">
-        <video class="hm-card-vis tall" src="Animation_Display_OOH/Timbers.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <video class="hm-card-vis tall" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Partnerships</span>
         <div class="hm-card-info">
@@ -534,7 +544,7 @@ img.mb-card-vis{object-fit:cover;}
       </div>
 
       <div class="hm-card hf-e" onclick="goWork('branding')">
-        <video class="hm-card-vis wide" src="Branding/Cruisers_Hero_Branding_Video_.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <video class="hm-card-vis wide" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Branding</span>
         <div class="hm-card-info">
@@ -544,7 +554,7 @@ img.mb-card-vis{object-fit:cover;}
       </div>
 
       <div class="hm-card hf-f" onclick="goWork('pr')">
-        <video class="hm-card-vis sq" src="Animation_Display_OOH/Yankees.mp4" muted playsinline loop preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+        <video class="hm-card-vis sq" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">PR</span>
         <div class="hm-card-info">
@@ -581,9 +591,10 @@ img.mb-card-vis{object-fit:cover;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis tall" src="Broadcast/Dear_Friday_30_copy.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-a">
+        <video class="mb-card-vis tall" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear Friday, 30</p>
           <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
@@ -596,9 +607,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Broadcast/Dear_Savvy_30_copy.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-b">
+        <video class="mb-card-vis wide" src="Broadcast/Dear_Savvy_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear Savvy, 30</p>
           <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
@@ -611,9 +623,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis sq" src="Broadcast/Dear_First_Place_30_copy.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-c">
+        <video class="mb-card-vis sq" src="Broadcast/Dear_First_Place_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear First Place, 30</p>
           <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
@@ -626,9 +639,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-d" onclick="openModal(this)">
-        <video class="mb-card-vis tall" src="Broadcast/Dear_Crew_30_copy.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-d">
+        <video class="mb-card-vis tall" src="Broadcast/Dear_Crew_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear Crew, 30</p>
           <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
@@ -641,9 +655,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-e" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Broadcast/Dear_Snow_30.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-e">
+        <video class="mb-card-vis wide" src="Broadcast/Dear_Snow_30.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear Snow, 30</p>
           <p class="mb-card-desc-text">Regional broadcast and paid social campaign targeting the Denver market.</p>
@@ -656,9 +671,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-f" onclick="openModal(this)">
-        <video class="mb-card-vis sq" src="Broadcast/Parking_Spot_Face-Off.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-f">
+        <video class="mb-card-vis sq" src="Broadcast/Parking_Spot_Face-Off.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Parking Spot Face-Off</p>
           <p class="mb-card-desc-text">Las Vegas Knights x Denver Toyota TDA. Associate Producer.</p>
@@ -671,9 +687,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Broadcast/Zamboni_Machine.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-a">
+        <video class="mb-card-vis wide" src="Broadcast/Zamboni_Machine.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Zamboni Machine</p>
           <p class="mb-card-desc-text">Las Vegas Knights x Denver Toyota TDA. Associate Producer.</p>
@@ -697,37 +714,44 @@ img.mb-card-vis{object-fit:cover;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis tall" src="Social/organic_social_feed_1.jpg" style="object-fit:cover;object-position:top;" alt="Drive Toyota Organic Social">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Organic Growth: 24K → 52K</p><p class="mb-card-desc-text">Lead Producer across nine domestic markets. Sourcing all footage, stills, and audio.</p></div>
         <template class="modal-data"><span class="m-tag">Drive Toyota — Organic Social Lead</span><span class="m-title">Organic Growth: 24K → 52K</span><span class="m-src">Social/organic_social_feed_1.jpg</span><span class="m-body">Lead Producer across nine domestic markets. Responsible for sourcing all footage, stills, and audio for organic activations. Grew the account from ~24K to 52.6K followers.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis vert" src="Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Toyota NYR Eli Manning Social</p><p class="mb-card-desc-text">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota NYR · Eli Manning x Red Bulls x NYR</span><span class="m-title">Toyota NYR Eli Manning Social</span><span class="m-src">Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4</span><span class="m-body">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis sq" src="Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis vert" src="Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Toyota NYR Eli Manning Social</p><p class="mb-card-desc-text">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota NYR · Eli Manning x Red Bulls x NYR</span><span class="m-title">Toyota NYR Eli Manning Social</span><span class="m-src">Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4</span><span class="m-body">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis sq" src="Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear First Place Camry v Accord EN Social</p><p class="mb-card-desc-text">Post Production Social Resize.</p></div>
         <template class="modal-data"><span class="m-tag">Dear First Place — Social Resize</span><span class="m-title">Dear First Place Camry v Accord EN Social</span><span class="m-src">Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4</span><span class="m-body">Dear First Place Camry v Accord EN Social: Post Production Social Resize. Adapting broadcast deliverables for social formats across all markets.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis tall" src="Social/TU_Winner_Ad.jpg" style="object-fit:cover;" alt="Paid Social Trafficking">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Paid Social Asset Trafficking</p><p class="mb-card-desc-text">Meta, Reddit, Snapchat, YouTube — coordinating across all teams and markets.</p></div>
         <template class="modal-data"><span class="m-tag">Paid Social · Toyota TDA</span><span class="m-title">Paid Social Asset Trafficking</span><span class="m-src">Social/TU_Winner_Ad.jpg</span><span class="m-body">Managing and trafficking paid social assets across Meta, Reddit, Snapchat, and YouTube while keeping all markets on schedule. Daily point of contact across media, creative, account, product, and legal teams.</span></template>
       </div>
@@ -743,9 +767,10 @@ img.mb-card-vis{object-fit:cover;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Animation_Display_OOH/Timbers.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-a">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Portland Timbers — Animated LED with Running Footage Edit</p>
           <p class="mb-card-desc-text">Full production from budget approval, footage sourcing, edit &amp; animation revisions, partner clearing.</p>
@@ -758,9 +783,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Animation_Display_OOH/Redbulls.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-b">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Toyota NYR New York Red Bulls — Raging Bull</p>
           <p class="mb-card-desc-text">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</p>
@@ -773,9 +799,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Animation_Display_OOH/Yankees.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-c">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Toyota NYR New York Yankees LEDs</p>
           <p class="mb-card-desc-text">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</p>
@@ -788,9 +815,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-d" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-d">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Las Vegas T-Mobile Fascia OOH</p>
           <p class="mb-card-desc-text">Full production from budget approval, footage sourcing, edit &amp; animation revisions, partner clearing.</p>
@@ -803,9 +831,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-e" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Animation_Display_OOH/T-Mobile_Center.mov" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-e">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/T-Mobile_Center.mov" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Las Vegas LED — New Vendor Onboarding</p>
           <p class="mb-card-desc-text">Produced in-stadium LED and DED placement for Toyota Denver TDA at the T-Mobile Arena in Las Vegas, marking the first project with a newly onboarded vendor.</p>
@@ -818,9 +847,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-f" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-f">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Minnesota Wild LED</p>
           <p class="mb-card-desc-text">In-stadium LED placement for Toyota TDA at the Minnesota Wild Arena. Full production from budget approval through creative development and final delivery.</p>
@@ -833,9 +863,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-a">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Minnesota Wild DED</p>
           <p class="mb-card-desc-text">In-stadium DED placement for Toyota TDA at the Minnesota Wild Arena. Full production from budget approval through creative development and final delivery.</p>
@@ -848,9 +879,10 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Animation_Display_OOH/Buffalo_Bills.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card float-b">
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Buffalo Bills LED</p>
           <p class="mb-card-desc-text">Full production from budget approval, turntable/3D asset sourcing, edit &amp; animation revisions, partner clearing.</p>
@@ -873,21 +905,24 @@ img.mb-card-vis{object-fit:cover;}
       <p class="mb-desc">Produced social media footage banks for Toyota TDA — capturing primary source footage across multi-day shoots, cut down and repurposed across multiple social assets and campaigns.</p>
     </div>
     <div class="masonry">
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES1.mov" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES1.mov" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Primary source footage captured across a four-day shoot, repurposed across multiple campaigns.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES1.mov</span><span class="m-body">Produced a social media footage bank for Toyota TDA over a four-day shoot, capturing primary source footage across the full production. Material was cut down and repurposed across multiple social assets and campaigns.</span></template>
       </div>
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES2.mov" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES2.mov" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Footage banks built to serve broadcast, social, and digital campaigns across all nine markets.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES2.mov</span><span class="m-body">Footage banks built to serve creative use across broadcast, social, and digital campaigns. Single shoot day used to generate assets for multiple markets and activation types.</span></template>
       </div>
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES3.mov" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES3.mov" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Running a parallel social unit alongside broadcast crew to maximize footage output.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES3.mov</span><span class="m-body">Running a dedicated parallel social unit alongside the broadcast crew — capturing supplementary footage, behind-the-scenes content, and social-first assets simultaneously to maximize footage output from every shoot day.</span></template>
       </div>
@@ -902,65 +937,81 @@ img.mb-card-vis{object-fit:cover;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Partner_Launches/Stance_Video.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis wide" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Stance Socks x Paul George — Launch Film</p><p class="mb-card-desc-text">Launch content produced alongside the Stance x RKL partnership campaign.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance Socks x Paul George — Launch Film</span><span class="m-src">Partner_Launches/Stance_Video.mp4</span><span class="m-body">Closed the Stance Socks partnership and produced the launch campaign alongside the creative team. Built a digital-physical QR code integration connecting a custom sock design to Paul George's Stance line with filmed launch content. Managed the relationship from deal close through production prep and launch execution.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis tall" src="Partner_Launches/Stance_Paul_George.jpg" style="object-fit:cover;object-position:top;" alt="Stance x Paul George">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Stance Socks x Paul George</p><p class="mb-card-desc-text">Digital-physical QR code integration tied to Paul George's Stance line.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance Socks x Paul George</span><span class="m-src">Partner_Launches/Stance_Paul_George.jpg</span><span class="m-body">Closed brand partnership with Stance Socks and transitioned into production, coordinating with the creative team on a digital-physical campaign concept connecting a custom QR code sock design to Paul George's Stance line with filmed launch content. Managed the relationship from deal close through production prep and launch execution.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis sq" src="Partner_Launches/Stance_Socks.jpg" style="object-fit:cover;" alt="Stance x RKL Socks">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Stance x RKL — Custom Sock Design</p><p class="mb-card-desc-text">Co-branded Stance x RKL sock packaging and product from the Paul George partnership launch.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Stance Socks</span><span class="m-title">Stance x RKL — Custom Sock Design</span><span class="m-src">Partner_Launches/Stance_Socks.jpg</span><span class="m-body">Co-branded Stance x RKL custom sock design produced as part of the Paul George partnership launch campaign. The product connected a custom QR code sock design to Paul George's Stance NFT line, bridging physical product and digital activation.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis tall" src="Partner_Launches/Crystal_Danger.jpeg" style="object-fit:cover;object-position:top;" alt="Crystal Dangerfield">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Crystal Dangerfield — RKL Co-Branded Shoes</p><p class="mb-card-desc-text">First WNBA Player to wear an NFT brand's branding on her shoes in a game.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Crystal Dangerfield</span><span class="m-title">Crystal Dangerfield — RKL Co-Branded Shoes</span><span class="m-src">Partner_Launches/Crystal_Danger.jpeg</span><span class="m-body">Crystal Dangerfield x RKL co-branded shoe collaboration — the first WNBA Player to wear an NFT brand's branding on her shoes in a game. Managed the partnership from signing through launch execution, including product coordination and in-game activation.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis tall" src="Partner_Launches/LDJDF9WRSwn_576.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis tall" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Multi-year brand partnership launch with co-branded in-game wearables and interactive web experience.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL Teaser</span><span class="m-src">Partner_Launches/LDJDF9WRSwn_576.mp4</span><span class="m-body">Gatorade teaser for a multi-year brand partnership. Launched with an interactive web experience, including marketing support, co-branded in-game wearables, and brand support. Grew the partner catalog by 450% after onboarding 13 new partners. Added $300K in contract value and negotiated revenue split increases of 25% across active accounts.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis wide" src="Partner_Launches/Gatorade_Wearables_RKl_.png" style="object-fit:cover;" alt="Gatorade x RKL Wearables">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Co-branded in-game wearables launched as part of the Gatorade multi-year partnership.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">Partner_Launches/Gatorade_Wearables_RKl_.png</span><span class="m-body">Gatorade teasers for a multi-year brand partnership. Launched with an interactive web experience, including marketing support, co-branded in-game wearables, and brand support. Grew the partner catalog by 450% after onboarding 13 new partners. Added $300K in contract value and negotiated revenue split increases of 25% across active accounts.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis sq" src="Partner_Launches/gatorade_Wearables_RKL.png" style="object-fit:cover;" alt="Gatorade x RKL Wearable 2">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Legendary in-game wearable item from the Gatorade x RKL multi-year partnership.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">Partner_Launches/gatorade_Wearables_RKL.png</span><span class="m-body">Co-branded legendary in-game wearable item produced as part of the Gatorade x RKL multi-year brand partnership. Interactive web experience with co-branded in-game wearables bridging physical brand presence and digital gameplay.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis wide" src="Partner_Launches/gatorade_Werables_2_RKL.png" style="object-fit:cover;" alt="Gatorade x RKL Towel">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Co-branded in-game wearable from the Gatorade x RKL partnership launch.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios · Gatorade</span><span class="m-title">Gatorade x RKL — In-Game Wearables</span><span class="m-src">Partner_Launches/gatorade_Werables_2_RKL.png</span><span class="m-body">Co-branded in-game wearable produced as part of the Gatorade x RKL multi-year brand partnership — a common-tier wearable item in the RKL in-game wearable collection.</span></template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis sq" src="Partner_Launches/RKL_x_Round21_BB_.jpeg" style="object-fit:cover;" alt="Round21 x RKL Basketball">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Round21 x RKL GTM</p><p class="mb-card-desc-text">Co-branded basketball launch with marketing support and NFT NYC event activation.</p></div>
         <template class="modal-data"><span class="m-tag">Rumble League Studios</span><span class="m-title">Round21 x RKL GTM</span><span class="m-src">Partner_Launches/RKL_x_Round21_BB_.jpeg</span><span class="m-body">Round21 x RKL partnership launch — GTM of co-branded basketball. Marketing support, live community discussions, and event support at NFT NYC.</span></template>
       </div>
@@ -975,13 +1026,15 @@ img.mb-card-vis{object-fit:cover;}
       <p class="mb-desc">Public Relations work with Sony Pictures Entertainment NY office. Specializing in video game culture outlet pieces. Work spanning 900M UVMs, 4.5MM Circulation, and 3.2MM social reach.</p>
     </div>
     <div class="masonry">
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis tall" src="PR/Raccoon_City.jpg" style="object-fit:cover;" alt="Resident Evil Raccoon City">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Resident Evil: Welcome to Raccoon City</p><p class="mb-card-desc-text">Primary PR contact for Game Informer. Exclusive interviews, clip debut, roundtable junket.</p></div>
         <template class="modal-data"><span class="m-tag">Sony Pictures — Game Informer</span><span class="m-title">Resident Evil: Welcome to Raccoon City</span><span class="m-src">PR/Raccoon_City.jpg</span><span class="m-body">Served as the primary PR contact for Game Informer Magazine. Managed the full press relationship from outreach to execution: securing exclusive interviews, coordinating a clip debut, and organizing a roundtable junket ahead of the film's theatrical release to drive awareness within the gaming community.</span></template>
       </div>
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <div class="mb-card-vis wide g6" style="position:relative;overflow:hidden;">
           <img src="https://img.youtube.com/vi/m1LXzIaYZq8/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Nolan North Uncharted">
         </div>
@@ -989,9 +1042,11 @@ img.mb-card-vis{object-fit:cover;}
         <div class="mb-card-desc"><p class="mb-card-desc-title">Nolan North Campaign</p><p class="mb-card-desc-text">Exclusive content releases drove 30K+ YouTube views and entertainment outlet pickup.</p></div>
         <template class="modal-data"><span class="m-tag">Sony Pictures — Uncharted</span><span class="m-title">Nolan North Campaign</span><span class="m-src">yt:m1LXzIaYZq8</span><span class="m-body">Managed the press relationship with Nolan North (voice of Nathan Drake) in support of Sony Pictures' Uncharted theatrical release. Coordinated exclusive image releases and content teases to build anticipation ahead of the film's debut. The campaign drove 30K+ YouTube views along with additional pickup from entertainment outlets.</span></template>
       </div>
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis sq" src="PR/Paul_Anderson_Raccoon_City_.jpg" style="object-fit:cover;" alt="Paul W.S. Anderson Monster Hunter">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Director Interview — Paul W.S. Anderson</p><p class="mb-card-desc-text">Post-release print interview for Monster Hunter home entertainment release.</p></div>
         <template class="modal-data"><span class="m-tag">Sony Pictures — Monster Hunter</span><span class="m-title">Director Interview — Paul W.S. Anderson</span><span class="m-src">PR/Paul_Anderson_Raccoon_City_.jpg</span><span class="m-body">Coordinated a print magazine interview with director Paul W.S. Anderson in support of Sony Pictures' Monster Hunter home entertainment release. Managed the full press placement from pitch to execution, targeting audiences ahead of the film's digital and DVD sales window.</span></template>
       </div>
@@ -1006,9 +1061,10 @@ img.mb-card-vis{object-fit:cover;}
     </div>
     <div class="masonry">
 
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Branding/Cruisers_Hero_Branding_Video_.mp4" muted playsinline preload="metadata"></video>
+      <div class="mb-card">
+        <video class="mb-card-vis wide" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Cruisers — Hero Branding Video</p>
           <p class="mb-card-desc-text">Edited, Sound Direction, and Animation. Hero video for the Cruisers cycling community brand.</p>
@@ -1021,9 +1077,11 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis wide" src="Branding/Cruisers_Branding_1.jpg" style="object-fit:cover;" alt="Cruisers Branding">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Cruisers — Brand Identity</p>
           <p class="mb-card-desc-text">Visual identity system including logo, typography, and color language for the Denver cycling community.</p>
@@ -1036,9 +1094,11 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis tall" src="Branding/Cruisers_Branding_.jpg" style="object-fit:cover;" alt="Cruisers Branding">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Cruisers — Brand Campaign</p>
           <p class="mb-card-desc-text">Campaign creative and brand expression for the Cruisers cycling community.</p>
@@ -1051,9 +1111,11 @@ img.mb-card-vis{object-fit:cover;}
         </template>
       </div>
 
-      <div class="mb-card" onclick="openModal(this)">
+      <div class="mb-card">
         <img class="mb-card-vis sq" src="Branding/Cruisers_Strava_.jpg" style="object-fit:cover;" alt="Cruisers Strava Assets">
         <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Cruisers — Strava Event Iconography</p>
           <p class="mb-card-desc-text">Custom sketch-fill icon system for Strava event templates: weather, level, ride type, and special event icons.</p>
@@ -1139,7 +1201,7 @@ img.mb-card-vis{object-fit:cover;}
       <div class="side-blk">
         <p class="side-lbl">Contact</p>
         <div class="side-row"><span>+1 917-613-3767</span><div class="dot"></div></div>
-        <div class="side-row"><span style="font-size:0.78rem;">Johnconnorannand@gmail.com</span><div class="dot"></div></div>
+        <div class="side-row"><span style="font-size:0.78rem;"><span id="resume-email"></span></span><div class="dot"></div></div>
         <div class="side-row"><span>connorannand.com</span><div class="dot"></div></div>
       </div>
       <div class="side-blk">
@@ -1180,8 +1242,8 @@ img.mb-card-vis{object-fit:cover;}
     <p class="ct-connect-label">Let's Connect</p>
     <p class="ct-exp-line">5+ years of experience — always looking to connect.</p>
     <div class="ct-btns">
-      <a href="mailto:Johnconnorannand@gmail.com?subject=Let's%20Work%20Together" class="ct-btn primary">
-        <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="3" width="13" height="9" rx="1"/><path d="M1 4l6.5 5L14 4"/></svg>
+      <a id="contact-email-btn" href="#" class="ct-btn primary">
+        <svg viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="10" rx="1.5"/><path d="M1 3l6 4 6-4"/></svg>
         Email Connor
       </a>
       <a href="https://www.linkedin.com/in/connor-annand-65248a106" target="_blank" rel="noopener" class="ct-btn secondary">
@@ -1237,11 +1299,11 @@ function go(id){
   setTimeout(initReveals,50);
 }
 
-function goWork(cat){go('work');setTimeout(()=>switchCat(cat),80);}
+function goWork(cat){go('work');setTimeout(function(){switchCat(cat);},80);}
 
 function switchCat(id){
-  document.querySelectorAll('.wcat').forEach(el=>el.classList.toggle('active',el.dataset.cat===id));
-  document.querySelectorAll('.cat-panel').forEach(el=>el.classList.toggle('active',el.id==='cat-'+id));
+  document.querySelectorAll('.wcat').forEach(function(el){el.classList.toggle('active',el.dataset.cat===id);});
+  document.querySelectorAll('.cat-panel').forEach(function(el){el.classList.toggle('active',el.id==='cat-'+id);});
   window.scrollTo(0,0);
 }
 
@@ -1250,24 +1312,23 @@ function onScroll(){
 }
 
 function openModal(card){
-  const tmpl=card.querySelector('template.modal-data');
+  var tmpl=card.querySelector('template.modal-data');
   if(!tmpl)return;
-  const d=tmpl.content;
-  const tag=d.querySelector('.m-tag')?d.querySelector('.m-tag').textContent:'';
-  const title=d.querySelector('.m-title')?d.querySelector('.m-title').textContent:'';
-  const src=d.querySelector('.m-src')?d.querySelector('.m-src').textContent.trim():'';
-  const bodyEl=d.querySelector('.m-body');
-  const bodyHTML=bodyEl?bodyEl.innerHTML:'';
+  var d=tmpl.content;
+  var tag=d.querySelector('.m-tag')?d.querySelector('.m-tag').textContent:'';
+  var title=d.querySelector('.m-title')?d.querySelector('.m-title').textContent:'';
+  var src=d.querySelector('.m-src')?d.querySelector('.m-src').textContent.trim():'';
+  var bodyEl=d.querySelector('.m-body');
+  var bodyHTML=bodyEl?bodyEl.innerHTML:'';
 
   document.getElementById('modal-tag').textContent=tag;
   document.getElementById('modal-title').textContent=title;
   document.getElementById('modal-body').innerHTML=bodyHTML;
 
-  const vid=document.getElementById('modal-video');
-  const placeholder=document.getElementById('modal-placeholder');
-  const wrap=document.getElementById('modal-video-wrap');
+  var vid=document.getElementById('modal-video');
+  var placeholder=document.getElementById('modal-placeholder');
+  var wrap=document.getElementById('modal-video-wrap');
 
-  // Remove any existing iframe or img
   var oldIframe=wrap.querySelector('iframe');
   if(oldIframe)oldIframe.remove();
   var oldImg=wrap.querySelector('img.modal-img');
@@ -1276,10 +1337,10 @@ function openModal(card){
   placeholder.style.display='none';
   document.getElementById('mute-btn').style.display='flex';
 
-  var isImage=/\.(jpg|jpeg|png|gif|webp|heic)$/i.test(src);
-  var isVideo=/\.(mp4|mov|webm|ogg)$/i.test(src);
+  var isImage=/(jpg|jpeg|png|gif|webp|heic)$/i.test(src);
+  var isVideo=/(mp4|mov|webm|ogg)$/i.test(src);
 
-  if(src.startsWith('yt:')){
+  if(src.indexOf('yt:')===0){
     var ytId=src.replace('yt:','');
     var iframe=document.createElement('iframe');
     iframe.src='https://www.youtube.com/embed/'+ytId+'?autoplay=1';
@@ -1296,14 +1357,7 @@ function openModal(card){
     img.style.cssText='width:100%;max-height:65vh;object-fit:contain;display:block;background:#0A0C14;';
     document.getElementById('mute-btn').style.display='none';
     wrap.appendChild(img);
-  } else if(isVideo){
-    vid.src=src;
-    vid.style.display='block';
-    vid.muted=true;
-    vid.load();
-    vid.play().catch(function(){});
-    updateMuteIcon(true);
-  } else if(src){
+  } else if(isVideo||src){
     vid.src=src;
     vid.style.display='block';
     vid.muted=true;
@@ -1319,7 +1373,7 @@ function openModal(card){
 }
 
 function closeModal(){
-  const vid=document.getElementById('modal-video');
+  var vid=document.getElementById('modal-video');
   vid.pause();
   vid.src='';
   var wrap=document.getElementById('modal-video-wrap');
@@ -1338,13 +1392,13 @@ function handleBackdropClick(e){
 }
 
 function toggleMute(){
-  const vid=document.getElementById('modal-video');
+  var vid=document.getElementById('modal-video');
   vid.muted=!vid.muted;
   updateMuteIcon(vid.muted);
 }
 
 function updateMuteIcon(muted){
-  const icon=document.getElementById('mute-icon');
+  var icon=document.getElementById('mute-icon');
   if(muted){
     icon.innerHTML='<path d="M3 6H1v4h2l4 3V3L3 6z"/><line x1="12" y1="6" x2="16" y2="10"/><line x1="16" y1="6" x2="12" y2="10"/>';
   } else {
@@ -1355,28 +1409,26 @@ function updateMuteIcon(muted){
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 
 function initReveals(){
-  const els=document.querySelectorAll('.page.active .reveal');
-  const io=new IntersectionObserver(function(entries){
+  var els=document.querySelectorAll('.page.active .reveal');
+  var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e,i){
       if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in');},i*70);io.unobserve(e.target);}
     });
   },{threshold:0.07});
   els.forEach(function(el){el.classList.remove('in');io.observe(el);});
 }
-window.addEventListener('scroll',onScroll);
-initReveals();
 
-// Seek all card videos to 0.1s so browsers show a thumbnail frame
 function initVideoThumbnails(){
   document.querySelectorAll('.mb-card-vis, .hm-card-vis').forEach(function(el){
-    if(el.tagName === 'VIDEO'){
-      el.addEventListener('loadedmetadata', function(){
-        el.currentTime = 0.1;
-      }, {once: true});
-      if(el.readyState >= 1) el.currentTime = 0.1;
+    if(el.tagName==='VIDEO'){
+      el.addEventListener('loadedmetadata',function(){el.currentTime=0.1;},{once:true});
+      if(el.readyState>=1)el.currentTime=0.1;
     }
   });
 }
+
+window.addEventListener('scroll',onScroll);
+initReveals();
 initVideoThumbnails();
 </script>
 </body>
