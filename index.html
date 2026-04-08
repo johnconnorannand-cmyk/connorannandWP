@@ -33,8 +33,8 @@ body{background:var(--bone);color:var(--ink);font-family:var(--body-font);font-w
 
 .title-font{font-family:var(--title-font);}
 
-.page{display:none;}
-.page.active{display:block;}
+.page{display:none;overflow:hidden;}
+.page.active{display:block;overflow:hidden;}
 
 /* ── NAV ──────────────────────────── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 3rem;height:64px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,border-color 0.4s;}
@@ -211,6 +211,8 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 .hm-card-vis.wide{aspect-ratio:16/9;}
 .hm-card-vis.sq{aspect-ratio:1/1;}
 .hm-card-vis.short{aspect-ratio:5/3;}
+video.hm-card-vis{object-fit:cover;background:#0A0C14;}
+img.hm-card-vis{object-fit:cover;}
 .hm-card-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,31,0.92) 0%,rgba(8,12,31,0.1) 55%,transparent 100%);transition:opacity 0.3s;}
 .hm-card-info{position:absolute;bottom:0;left:0;right:0;padding:1.25rem 1.1rem;}
 .hm-card-tag{font-family:var(--body-font);font-size:0.57rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--cobalt-lt);margin-bottom:0.3rem;opacity:0;transform:translateY(5px);transition:opacity 0.3s,transform 0.3s;}
@@ -247,7 +249,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 .cat-panel.active{display:block;}
 
 /* ── MOODBOARD DARK ───────────────── */
-.moodboard-panel{padding:3rem 3rem 6rem;background:var(--dark);}
+.moodboard-panel{padding:3rem 3rem 6rem;background:var(--dark);overflow:hidden;}
 .mb-header{margin-bottom:2.5rem;}
 .mb-title{font-family:var(--title-font);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;color:var(--white);line-height:1.1;letter-spacing:0.02em;}
 .mb-title em{font-style:italic;color:var(--cobalt-lt);}
@@ -266,6 +268,8 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 .mb-card-vis.tall{aspect-ratio:3/4;}
 .mb-card-vis.wide{aspect-ratio:16/9;}
 .mb-card-vis.sq{aspect-ratio:1/1;}
+video.mb-card-vis{object-fit:cover;background:#0A0C14;}
+img.mb-card-vis{object-fit:cover;}
 .mb-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,31,0.88) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;}
 .mb-card:hover .mb-card-overlay{opacity:1;}
 .mb-card-label{position:absolute;bottom:0.85rem;left:0.9rem;right:0.9rem;font-family:var(--body-font);font-size:0.6rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,248,244,0.88);opacity:0;transform:translateY(4px);transition:opacity 0.3s,transform 0.3s;}
@@ -740,7 +744,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
     <div class="masonry">
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis tall" src="Animation_Display_OOH/Timbers.mp4" muted playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Timbers.mp4" muted playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Portland Timbers — Animated LED with Running Footage Edit</p>
@@ -770,7 +774,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis sq" src="Animation_Display_OOH/Yankees.mp4" muted playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Yankees.mp4" muted playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Toyota NYR New York Yankees LEDs</p>
@@ -800,7 +804,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
       </div>
 
       <div class="mb-card float-e" onclick="openModal(this)">
-        <video class="mb-card-vis tall" src="Animation_Display_OOH/T-Mobile_Center.mov" muted playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/T-Mobile_Center.mov" muted playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Las Vegas LED — New Vendor Onboarding</p>
@@ -830,7 +834,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
       </div>
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis sq" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" muted playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" muted playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Minnesota Wild DED</p>
@@ -845,7 +849,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis tall" src="Animation_Display_OOH/Buffalo_Bills.mp4" muted playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide" src="Animation_Display_OOH/Buffalo_Bills.mp4" muted playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Buffalo Bills LED</p>
@@ -870,7 +874,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
     </div>
     <div class="masonry">
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis tall" src="Footage_Banks/DAILIES1.mov" muted playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES1.mov" muted playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Primary source footage captured across a four-day shoot, repurposed across multiple campaigns.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES1.mov</span><span class="m-body">Produced a social media footage bank for Toyota TDA over a four-day shoot, capturing primary source footage across the full production. Material was cut down and repurposed across multiple social assets and campaigns.</span></template>
@@ -882,7 +886,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES2.mov</span><span class="m-body">Footage banks built to serve creative use across broadcast, social, and digital campaigns. Single shoot day used to generate assets for multiple markets and activation types.</span></template>
       </div>
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis sq" src="Footage_Banks/DAILIES3.mov" muted playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide" src="Footage_Banks/DAILIES3.mov" muted playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Running a parallel social unit alongside broadcast crew to maximize footage output.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES3.mov</span><span class="m-body">Running a dedicated parallel social unit alongside the broadcast crew — capturing supplementary footage, behind-the-scenes content, and social-first assets simultaneously to maximize footage output from every shoot day.</span></template>
@@ -1263,10 +1267,17 @@ function openModal(card){
   const placeholder=document.getElementById('modal-placeholder');
   const wrap=document.getElementById('modal-video-wrap');
 
-  // Remove any existing iframe
+  // Remove any existing iframe or img
   var oldIframe=wrap.querySelector('iframe');
   if(oldIframe)oldIframe.remove();
+  var oldImg=wrap.querySelector('img.modal-img');
+  if(oldImg)oldImg.remove();
+  vid.style.display='none';
+  placeholder.style.display='none';
   document.getElementById('mute-btn').style.display='flex';
+
+  var isImage=/\.(jpg|jpeg|png|gif|webp|heic)$/i.test(src);
+  var isVideo=/\.(mp4|mov|webm|ogg)$/i.test(src);
 
   if(src.startsWith('yt:')){
     var ytId=src.replace('yt:','');
@@ -1276,20 +1287,30 @@ function openModal(card){
     iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen=true;
     iframe.style.cssText='width:100%;aspect-ratio:16/9;border:none;display:block;';
-    vid.style.display='none';
-    placeholder.style.display='none';
     document.getElementById('mute-btn').style.display='none';
     wrap.appendChild(iframe);
+  } else if(isImage){
+    var img=document.createElement('img');
+    img.src=src;
+    img.className='modal-img';
+    img.style.cssText='width:100%;max-height:65vh;object-fit:contain;display:block;background:#0A0C14;';
+    document.getElementById('mute-btn').style.display='none';
+    wrap.appendChild(img);
+  } else if(isVideo){
+    vid.src=src;
+    vid.style.display='block';
+    vid.muted=true;
+    vid.load();
+    vid.play().catch(function(){});
+    updateMuteIcon(true);
   } else if(src){
     vid.src=src;
     vid.style.display='block';
-    placeholder.style.display='none';
     vid.muted=true;
     vid.load();
     vid.play().catch(function(){});
     updateMuteIcon(true);
   } else {
-    vid.style.display='none';
     placeholder.style.display='flex';
   }
 
@@ -1302,8 +1323,12 @@ function closeModal(){
   vid.pause();
   vid.src='';
   var wrap=document.getElementById('modal-video-wrap');
-  var iframe=wrap?wrap.querySelector('iframe'):null;
-  if(iframe)iframe.remove();
+  if(wrap){
+    var iframe=wrap.querySelector('iframe');
+    if(iframe)iframe.remove();
+    var img=wrap.querySelector('img.modal-img');
+    if(img)img.remove();
+  }
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow='';
 }
@@ -1340,6 +1365,19 @@ function initReveals(){
 }
 window.addEventListener('scroll',onScroll);
 initReveals();
+
+// Seek all card videos to 0.1s so browsers show a thumbnail frame
+function initVideoThumbnails(){
+  document.querySelectorAll('.mb-card-vis, .hm-card-vis').forEach(function(el){
+    if(el.tagName === 'VIDEO'){
+      el.addEventListener('loadedmetadata', function(){
+        el.currentTime = 0.1;
+      }, {once: true});
+      if(el.readyState >= 1) el.currentTime = 0.1;
+    }
+  });
+}
+initVideoThumbnails();
 </script>
 </body>
 </html>
