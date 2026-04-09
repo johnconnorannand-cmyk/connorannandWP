@@ -322,13 +322,11 @@ img.hm-card-vis{object-fit:cover;}
 #cat-partners .masonry{columns:3;column-gap:8px;}
 #cat-partners .mb-card-vis.featured{min-height:320px;}
 #cat-ooh .masonry{columns:3;column-gap:8px;}
-#cat-ooh video.mb-card-vis{width:100%;display:block;background:#0A0C14;object-fit:contain;}
-#cat-ooh .mb-card-vis.wide{aspect-ratio:21/9;}
-#cat-ooh .mb-card-vis.featured{aspect-ratio:16/9;}
+#cat-ooh video.mb-card-vis{width:100%;display:block;background:#0A0C14;object-fit:contain;height:auto;aspect-ratio:unset;}
+#cat-ooh .mb-card-vis.wide{aspect-ratio:unset;min-height:unset;}
+#cat-ooh .mb-card-vis.featured{aspect-ratio:unset;min-height:unset;}
 #cat-ooh .mb-card-desc{padding:0.5rem 0.75rem 0.6rem;}
 #cat-ooh .mb-card{margin-bottom:8px;}
-#cat-ooh .mb-card-vis.wide{aspect-ratio:21/9;}
-#cat-ooh .mb-card-vis.featured{aspect-ratio:16/9;}
 #cat-footage .masonry{columns:3;column-gap:8px;}
 #cat-footage .mb-card-vis{aspect-ratio:16/9;min-height:220px;object-fit:cover;}
 #cat-pr .masonry{columns:3;column-gap:8px;}
@@ -707,6 +705,19 @@ nav.clear .nav-hamburger span{background:var(--white);}
 }
 .nav-backdrop.open{opacity:1;}
 
+.nav-drawer-close{
+  position:absolute;
+  top:1.1rem;right:1.25rem;
+  width:40px;height:40px;
+  background:none;border:none;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink-mute);
+  transition:color 0.2s;
+}
+.nav-drawer-close:hover{color:var(--cobalt);}
+.nav-drawer-close svg{width:16px;height:16px;pointer-events:none;}
+
 @media(max-width:768px){
   .nav-links{display:none;}
   .nav-hamburger{display:flex;}
@@ -730,6 +741,9 @@ nav.clear .nav-hamburger span{background:var(--white);}
 <!-- Mobile Drawer -->
 <div class="nav-backdrop" id="nav-backdrop" onclick="closeDrawer()"></div>
 <div class="nav-drawer" id="nav-drawer">
+  <button class="nav-drawer-close" onclick="closeDrawer()" aria-label="Close menu">
+    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l12 12M13 1L1 13"/></svg>
+  </button>
   <ul class="nav-drawer-links">
     <li><a onclick="go('work');closeDrawer();" data-p="work">Work</a></li>
     <li><a onclick="go('resume');closeDrawer();" data-p="resume">Resume</a></li>
@@ -772,7 +786,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <div class="home-masonry">
 
       <div class="hm-card hf-a" onclick="goWork('broadcast')">
-        <video class="hm-card-vis wide" poster="Broadcast/Posters/Dear_Friday_poster.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hm-card-vis wide" poster="Social/organic_social_feed_1.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Broadcast</span>
         <div class="hm-card-info">
@@ -792,7 +806,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="hm-card hf-c" onclick="goWork('ooh')">
-        <video class="hm-card-vis wide" poster="Animation_Display_OOH/Posters/Timbers_poster.jpg" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hm-card-vis wide" poster="Social/organic_social_feed_1.jpg" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">OOH</span>
         <div class="hm-card-info">
@@ -866,7 +880,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <div class="masonry">
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Friday_poster.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" preload="none" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Social/organic_social_feed_1.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" preload="none" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -882,7 +896,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Savvy_poster.jpg" src="Broadcast/Dear_Savvy_30_copy.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Social/organic_social_feed_1.jpg" src="Broadcast/Dear_Savvy_30_copy.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -898,7 +912,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_First_Place_poster.jpg" src="Broadcast/Dear_First_Place_30_copy.mp4" preload="none" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Social/4R_Nuggets_B.jpg" src="Broadcast/Dear_First_Place_30_copy.mp4" preload="none" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -914,7 +928,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-f" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Parking_Spot_poster.jpg" src="Broadcast/Parking_Spot_Face-Off.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Social/4R_Nuggets_B.jpg" src="Broadcast/Parking_Spot_Face-Off.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -930,7 +944,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-e" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Snow_poster.jpg" src="Broadcast/Dear_Snow_30.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Social/organic_social_feed_1.jpg" src="Broadcast/Dear_Snow_30.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -946,7 +960,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-d" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Crew_poster.jpg" src="Broadcast/Dear_Crew_30_copy.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Social/organic_social_feed_1.jpg" src="Broadcast/Dear_Crew_30_copy.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -962,7 +976,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Zamboni_poster.jpg" src="Broadcast/Zamboni_Machine.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Social/4R_Nuggets_B.jpg" src="Broadcast/Zamboni_Machine.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -998,7 +1012,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis vert" poster="Social/Posters/Eli_Seat_poster.jpg" src="Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis vert" poster="Social/organic_social_feed_1.jpg" src="Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Toyota NYR Eli Manning Social</p><p class="mb-card-desc-text">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</p></div>
@@ -1006,7 +1020,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis vert" poster="Social/Posters/Eli_Safety_poster.jpg" src="Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis vert" poster="Social/organic_social_feed_1.jpg" src="Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Toyota NYR Eli Manning Social</p><p class="mb-card-desc-text">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</p></div>
@@ -1014,7 +1028,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis sq" poster="Social/Posters/First_Place_Camry_poster.jpg" src="Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis sq" poster="Social/4R_Nuggets_B.jpg" src="Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear First Place Camry v Accord EN Social</p><p class="mb-card-desc-text">Post Production Social Resize.</p></div>
@@ -1074,7 +1088,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <div class="masonry">
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/Timbers_poster.jpg" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Social/organic_social_feed_1.jpg" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1090,7 +1104,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" style="object-position:center center;object-fit:contain;" poster="Animation_Display_OOH/Posters/Redbulls_poster.jpg" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis wide led" style="object-position:center center;object-fit:contain;" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1106,7 +1120,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/Yankees_poster.jpg" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1122,7 +1136,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-d" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/TMobile_Mesh_poster.jpg" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1138,7 +1152,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-e" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/TMobile_Center_poster.jpg" src="Animation_Display_OOH/T-Mobile_Center.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/T-Mobile_Center.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1154,7 +1168,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-f" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/Toyota_Column_poster.jpg" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Social/4R_Nuggets_B.jpg" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1170,7 +1184,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/Toyota_DED_poster.jpg" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Social/4R_Nuggets_B.jpg" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1186,7 +1200,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" poster="Animation_Display_OOH/Posters/Buffalo_Bills_poster.jpg" src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis wide led" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1212,21 +1226,21 @@ nav.clear .nav-hamburger span{background:var(--white);}
     </div>
     <div class="masonry">
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Footage_Banks/Posters/Dailies1_poster.jpg" src="Footage_Banks/DAILIES1.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="PR/Raccoon_City.jpg" src="Footage_Banks/DAILIES1.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Primary source footage captured across a four-day shoot, repurposed across multiple campaigns.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES1.mov</span><span class="m-body">Produced a social media footage bank for Toyota TDA over a four-day shoot, capturing primary source footage across the full production. Material was cut down and repurposed across multiple social assets and campaigns.</span></template>
       </div>
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Footage_Banks/Posters/Dailies2_poster.jpg" src="Footage_Banks/DAILIES2.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="PR/Raccoon_City.jpg" src="Footage_Banks/DAILIES2.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Footage banks built to serve broadcast, social, and digital campaigns across all nine markets.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES2.mov</span><span class="m-body">Footage banks built to serve creative use across broadcast, social, and digital campaigns. Single shoot day used to generate assets for multiple markets and activation types.</span></template>
       </div>
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Footage_Banks/Posters/Dailies3_poster.jpg" src="Footage_Banks/DAILIES3.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="PR/Paul_Anderson_Raccoon_City_.jpg" src="Footage_Banks/DAILIES3.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Running a parallel social unit alongside broadcast crew to maximize footage output.</p></div>
