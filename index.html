@@ -357,6 +357,37 @@ img.hm-card-vis{object-fit:cover;}
 
 /* Dark cards */
 .mb-card{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;background:var(--ink);display:flex;flex-direction:column;}
+
+/* ── VIDEO LOADING SHIMMER ── */
+.mb-card.loading::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:5;
+  background:linear-gradient(
+    110deg,
+    rgba(13,15,26,0) 0%,
+    rgba(13,15,26,0) 35%,
+    rgba(27,60,196,0.12) 50%,
+    rgba(13,15,26,0) 65%,
+    rgba(13,15,26,0) 100%
+  );
+  background-size:200% 100%;
+  animation:shimmer 1.6s ease-in-out infinite;
+  pointer-events:none;
+}
+.mb-card.loading video.mb-card-vis{
+  opacity:0.15;
+  transition:opacity 0.5s ease;
+}
+.mb-card.video-ready video.mb-card-vis{
+  opacity:1;
+  transition:opacity 0.5s ease;
+}
+@keyframes shimmer{
+  0%{background-position:200% 0;}
+  100%{background-position:-200% 0;}
+}
 .mb-card-vis{width:100%;display:block;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0;}
 .mb-card:hover .mb-card-vis{transform:scale(1.04);}
 .mb-card-vis.tall{aspect-ratio:3/4;}
@@ -1101,7 +1132,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" style="object-position:center center;object-fit:contain;" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide led" style="object-position:center center;object-fit:contain;" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1117,7 +1148,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1788,8 +1819,20 @@ function initReveals(){
 function initVideoThumbnails(){
   document.querySelectorAll('.mb-card-vis, .hm-card-vis').forEach(function(el){
     if(el.tagName==='VIDEO'){
-      if(el.readyState>=1){el.currentTime=0.1;}
-      else{el.addEventListener('loadedmetadata',function(){el.currentTime=0.1;},{once:true});}
+      var card = el.closest('.mb-card, .hm-card');
+      if(card && !card.classList.contains('video-ready')){
+        card.classList.add('loading');
+        el.addEventListener('canplay',function(){
+          card.classList.remove('loading');
+          card.classList.add('video-ready');
+        },{once:true});
+      }
+      if(el.readyState>=2){
+        if(card){card.classList.remove('loading');card.classList.add('video-ready');}
+        el.currentTime=0.1;
+      } else {
+        el.addEventListener('loadedmetadata',function(){el.currentTime=0.1;},{once:true});
+      }
       setTimeout(function(){if(el.readyState>=1&&el.currentTime<0.05)el.currentTime=0.1;},600);
       setTimeout(function(){if(el.readyState>=1&&el.currentTime<0.05)el.currentTime=0.1;},2000);
     }
@@ -1800,8 +1843,17 @@ switchCat=function(id){
   _orig(id);
   setTimeout(function(){
     document.querySelectorAll('#cat-'+id+' video.mb-card-vis').forEach(function(el){
+      var card=el.closest('.mb-card');
+      if(card&&!card.classList.contains('video-ready')){
+        card.classList.add('loading');
+        el.addEventListener('canplay',function(){
+          card.classList.remove('loading');
+          card.classList.add('video-ready');
+        },{once:true});
+      }
       if(el.readyState===0){el.load();}
       if(el.readyState>=2){
+        if(card){card.classList.remove('loading');card.classList.add('video-ready');}
         el.currentTime=0.1;
         el.play().catch(function(){});
       } else {
