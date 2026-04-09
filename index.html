@@ -1524,4 +1524,17 @@ switchCat=function(id){
   setTimeout(function(){
     document.querySelectorAll('#cat-'+id+' video.mb-card-vis').forEach(function(el){
       if(el.readyState>=1){el.currentTime=0.1;}
-      else{el.addEventListener('
+      else{el.addEventListener('loadedmetadata',function(){el.currentTime=0.1;},{once:true});}
+    });
+  },100);
+};
+
+window.addEventListener('load',function(){
+  initReveals();
+  initVideoThumbnails();
+});
+
+go('home');
+</script>
+</body>
+</html>
