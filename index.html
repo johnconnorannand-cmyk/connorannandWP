@@ -315,6 +315,13 @@ img.hm-card-vis{object-fit:cover;}
 #cat-branding .mb-card:nth-child(1){grid-row:1/3;}
 #cat-branding .mb-card:nth-child(4){grid-column:1/3;}
 #cat-branding .mb-card-vis{width:100%;display:block;object-fit:cover;}
+#cat-broadcast video.mb-card-vis{
+  will-change:transform;
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
 @media(min-width:1400px){#cat-broadcast .masonry{columns:2;}}
 @media(max-width:1100px){.masonry{columns:3;}}
 @media(max-width:768px){.masonry{columns:2;}}
@@ -501,7 +508,10 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
   .nav-links li:nth-child(1){display:none;}
   .intro-strip,.producer-line,.moodboard-panel,.resume-hdr,.work-cats{padding-left:1.25rem;padding-right:1.25rem;}
   .hw-bar{padding-left:1.25rem;padding-right:1.25rem;}
-  .home-masonry{columns:2;}
+  .home-masonry{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .hm-card.hf-b{grid-row:auto;grid-column:auto;}
+  .hm-card.hf-a,.hm-card.hf-d,.hm-card.hf-e,.hm-card.hf-f{grid-row:auto;grid-column:auto;}
+  .hm-card.hf-c{display:block;}
   .masonry{columns:2;}
   .resume-body{grid-template-columns:1fr;}
   .r-main{border-right:none;padding:2.5rem 1.25rem 3rem;}
@@ -511,8 +521,60 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
   #page-contact{padding-left:1.25rem;padding-right:1.25rem;}
 }
 @media(max-width:480px){
-  .home-masonry{columns:1;}
-  .masonry{columns:1;}
+  /* Single column stacked layout */
+  .home-masonry{grid-template-columns:1fr;}
+  .masonry{columns:1;column-gap:0;}
+
+  /* Force all videos/images to 16:9 — never taller */
+  .mb-card-vis.featured,
+  video.mb-card-vis.featured{
+    aspect-ratio:16/9 !important;
+    min-height:unset !important;
+    max-height:56vw;
+  }
+  .mb-card-vis.wide{
+    aspect-ratio:16/9 !important;
+    min-height:unset !important;
+  }
+  .mb-card-vis.vert{
+    aspect-ratio:16/9 !important;
+    min-height:unset !important;
+  }
+  .mb-card-vis.tall{
+    aspect-ratio:16/9 !important;
+    min-height:unset !important;
+  }
+  .mb-card-vis.sq{
+    aspect-ratio:16/9 !important;
+    min-height:unset !important;
+  }
+
+  /* Home moodboard cards — match the work page stacked feel */
+  .hm-card-vis.vert,
+  .hm-card-vis.tall,
+  .hm-card-vis.wide,
+  .hm-card-vis.sq{
+    aspect-ratio:16/9 !important;
+    min-height:unset !important;
+    max-height:56vw;
+  }
+
+  /* OOH/LED — keep contain so full artwork shows */
+  #cat-ooh .mb-card-vis,
+  video.mb-card-vis.led{
+    aspect-ratio:16/9 !important;
+    min-height:unset !important;
+    object-fit:contain !important;
+  }
+
+  /* Broadcast — 2-column would crush these, 1 col is right */
+  #cat-broadcast .masonry{columns:1;}
+
+  /* Reduce padding on mobile */
+  .moodboard-panel{padding:1.5rem 1rem 3rem;}
+  .page-hero{padding:3rem 1.25rem 1.5rem;}
+  .work-cats{padding:0 0.5rem;}
+  .wcat{padding:0.85rem 0.85rem;font-size:0.6rem;}
 }
 </style>
 </head>
@@ -818,7 +880,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <img class="mb-card-vis wide" src="Social/4R_Nuggets_B.jpg" style="object-fit:cover;" alt="Paid Social Asset Trafficking">
+        <img class="mb-card-vis wide" src="Social/4R_Nuggets_B.jpg" style="object-fit:contain;background:#0A0C14;" alt="Paid Social Asset Trafficking">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Paid Social Asset Trafficking</p><p class="mb-card-desc-text">Managing and trafficking paid social assets across Meta, Reddit, Snapchat, and YouTube.</p></div>
@@ -826,7 +888,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <img class="mb-card-vis sq" src="Social/Card 4_RV.jpg" style="object-fit:cover;" alt="Paid Social Asset Trafficking">
+        <img class="mb-card-vis sq" src="Social/Card 4_RV.jpg" style="object-fit:contain;background:#0A0C14;" alt="Paid Social Asset Trafficking">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Paid Social Asset Trafficking</p><p class="mb-card-desc-text">Managing and trafficking paid social assets across Meta, Reddit, Snapchat, and YouTube.</p></div>
@@ -834,7 +896,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <img class="mb-card-vis tall" src="Social/July-Aug2023_DNV_TDA_TCUV_FB_Social_LeadGen_Static_CamryHybrid.jpg" style="object-fit:cover;" alt="Paid Social Asset Trafficking">
+        <img class="mb-card-vis tall" src="Social/July-Aug2023_DNV_TDA_TCUV_FB_Social_LeadGen_Static_CamryHybrid.jpg" style="object-fit:contain;background:#0A0C14;" alt="Paid Social Asset Trafficking">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Paid Social Asset Trafficking</p><p class="mb-card-desc-text">Managing and trafficking paid social assets across Meta, Reddit, Snapchat, and YouTube.</p></div>
@@ -842,7 +904,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <img class="mb-card-vis wide" src="Social/JUL23_NYR_TCUV_Social_Price_Ads_FBIG_LeadGen_RAV4_ES.jpg" style="object-fit:cover;" alt="Paid Social Asset Trafficking">
+        <img class="mb-card-vis wide" src="Social/JUL23_NYR_TCUV_Social_Price_Ads_FBIG_LeadGen_RAV4_ES.jpg" style="object-fit:contain;background:#0A0C14;" alt="Paid Social Asset Trafficking">
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Paid Social Asset Trafficking</p><p class="mb-card-desc-text">Managing and trafficking paid social assets across Meta, Reddit, Snapchat, and YouTube.</p></div>
