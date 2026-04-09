@@ -323,6 +323,8 @@ img.hm-card-vis{object-fit:cover;}
 #cat-partners .mb-card-vis.featured{min-height:320px;}
 #cat-ooh .masonry{columns:3;column-gap:8px;}
 #cat-ooh video.mb-card-vis{width:100%;display:block;background:#0A0C14;object-fit:contain;}
+#cat-ooh .mb-card-vis.wide{aspect-ratio:21/9;}
+#cat-ooh .mb-card-vis.featured{aspect-ratio:16/9;}
 #cat-ooh .mb-card-desc{padding:0.5rem 0.75rem 0.6rem;}
 #cat-ooh .mb-card{margin-bottom:8px;}
 #cat-ooh .mb-card-vis.wide{aspect-ratio:21/9;}
@@ -349,8 +351,8 @@ img.hm-card-vis{object-fit:cover;}
 @media(max-width:480px){.masonry{columns:1;}}
 
 /* Dark cards */
-.mb-card{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;background:var(--ink);display:block;}
-.mb-card-vis{width:100%;display:block;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);}
+.mb-card{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;background:var(--ink);display:flex;flex-direction:column;}
+.mb-card-vis{width:100%;display:block;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);flex-shrink:0;}
 .mb-card:hover .mb-card-vis{transform:scale(1.04);}
 .mb-card-vis.tall{aspect-ratio:3/4;}
 .mb-card-vis.vert{aspect-ratio:9/16;}
@@ -366,7 +368,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 .mb-card:hover .mb-card-overlay{opacity:1;}
 .mb-card-label{position:absolute;bottom:0.85rem;left:0.9rem;right:0.9rem;font-family:var(--body-font);font-size:0.6rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,248,244,0.88);opacity:0;transform:translateY(4px);transition:opacity 0.3s,transform 0.3s;}
 .mb-card:hover .mb-card-label{opacity:1;transform:translateY(0);}
-.mb-card-desc{padding:0.85rem 1rem 1rem;background:rgba(13,15,26,0.97);}
+.mb-card-desc{padding:0.85rem 1rem 1rem;background:rgba(13,15,26,0.97);flex-shrink:0;}
 .mb-card-desc-title{font-family:var(--title-font);font-size:0.98rem;font-weight:400;color:var(--white);margin-bottom:0.25rem;letter-spacing:0.01em;}
 .mb-card-desc-text{font-family:var(--body-font);font-size:0.75rem;line-height:1.6;color:rgba(250,248,244,0.48);}
 
@@ -580,18 +582,163 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
   .wcat{padding:0.85rem 0.75rem;font-size:0.58rem;letter-spacing:0.1em;}
   .mb-card{margin-bottom:8px;}
 }
+/* ── HAMBURGER MENU ───────────────── */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  width:40px;height:40px;
+  cursor:pointer;
+  background:none;border:none;
+  padding:4px;
+  z-index:300;
+  flex-shrink:0;
+}
+.nav-hamburger span{
+  display:block;
+  width:22px;height:1.5px;
+  background:var(--ink);
+  transition:transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transform-origin:center;
+}
+nav.clear .nav-hamburger span{background:var(--white);}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;width:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* Drawer */
+.nav-drawer{
+  position:fixed;
+  top:0;right:0;
+  width:100%;height:100vh;
+  background:var(--bone);
+  z-index:250;
+  display:flex;flex-direction:column;
+  padding:100px 2.5rem 3rem;
+  transform:translateX(100%);
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  overflow:hidden;
+}
+.nav-drawer.open{transform:translateX(0);}
+
+/* Cobalt accent line left edge of drawer */
+.nav-drawer::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  width:3px;height:100%;
+  background:var(--cobalt);
+}
+
+.nav-drawer-links{
+  list-style:none;
+  display:flex;flex-direction:column;
+  gap:0;
+  flex:1;
+}
+.nav-drawer-links li{
+  border-bottom:1px solid var(--bone-dim);
+  opacity:0;
+  transform:translateX(24px);
+  transition:opacity 0.35s ease, transform 0.35s ease;
+}
+.nav-drawer.open .nav-drawer-links li:nth-child(1){opacity:1;transform:none;transition-delay:0.08s;}
+.nav-drawer.open .nav-drawer-links li:nth-child(2){opacity:1;transform:none;transition-delay:0.14s;}
+.nav-drawer.open .nav-drawer-links li:nth-child(3){opacity:1;transform:none;transition-delay:0.20s;}
+
+.nav-drawer-links a{
+  display:block;
+  padding:1.4rem 0;
+  font-family:var(--title-font);
+  font-size:clamp(2rem,8vw,3rem);
+  font-weight:400;
+  color:var(--ink);
+  text-decoration:none;
+  cursor:pointer;
+  letter-spacing:0.02em;
+  transition:color 0.2s;
+}
+.nav-drawer-links a:hover{color:var(--cobalt);}
+
+.nav-drawer-cta{
+  margin-top:2.5rem;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity 0.35s ease 0.28s, transform 0.35s ease 0.28s;
+}
+.nav-drawer.open .nav-drawer-cta{opacity:1;transform:none;}
+.nav-drawer-cta a{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:1rem 2.5rem;
+  background:var(--cobalt);
+  color:var(--white) !important;
+  font-family:var(--body-font);
+  font-size:0.72rem;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;
+  transition:background 0.2s;
+  width:100%;
+}
+.nav-drawer-cta a:hover{background:#0f2490;}
+
+.nav-drawer-footer{
+  margin-top:auto;
+  padding-top:2rem;
+  font-family:var(--body-font);
+  font-size:0.6rem;letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--bone-dim);
+  opacity:0;
+  transition:opacity 0.35s ease 0.32s;
+}
+.nav-drawer.open .nav-drawer-footer{opacity:1;}
+
+/* Backdrop */
+.nav-backdrop{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(13,15,26,0.35);
+  z-index:240;
+  backdrop-filter:blur(2px);
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+.nav-backdrop.open{opacity:1;}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-hamburger{display:flex;}
+}
 </style>
 </head>
 <body>
 
 <nav id="nav" class="solid">
-  <a class="nav-logo" onclick="go('home')">Connor Annand</a>
+  <a class="nav-logo" onclick="go('home');closeDrawer();">Connor Annand</a>
   <ul class="nav-links">
     <li><a onclick="go('work')" data-p="work">Work</a></li>
     <li><a onclick="go('resume')" data-p="resume">Resume</a></li>
     <li><a onclick="go('contact')" data-p="contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleDrawer()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Drawer -->
+<div class="nav-backdrop" id="nav-backdrop" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="nav-drawer">
+  <ul class="nav-drawer-links">
+    <li><a onclick="go('work');closeDrawer();" data-p="work">Work</a></li>
+    <li><a onclick="go('resume');closeDrawer();" data-p="resume">Resume</a></li>
+  </ul>
+  <div class="nav-drawer-cta">
+    <a onclick="go('contact');closeDrawer();">Contact</a>
+  </div>
+  <p class="nav-drawer-footer">connorannand.com &nbsp;·&nbsp; US &amp; UK</p>
+</div>
 
 <!-- ════════════ HOME ════════════ -->
 <div id="page-home" class="page active">
@@ -625,7 +772,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     <div class="home-masonry">
 
       <div class="hm-card hf-a" onclick="goWork('broadcast')">
-        <video class="hm-card-vis wide" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hm-card-vis wide" poster="Broadcast/Posters/Dear_Friday_poster.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Broadcast</span>
         <div class="hm-card-info">
@@ -645,7 +792,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="hm-card hf-c" onclick="goWork('ooh')">
-        <video class="hm-card-vis wide" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hm-card-vis wide" poster="Animation_Display_OOH/Posters/Timbers_poster.jpg" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">OOH</span>
         <div class="hm-card-info">
@@ -655,7 +802,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="hm-card hf-d" onclick="goWork('partners')">
-        <video class="hm-card-vis wide" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto" style="object-position:center top;"></video>
+        <video class="hm-card-vis wide" poster="Partner_Launches/Stance_Paul_George.jpg" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto" style="object-position:center top;"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Partnerships</span>
         <div class="hm-card-info">
@@ -665,7 +812,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="hm-card hf-e" onclick="goWork('branding')">
-        <video class="hm-card-vis wide" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hm-card-vis wide" poster="Branding/Cruisers_Branding_1.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Branding</span>
         <div class="hm-card-info">
@@ -719,7 +866,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     <div class="masonry">
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Broadcast/Dear_Friday_30_copy.mp4" preload="none" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Friday_poster.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" preload="none" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -735,7 +882,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Broadcast/Dear_Savvy_30_copy.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Savvy_poster.jpg" src="Broadcast/Dear_Savvy_30_copy.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -751,7 +898,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Broadcast/Dear_First_Place_30_copy.mp4" preload="none" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_First_Place_poster.jpg" src="Broadcast/Dear_First_Place_30_copy.mp4" preload="none" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -767,7 +914,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-f" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Broadcast/Parking_Spot_Face-Off.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Broadcast/Posters/Parking_Spot_poster.jpg" src="Broadcast/Parking_Spot_Face-Off.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -783,7 +930,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-e" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Broadcast/Dear_Snow_30.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Snow_poster.jpg" src="Broadcast/Dear_Snow_30.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -799,7 +946,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-d" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Broadcast/Dear_Crew_30_copy.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Crew_poster.jpg" src="Broadcast/Dear_Crew_30_copy.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -815,7 +962,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Broadcast/Zamboni_Machine.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Broadcast/Posters/Zamboni_poster.jpg" src="Broadcast/Zamboni_Machine.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -851,7 +998,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis vert" src="Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis vert" poster="Social/Posters/Eli_Seat_poster.jpg" src="Social/V3_TOYOTA_TRIVIA_ELI_Seat__AC05.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Toyota NYR Eli Manning Social</p><p class="mb-card-desc-text">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</p></div>
@@ -859,7 +1006,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis vert" src="Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis vert" poster="Social/Posters/Eli_Safety_poster.jpg" src="Social/V3_TOYOTA_TRIVIA_ELI_Safety_AC05.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Toyota NYR Eli Manning Social</p><p class="mb-card-desc-text">iPhone Shot Eli Manning x Red Bulls x NYR Toyota Social Post Production.</p></div>
@@ -867,7 +1014,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis sq" src="Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis sq" poster="Social/Posters/First_Place_Camry_poster.jpg" src="Social/First_Place_Camry_AWD_NP_15_1x1_02.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear First Place Camry v Accord EN Social</p><p class="mb-card-desc-text">Post Production Social Resize.</p></div>
@@ -927,7 +1074,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     <div class="masonry">
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/Timbers_poster.jpg" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -943,7 +1090,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" style="object-position:center center;object-fit:contain;" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis wide led" style="object-position:center center;object-fit:contain;" poster="Animation_Display_OOH/Posters/Redbulls_poster.jpg" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -959,7 +1106,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/Yankees_poster.jpg" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -975,7 +1122,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-d" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/TMobile_Mesh_poster.jpg" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -991,7 +1138,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-e" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" src="Animation_Display_OOH/T-Mobile_Center.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/TMobile_Center_poster.jpg" src="Animation_Display_OOH/T-Mobile_Center.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1007,7 +1154,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-f" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/Toyota_Column_poster.jpg" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1023,7 +1170,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" poster="Animation_Display_OOH/Posters/Toyota_DED_poster.jpg" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1039,7 +1186,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis wide led" poster="Animation_Display_OOH/Posters/Buffalo_Bills_poster.jpg" src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1065,21 +1212,21 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
     </div>
     <div class="masonry">
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Footage_Banks/DAILIES1.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Footage_Banks/Posters/Dailies1_poster.jpg" src="Footage_Banks/DAILIES1.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Primary source footage captured across a four-day shoot, repurposed across multiple campaigns.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES1.mov</span><span class="m-body">Produced a social media footage bank for Toyota TDA over a four-day shoot, capturing primary source footage across the full production. Material was cut down and repurposed across multiple social assets and campaigns.</span></template>
       </div>
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Footage_Banks/DAILIES2.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Footage_Banks/Posters/Dailies2_poster.jpg" src="Footage_Banks/DAILIES2.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Footage banks built to serve broadcast, social, and digital campaigns across all nine markets.</p></div>
         <template class="modal-data"><span class="m-tag">Toyota TDA — Four Day Shoot</span><span class="m-title">Dear '25 — Social Footage Bank</span><span class="m-src">Footage_Banks/DAILIES2.mov</span><span class="m-body">Footage banks built to serve creative use across broadcast, social, and digital campaigns. Single shoot day used to generate assets for multiple markets and activation types.</span></template>
       </div>
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Footage_Banks/DAILIES3.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Footage_Banks/Posters/Dailies3_poster.jpg" src="Footage_Banks/DAILIES3.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Dear '25 — Social Footage Bank</p><p class="mb-card-desc-text">Running a parallel social unit alongside broadcast crew to maximize footage output.</p></div>
@@ -1098,7 +1245,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 <div class="masonry">
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Partner_Launches/Stance_Paul_George.jpg" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Stance Socks x Paul George — Launch Film</p><p class="mb-card-desc-text">Launch content produced alongside the Stance x RKL partnership campaign.</p></div>
@@ -1157,7 +1304,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis wide" poster="Partner_Launches/Gatorade_Wearables_RKl_.png" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Multi-year brand partnership launch with co-branded in-game wearables and interactive web experience.</p></div>
@@ -1259,7 +1406,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" poster="Branding/Cruisers_Branding_1.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1592,7 +1739,31 @@ function updateMuteIcon(muted){
   }
 }
 
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+// ── MOBILE DRAWER ─────────────────────────────
+var drawer=document.getElementById('nav-drawer');
+var backdrop=document.getElementById('nav-backdrop');
+var hamburger=document.getElementById('nav-hamburger');
+
+function openDrawer(){
+  drawer.classList.add('open');
+  backdrop.style.display='block';
+  setTimeout(function(){backdrop.classList.add('open');},10);
+  hamburger.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  drawer.classList.remove('open');
+  backdrop.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(function(){backdrop.style.display='none';},300);
+}
+function toggleDrawer(){
+  drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeModal();closeDrawer();}
+});
 
 function initReveals(){
   var els=document.querySelectorAll('.page.active .reveal');
@@ -1643,6 +1814,35 @@ window.addEventListener('load',function(){
     });
   }
 });
+
+// ── MOBILE: swap all videos to static thumbnails ──────────────
+(function(){
+  if(window.innerWidth > 768) return;
+
+  document.querySelectorAll('video.mb-card-vis, video.hm-card-vis').forEach(function(vid){
+    var poster = vid.getAttribute('poster');
+    var src    = vid.getAttribute('src');
+    var cls    = vid.getAttribute('class');
+    var style  = vid.getAttribute('style') || '';
+
+    // Stop any loading immediately
+    vid.removeAttribute('src');
+    vid.load();
+
+    if(poster){
+      // Replace with img using poster
+      var img = document.createElement('img');
+      img.className = cls;
+      img.src = poster;
+      img.style.cssText = style + (style ? ';' : '') + 'object-fit:cover;';
+      img.alt = '';
+      vid.parentNode.replaceChild(img, vid);
+    } else {
+      // No poster — just hide the video, desc still shows
+      vid.style.display = 'none';
+    }
+  });
+})();
 
 go('home');
 </script>
