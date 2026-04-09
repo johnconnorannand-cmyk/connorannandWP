@@ -4,7 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connor Annand — Producer</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23EDE8DE'/><text x='32' y='46' font-family='Georgia,serif' font-size='32' font-weight='700' text-anchor='middle' fill='%230D0F1A'>CA</text></svg>">
+
+<!-- Favicon — adapts to light/dark mode -->
+<link rel="icon" media="(prefers-color-scheme: light)" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%231B3CC4'/><text x='32' y='46' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23FAF8F4'>CA</text></svg>">
+<link rel="icon" media="(prefers-color-scheme: dark)" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%231B3CC4'/><text x='32' y='46' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23FAF8F4'>CA</text></svg>">
+<!-- Fallback favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%231B3CC4'/><text x='32' y='46' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23FAF8F4'>CA</text></svg>">
+
+<!-- Open Graph / iMessage social share -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://connorannand.com">
+<meta property="og:title" content="Connor Annand — Producer">
+<meta property="og:description" content="A producer driven by more than the shoot day. Broadcast, Social, OOH &amp; Brand — US &amp; UK.">
+<meta property="og:image" content="https://connorannand.com/Hero_Photos/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Connor Annand — Producer">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connor Annand — Producer">
+<meta name="twitter:description" content="A producer driven by more than the shoot day.">
+<meta name="twitter:image" content="https://connorannand.com/Hero_Photos/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -502,17 +523,12 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.in{opacity:1;transform:none;}
 
-/* ── MOBILE ───────────────────────── */
+/* ── TABLET (max 900px) ───────────────────────── */
 @media(max-width:900px){
   nav{padding:0 1.25rem;}
   .nav-links li:nth-child(1){display:none;}
   .intro-strip,.producer-line,.moodboard-panel,.resume-hdr,.work-cats{padding-left:1.25rem;padding-right:1.25rem;}
   .hw-bar{padding-left:1.25rem;padding-right:1.25rem;}
-  .home-masonry{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
-  .hm-card.hf-b{grid-row:auto;grid-column:auto;}
-  .hm-card.hf-a,.hm-card.hf-d,.hm-card.hf-e,.hm-card.hf-f{grid-row:auto;grid-column:auto;}
-  .hm-card.hf-c{display:block;}
-  .masonry{columns:2;}
   .resume-body{grid-template-columns:1fr;}
   .r-main{border-right:none;padding:2.5rem 1.25rem 3rem;}
   .r-side{padding:2rem 1.25rem 3rem;}
@@ -520,61 +536,49 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
   .dl-btn{margin-left:0;}
   #page-contact{padding-left:1.25rem;padding-right:1.25rem;}
 }
-@media(max-width:480px){
-  /* Single column stacked layout */
-  .home-masonry{grid-template-columns:1fr;}
-  .masonry{columns:1;column-gap:0;}
 
-  /* Force all videos/images to 16:9 — never taller */
-  .mb-card-vis.featured,
-  video.mb-card-vis.featured{
-    aspect-ratio:16/9 !important;
-    min-height:unset !important;
-    max-height:56vw;
-  }
-  .mb-card-vis.wide{
-    aspect-ratio:16/9 !important;
-    min-height:unset !important;
-  }
-  .mb-card-vis.vert{
-    aspect-ratio:16/9 !important;
-    min-height:unset !important;
-  }
-  .mb-card-vis.tall{
-    aspect-ratio:16/9 !important;
-    min-height:unset !important;
-  }
-  .mb-card-vis.sq{
-    aspect-ratio:16/9 !important;
-    min-height:unset !important;
-  }
+/* ── MOBILE (max 768px) — single column everything ── */
+@media(max-width:768px){
+  nav{padding:0 1.25rem;}
 
-  /* Home moodboard cards — match the work page stacked feel */
-  .hm-card-vis.vert,
-  .hm-card-vis.tall,
-  .hm-card-vis.wide,
-  .hm-card-vis.sq{
-    aspect-ratio:16/9 !important;
-    min-height:unset !important;
-    max-height:56vw;
-  }
+  /* All work masonries single column */
+  .masonry,
+  #cat-broadcast .masonry,
+  #cat-social .masonry,
+  #cat-partners .masonry,
+  #cat-ooh .masonry,
+  #cat-footage .masonry,
+  #cat-pr .masonry{columns:1 !important;column-gap:0;}
 
-  /* OOH/LED — keep contain so full artwork shows */
-  #cat-ooh .mb-card-vis,
-  video.mb-card-vis.led{
-    aspect-ratio:16/9 !important;
-    min-height:unset !important;
-    object-fit:contain !important;
-  }
+  /* Branding grid single column */
+  #cat-branding .masonry{display:flex !important;flex-direction:column;gap:8px;}
+  #cat-branding .mb-card:nth-child(1){grid-row:auto;grid-column:auto;}
+  #cat-branding .mb-card:nth-child(4){grid-column:auto;}
 
-  /* Broadcast — 2-column would crush these, 1 col is right */
-  #cat-broadcast .masonry{columns:1;}
+  /* Home moodboard single column */
+  .home-masonry{grid-template-columns:1fr !important;grid-template-rows:auto !important;}
+  .hm-card.hf-a,.hm-card.hf-b,.hm-card.hf-c,
+  .hm-card.hf-d,.hm-card.hf-e,.hm-card.hf-f{grid-row:auto !important;grid-column:auto !important;}
 
-  /* Reduce padding on mobile */
+  /* All card visuals 16:9, no min-height */
+  .mb-card-vis,.mb-card-vis.featured,.mb-card-vis.wide,
+  .mb-card-vis.tall,.mb-card-vis.vert,.mb-card-vis.sq,
+  .mb-card-vis.full,video.mb-card-vis,video.mb-card-vis.featured,
+  img.mb-card-vis{aspect-ratio:16/9 !important;min-height:unset !important;max-height:none !important;width:100% !important;}
+
+  /* OOH/LED contain so full artwork shows */
+  #cat-ooh .mb-card-vis,video.mb-card-vis.led{object-fit:contain !important;}
+
+  /* Home moodboard card visuals */
+  .hm-card-vis,.hm-card-vis.vert,.hm-card-vis.tall,
+  .hm-card-vis.wide,.hm-card-vis.sq{aspect-ratio:16/9 !important;min-height:unset !important;width:100% !important;}
+
+  /* Padding */
   .moodboard-panel{padding:1.5rem 1rem 3rem;}
   .page-hero{padding:3rem 1.25rem 1.5rem;}
-  .work-cats{padding:0 0.5rem;}
-  .wcat{padding:0.85rem 0.85rem;font-size:0.6rem;}
+  .work-cats{padding:0 0.5rem;overflow-x:auto;}
+  .wcat{padding:0.85rem 0.75rem;font-size:0.58rem;letter-spacing:0.1em;}
+  .mb-card{margin-bottom:8px;}
 }
 </style>
 </head>
@@ -1631,6 +1635,13 @@ switchCat=function(id){
 window.addEventListener('load',function(){
   initReveals();
   initVideoThumbnails();
+  // On mobile, defer home moodboard videos to save bandwidth
+  if(window.innerWidth <= 768){
+    document.querySelectorAll('.home-work video.hm-card-vis').forEach(function(v){
+      v.setAttribute('preload','none');
+      v.pause();
+    });
+  }
 });
 
 go('home');
