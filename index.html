@@ -339,7 +339,7 @@ img.hm-card-vis{object-fit:cover;}
 #cat-pr .masonry{columns:3;column-gap:8px;}
 #cat-pr .mb-card-vis.featured{min-height:400px;object-fit:cover;}
 #cat-pr .mb-card-vis.wide{min-height:280px;object-fit:cover;}
-#cat-branding .masonry{display:grid;grid-template-columns:3fr 2fr;gap:8px;}
+#cat-branding .masonry{display:grid !important;grid-template-columns:3fr 2fr;gap:8px;}
 #cat-branding .mb-card:nth-child(1){grid-row:1/3;}
 #cat-branding .mb-card:nth-child(4){grid-column:1/3;}
 #cat-branding .mb-card-vis{width:100%;display:block;object-fit:cover;}
@@ -564,7 +564,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 
   /* Home moodboard single column */
   .home-masonry{grid-template-columns:1fr !important;grid-template-rows:auto !important;}
-  .hm-card.hf-a,.hm-card.hf-b,.hm-card.hf-c,
+  .hm-card.hf-a,.hm-card.hf-b,
   .hm-card.hf-d,.hm-card.hf-e,.hm-card.hf-f{grid-row:auto !important;grid-column:auto !important;}
 
   /* All card visuals 16:9, no min-height */
@@ -807,23 +807,13 @@ nav.clear .nav-hamburger span{background:var(--white);}
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Social</span>
         <div class="hm-card-info">
-          <p class="hm-card-tag">Drive Toyota</p>
-          <p class="hm-card-title">Organic Social Growth — 24K to 52K</p>
-        </div>
-      </div>
-
-      <div class="hm-card hf-c" onclick="goWork('ooh')">
-        <video class="hm-card-vis wide" poster="Social/organic_social_feed_1.jpg" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="auto"></video>
-        <div class="hm-card-grad"></div>
-        <span class="hm-card-pill">OOH</span>
-        <div class="hm-card-info">
-          <p class="hm-card-tag">Portland Timbers · Toyota TDA</p>
-          <p class="hm-card-title">Portland Timbers — Animated LED</p>
+          <p class="hm-card-tag" style="opacity:1;transform:none;">Drive Toyota</p>
+          <p class="hm-card-title" style="opacity:1;transform:none;">Organic Social Growth — 24K to 52K</p>
         </div>
       </div>
 
       <div class="hm-card hf-d" onclick="goWork('partners')">
-        <video class="hm-card-vis wide" poster="Partner_Launches/Stance_Paul_George.jpg" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto" style="object-position:center top;"></video>
+        <video class="hm-card-vis wide" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto" style="object-position:center top;"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Partnerships</span>
         <div class="hm-card-info">
@@ -1095,7 +1085,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <div class="masonry">
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Social/organic_social_feed_1.jpg" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1111,7 +1101,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" style="object-position:center center;object-fit:contain;" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis wide led" style="object-position:center center;object-fit:contain;" src="Animation_Display_OOH/Redbulls.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1127,7 +1117,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-c" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Yankees.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1143,7 +1133,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-d" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" src="Animation_Display_OOH/T-Mobile_Mesh.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1159,7 +1149,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-e" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/T-Mobile_Center.mov" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" src="Animation_Display_OOH/T-Mobile_Center.mov" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1175,7 +1165,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-f" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Social/4R_Nuggets_B.jpg" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" src="Animation_Display_OOH/TOYOTA_LED_ColumnFascia_60x680.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1191,7 +1181,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured led" poster="Social/4R_Nuggets_B.jpg" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured led" src="Animation_Display_OOH/Toyota_DED_1011_-_Truck.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1207,7 +1197,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card float-b" onclick="openModal(this)">
-        <video class="mb-card-vis wide led" poster="Social/TU_Winner_Ad.jpg" src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis wide led" src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
@@ -1266,7 +1256,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
 <div class="masonry">
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Partner_Launches/Stance_Paul_George.jpg" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis featured" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Stance Socks x Paul George — Launch Film</p><p class="mb-card-desc-text">Launch content produced alongside the Stance x RKL partnership campaign.</p></div>
@@ -1325,7 +1315,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" poster="Partner_Launches/Gatorade_Wearables_RKl_.png" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="none"></video>
+        <video class="mb-card-vis wide" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Multi-year brand partnership launch with co-branded in-game wearables and interactive web experience.</p></div>
@@ -1490,10 +1480,6 @@ nav.clear .nav-hamburger span{background:var(--white);}
       <p class="eyebrow">Resume</p>
       <h1>Experience.</h1>
     </div>
-    <a href="#" class="dl-btn">
-      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1v7M3 6l3 3 3-3M1 10.5h10"/></svg>
-      Download PDF
-    </a>
   </div>
   <div class="resume-body">
     <div class="r-main">
@@ -1552,7 +1538,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       <div class="side-blk">
         <p class="side-lbl">Contact</p>
         <div class="side-row"><span>+1 917-613-3767</span><div class="dot"></div></div>
-        <div class="side-row"><span style="font-size:0.78rem;"><span id="resume-email"></span></span><div class="dot"></div></div>
+        <div class="side-row"><span style="font-size:0.78rem;"><a href="mailto:johnconnorannand@gmail.com" style="color:var(--ink-mid);text-decoration:none;">johnconnorannand@gmail.com</a></span><div class="dot"></div></div>
         <div class="side-row"><span>connorannand.com</span><div class="dot"></div></div>
       </div>
       <div class="side-blk">
@@ -1593,7 +1579,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <p class="ct-connect-label">Let's Connect</p>
     <p class="ct-exp-line">5+ years of experience — always looking to connect.</p>
     <div class="ct-btns">
-      <a id="contact-email-btn" href="/cdn-cgi/l/email-protection#e8a28780868b878686879a89868689868ca88f85898184c68b8785d79b9d8a828d8b9cd5a48d9ccddadf9bcddad8bf879a83cddad8bc878f8d9c808d9a" class="ct-btn primary">
+      <a id="contact-email-btn" href="mailto:johnconnorannand@gmail.com" class="ct-btn primary">
         <svg viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="10" rx="1.5"/><path d="M1 3l6 4 6-4"/></svg>
         Email Connor
       </a>
@@ -1836,32 +1822,28 @@ window.addEventListener('load',function(){
   }
 });
 
-// ── MOBILE: swap all videos to static thumbnails ──────────────
+// ── MOBILE: swap videos-with-posters to static thumbnails ──────
+// Videos without a poster (Partners, OOH/Animation) play normally on mobile
 (function(){
   if(window.innerWidth > 768) return;
 
   document.querySelectorAll('video.mb-card-vis, video.hm-card-vis').forEach(function(vid){
     var poster = vid.getAttribute('poster');
-    var src    = vid.getAttribute('src');
     var cls    = vid.getAttribute('class');
     var style  = vid.getAttribute('style') || '';
 
-    // Stop any loading immediately
-    vid.removeAttribute('src');
-    vid.load();
-
     if(poster){
-      // Replace with img using poster
+      // Has a poster — swap to static image, save bandwidth
+      vid.removeAttribute('src');
+      vid.load();
       var img = document.createElement('img');
       img.className = cls;
       img.src = poster;
       img.style.cssText = style + (style ? ';' : '') + 'object-fit:cover;';
       img.alt = '';
       vid.parentNode.replaceChild(img, vid);
-    } else {
-      // No poster — just hide the video, desc still shows
-      vid.style.display = 'none';
     }
+    // No poster = leave video untouched, it will play normally
   });
 })();
 
