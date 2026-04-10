@@ -13,15 +13,15 @@
 
 <!-- Primary meta -->
 <meta name="description" content="A producer driven by more than the shoot day. Broadcast, Social, OOH &amp; Brand — US &amp; UK.">
-<link rel="canonical" href="https://connorannand.com">
+<link rel="canonical" href="https://johnconnorannand-cmyk.github.io">
 
 <!-- Open Graph / iMessage social share -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://connorannand.com">
+<meta property="og:url" content="https://johnconnorannand-cmyk.github.io">
 <meta property="og:site_name" content="Connor Annand">
 <meta property="og:title" content="Connor Annand — Producer">
 <meta property="og:description" content="A producer driven by more than the shoot day. Broadcast, Social, OOH &amp; Brand — US &amp; UK.">
-<meta property="og:image" content="https://connorannand.com/Hero_Photos/og-image.png">
+<meta property="og:image" content="https://johnconnorannand-cmyk.github.io/Hero_Photos/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -32,7 +32,7 @@
 <meta name="twitter:site" content="connorannand.com">
 <meta name="twitter:title" content="Connor Annand — Producer">
 <meta name="twitter:description" content="A producer driven by more than the shoot day.">
-<meta name="twitter:image" content="https://connorannand.com/Hero_Photos/og-image.png">
+<meta name="twitter:image" content="https://johnconnorannand-cmyk.github.io/Hero_Photos/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -824,7 +824,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <div class="home-masonry">
 
       <div class="hm-card hf-a" onclick="goWork('broadcast')">
-        <video class="hm-card-vis wide" poster="Broadcast/Posters/Dear_Friday_poster.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hm-card-vis wide" poster="Broadcast/Posters/Dear_Friday_poster.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Broadcast</span>
         <div class="hm-card-info">
@@ -844,7 +844,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="hm-card hf-d" onclick="goWork('partners')">
-        <video class="hm-card-vis wide" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto" style="object-position:center top;"></video>
+        <video class="hm-card-vis wide" poster="Partner_Launches/Posters/Stance_Thumbnail.jpg" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high" style="object-position:center top;"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Partnerships</span>
         <div class="hm-card-info">
@@ -854,7 +854,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="hm-card hf-e" onclick="goWork('branding')">
-        <video class="hm-card-vis wide" poster="Branding/Posters/Branding_video_Thumbnail.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto"></video>
+        <video class="hm-card-vis wide" poster="Branding/Posters/Branding_video_Thumbnail.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high"></video>
         <div class="hm-card-grad"></div>
         <span class="hm-card-pill">Branding</span>
         <div class="hm-card-info">
@@ -1287,7 +1287,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
 <div class="masonry">
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <video class="mb-card-vis featured" poster="Partner_Launches/Posters/Stance_Thumbnail.jpg" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Stance Socks x Paul George — Launch Film</p><p class="mb-card-desc-text">Launch content produced alongside the Stance x RKL partnership campaign.</p></div>
@@ -1346,7 +1346,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis wide" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <video class="mb-card-vis wide" poster="Partner_Launches/Posters/Gatorade_Thumbnail.jpg" src="Partner_Launches/LDJDF9WRSwn_576.mp4" autoplay muted loop playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc"><p class="mb-card-desc-title">Gatorade x RKL — In-Game Wearables</p><p class="mb-card-desc-text">Multi-year brand partnership launch with co-branded in-game wearables and interactive web experience.</p></div>
@@ -1499,6 +1499,22 @@ nav.clear .nav-hamburger span{background:var(--white);}
         </template>
       </div>
 
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis featured" src="Branding/CuisersRebrand_Website.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Cruisers — Website Creation &amp; Development</p>
+          <p class="mb-card-desc-text">Full website creation and development for the Cruisers cycling community brand.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Cruisers · Web Development</span>
+          <span class="m-title">Cruisers — Website Creation &amp; Development</span>
+          <span class="m-src">Branding/CuisersRebrand_Website.mp4</span>
+          <span class="m-body">Full website creation and development for the Cruisers cycling community. Built to reflect the brand identity and serve the Denver cycling community across desktop and mobile.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
+        </template>
+      </div>
+
 
     </div>
   </div>
@@ -1610,15 +1626,16 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <p class="ct-connect-label">Let's Connect</p>
     <p class="ct-exp-line">5+ years of experience — always looking to connect.</p>
     <div class="ct-btns">
-      <a id="contact-email-btn" href="mailto:johnconnorannand@gmail.com" class="ct-btn primary">
+      <a id="contact-email-btn" href="mailto:johnconnorannand@gmail.com" onclick="handleEmailClick(event)" class="ct-btn primary">
         <svg viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="10" rx="1.5"/><path d="M1 3l6 4 6-4"/></svg>
-        Email Connor
+        <span id="email-btn-text">Email Connor</span>
       </a>
       <a href="https://www.linkedin.com/in/connor-annand-65248a106" target="_blank" rel="noopener" class="ct-btn secondary">
         <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="13" height="13" rx="2"/><path d="M5 6.5V11M5 4.5v.01M7.5 11V8.5a1.5 1.5 0 013 0V11M7.5 8.5V6.5"/></svg>
         LinkedIn
       </a>
     </div>
+    <p style="font-family:var(--body-font);font-size:0.75rem;font-weight:400;color:var(--ink-mute);letter-spacing:0.06em;margin-top:1.25rem;">johnconnorannand@gmail.com</p>
     <div class="thin-rule" style="margin-top:3rem;"></div>
     <p class="ct-footer-line">connorannand.com &nbsp;·&nbsp; US &amp; UK</p>
   </div>
@@ -1877,6 +1894,21 @@ window.addEventListener('load',function(){
     });
   }
 });
+
+// ── EMAIL BUTTON — copy on mobile, mailto on desktop ──
+function handleEmailClick(e){
+  var isMobile = window.innerWidth <= 768;
+  if(isMobile){
+    e.preventDefault();
+    navigator.clipboard.writeText('johnconnorannand@gmail.com').then(function(){
+      var btn = document.getElementById('email-btn-text');
+      btn.textContent = 'Copied!';
+      setTimeout(function(){ btn.textContent = 'Email Connor'; }, 2500);
+    }).catch(function(){
+      window.location.href = 'mailto:johnconnorannand@gmail.com';
+    });
+  }
+}
 
 // ── MOBILE: swap videos-with-posters to static thumbnails ──────
 // Videos without a poster (Partners, OOH/Animation) play normally on mobile
