@@ -547,12 +547,25 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 .ct-connect-label{font-family:var(--body-font);font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:0.75rem;}
 .ct-exp-line{font-family:var(--body-font);font-size:0.85rem;font-weight:300;color:var(--ink-mid);line-height:1.6;margin-bottom:2rem;}
 .ct-btns{display:flex;flex-direction:column;gap:0.85rem;align-items:center;}
-.ct-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;padding:0.95rem 2.5rem;font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,transform 0.15s,color 0.2s;width:280px;}
+.ct-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;padding:0.95rem 2.5rem;font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,transform 0.15s,color 0.2s;width:320px;}
 .ct-btn.primary{background:var(--cobalt);color:var(--white);}
 .ct-btn.primary:hover{background:#0f2490;transform:translateY(-1px);}
 .ct-btn.secondary{background:transparent;color:var(--cobalt);border:1.5px solid var(--cobalt);}
 .ct-btn.secondary:hover{background:var(--cobalt);color:var(--white);transform:translateY(-1px);}
 .ct-btn svg{width:14px;height:14px;}
+.ct-btn-email{
+  display:block;
+  font-family:var(--title-font);
+  font-size:clamp(1rem,2.5vw,1.35rem);
+  font-weight:400;
+  font-style:italic;
+  color:var(--cobalt);
+  text-decoration:none;
+  letter-spacing:0.02em;
+  transition:color 0.2s, letter-spacing 0.2s;
+  margin-bottom:0.5rem;
+}
+.ct-btn-email:hover{color:var(--ink);letter-spacing:0.04em;}
 .ct-footer-line{font-family:var(--body-font);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bone-dim);}
 
 /* ── ANIMATIONS ───────────────────── */
@@ -1068,7 +1081,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-desc"><p class="mb-card-desc-title">Paid Social Asset Trafficking</p><p class="mb-card-desc-text">Meta, Reddit, Snapchat, YouTube — coordinating across all teams and markets.</p></div>
+        <div class="mb-card-desc"><p class="mb-card-desc-title">Paid Social Asset Trafficking</p><p class="mb-card-desc-text">Meta, Reddit, Snapchat, YouTube, coordinating across all teams and markets.</p></div>
         <template class="modal-data"><span class="m-tag">Paid Social · Toyota TDA</span><span class="m-title">Paid Social Asset Trafficking</span><span class="m-src">Social/TU_Winner_Ad.jpg</span><span class="m-body">Managing and trafficking paid social assets across Meta, Reddit, Snapchat, and YouTube while keeping all markets on schedule. Daily point of contact across media, creative, account, product, and legal teams.</span></template>
       </div>
 
@@ -1250,7 +1263,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
   <div class="cat-panel moodboard-panel" id="cat-footage">
     <div class="mb-header">
       <h2 class="mb-title"><em>Footage</em> Banks</h2>
-      <p class="mb-desc">Produced social media footage banks for Toyota TDA — capturing primary source footage across multi-day shoots, cut down and repurposed across multiple social assets and campaigns.</p>
+      <p class="mb-desc">Produced social media footage banks for Toyota TDA, capturing primary source footage across multi-day shoots, cut down and repurposed across multiple social assets and campaigns.</p>
     </div>
     <div class="masonry">
       <div class="mb-card" onclick="openModal(this)">
@@ -1624,18 +1637,17 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <p class="ct-tagline">A producer driven by more than the shoot day.</p>
     <div class="thin-rule"></div>
     <p class="ct-connect-label">Let's Connect</p>
-    <p class="ct-exp-line">5+ years of experience — always looking to connect.</p>
+    <p class="ct-exp-line">5+ years of experience, always looking to connect.</p>
     <div class="ct-btns">
-      <a id="contact-email-btn" href="mailto:johnconnorannand@gmail.com" onclick="handleEmailClick(event)" class="ct-btn primary">
+      <a href="mailto:johnconnorannand@gmail.com" class="ct-btn primary">
         <svg viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="10" rx="1.5"/><path d="M1 3l6 4 6-4"/></svg>
-        <span id="email-btn-text">Email Connor</span>
+        johnconnorannand@gmail.com
       </a>
       <a href="https://www.linkedin.com/in/connor-annand-65248a106" target="_blank" rel="noopener" class="ct-btn secondary">
         <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="13" height="13" rx="2"/><path d="M5 6.5V11M5 4.5v.01M7.5 11V8.5a1.5 1.5 0 013 0V11M7.5 8.5V6.5"/></svg>
         LinkedIn
       </a>
     </div>
-    <p style="font-family:var(--body-font);font-size:0.75rem;font-weight:400;color:var(--ink-mute);letter-spacing:0.06em;margin-top:1.25rem;">johnconnorannand@gmail.com</p>
     <div class="thin-rule" style="margin-top:3rem;"></div>
     <p class="ct-footer-line">connorannand.com &nbsp;·&nbsp; US &amp; UK</p>
   </div>
