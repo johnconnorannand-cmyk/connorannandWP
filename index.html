@@ -56,7 +56,8 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bone);color:var(--ink);font-family:var(--body-font);font-weight:300;overflow-x:hidden;line-height:1.6;}
+body{background:transparent;color:var(--ink);font-family:var(--body-font);font-weight:300;overflow-x:hidden;line-height:1.6;}
+html{background:var(--bone);}
 
 .title-font{font-family:var(--title-font);}
 
@@ -72,7 +73,7 @@ nav.clear{background:transparent;border-bottom:none;}
 nav.clear .nav-logo{color:var(--ink);}
 nav.solid .nav-logo{color:var(--ink);}
 .nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none;}
-.nav-links a{font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:color 0.2s;}
+.nav-links a{font-family:var(--title-font);font-size:1rem;font-weight:400;font-style:italic;letter-spacing:0.02em;text-transform:none;text-decoration:none;cursor:pointer;transition:color 0.2s;}
 nav.clear .nav-links a{color:var(--ink-mute);}
 nav.clear .nav-links a:hover{color:var(--ink);}
 nav.solid .nav-links a{color:var(--ink-mute);}
@@ -82,6 +83,25 @@ nav.clear .nav-cta{border:1px solid rgba(13,15,26,0.25);color:var(--ink)!importa
 nav.clear .nav-cta:hover{background:rgba(13,15,26,0.06);}
 nav.solid .nav-cta{background:var(--cobalt);color:var(--white)!important;}
 nav.solid .nav-cta:hover{background:#0f2490;}
+
+/* ── GLOBAL LAVA BACKGROUND ──────────── */
+#global-lava {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  image-rendering: auto;
+  filter: blur(8px) saturate(1.1);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+#global-lava.visible { opacity: 1; }
+#page-home { position: relative; z-index: 1; background: transparent; }
+#page-work { background: var(--bone); position: relative; z-index: 1; }
+#page-contact { background: transparent; position: relative; z-index: 1; }
+#page-resume { background: var(--bone); position: relative; z-index: 1; }
 
 /* ── HERO — carousel ─── */
 #hero {
@@ -94,11 +114,11 @@ nav.solid .nav-cta:hover{background:#0f2490;}
   align-items: center;
   justify-content: center;
   gap: 0;
-  background: var(--bone);
+  background: transparent;
 }
-/* Lava lamp canvas sits behind everything */
+/* Lava lamp canvas — fixed, fills full viewport */
 #hero-lava {
-  position: absolute;
+  position: fixed;
   top: -5%;
   left: -5%;
   width: 110%;
@@ -106,6 +126,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
   z-index: 0;
   image-rendering: auto;
   filter: blur(8px) saturate(1.2);
+  pointer-events: none;
 }
 /* Name block */
 .hero-text-block {
@@ -182,12 +203,6 @@ nav.solid .nav-cta:hover{background:#0f2490;}
   gap: 14px;
   width: max-content;
   will-change: transform;
-}
-.hero-carousel-track.row-1 {
-  animation: hero-scroll-fwd 75s linear infinite;
-}
-.hero-carousel-track.row-2 {
-  animation: hero-scroll-rev 85s linear infinite;
 }
 @keyframes hero-scroll-fwd {
   from { transform: translateX(0); }
@@ -649,7 +664,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 /* ── CONTACT ──────────────────────── */
 #page-contact{
   padding-top:64px;min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:3rem;padding-right:3rem;
-  background: var(--bone);
+  background: transparent;
 }
 .ct-inner{max-width:580px;width:100%;text-align:center;padding-top:2rem;padding-bottom:5rem;}
 .ct-top-rule{width:40px;height:1px;background:var(--cobalt);margin:0 auto 2rem;}
@@ -888,6 +903,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
 </style>
 </head>
 <body>
+<canvas id="global-lava" aria-hidden="true"></canvas>
 
 <nav id="nav" class="solid">
   <a class="nav-logo" onclick="go('home');closeDrawer();">Connor Annand</a>
@@ -978,6 +994,79 @@ nav.clear .nav-hamburger span{background:var(--white);}
               <span class="hero-carousel-card-title">Round 21 Basketball</span>
             </div>
           </div>
+          <div class="hero-carousel-card" onclick="goWork('ooh')">
+            <video src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
+              <span class="hero-carousel-card-title">Portland Timbers LED</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('broadcast')">
+            <img src="PR/Raccoon_City.jpg" alt="Resident Evil: Raccoon City">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">PR · Sony Pictures</span>
+              <span class="hero-carousel-card-title">Resident Evil: Raccoon City</span>
+            </div>
+          </div>
+          <!-- Duplicates for seamless loop -->
+          <div class="hero-carousel-card" onclick="goWork('broadcast')">
+            <img src="Broadcast/Posters/Dear_Friday_poster.jpg" alt="Dear Friday">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
+              <span class="hero-carousel-card-title">Dear Friday</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('branding')">
+            <img src="Branding/Posters/Branding_video_Thumbnail.jpg" alt="Cruisers Brand Video">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Branding · Cruisers</span>
+              <span class="hero-carousel-card-title">Cruisers Brand Video</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('broadcast')">
+            <img src="Broadcast/Posters/Dear_Snow_poster.jpg" alt="Dear Snow">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
+              <span class="hero-carousel-card-title">Dear Snow</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('ooh')">
+            <img src="Animation_Display_OOH/Wild_Screenshot.jpeg" alt="Minnesota Wild LEDs">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
+              <span class="hero-carousel-card-title">Minnesota Wild LEDs</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('partners')">
+            <img src="Partner_Launches/RKL_x_Round21_BB_.jpeg" alt="Round 21 Basketball">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Partnerships · Rumble League</span>
+              <span class="hero-carousel-card-title">Round 21 Basketball</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('ooh')">
+            <video src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
+              <span class="hero-carousel-card-title">Portland Timbers LED</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('broadcast')">
+            <img src="PR/Raccoon_City.jpg" alt="Resident Evil: Raccoon City">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">PR · Sony Pictures</span>
+              <span class="hero-carousel-card-title">Resident Evil: Raccoon City</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1022,6 +1111,22 @@ nav.clear .nav-hamburger span{background:var(--white);}
             <div class="hero-carousel-card-info">
               <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
               <span class="hero-carousel-card-title">Dear Friday</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('ooh')">
+            <video src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
+              <span class="hero-carousel-card-title">Buffalo Bills LED</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('broadcast')">
+            <img src="PR/Paul_Anderson_Raccoon_City_.jpg" alt="Paul W.S. Anderson Interview">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">PR · Sony Pictures</span>
+              <span class="hero-carousel-card-title">Director Interview — Paul W.S. Anderson</span>
             </div>
           </div>
           <!-- Duplicates for seamless loop -->
@@ -1073,6 +1178,22 @@ nav.clear .nav-hamburger span{background:var(--white);}
               <span class="hero-carousel-card-title">Dear Friday</span>
             </div>
           </div>
+          <div class="hero-carousel-card" onclick="goWork('ooh')">
+            <video src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
+              <span class="hero-carousel-card-title">Buffalo Bills LED</span>
+            </div>
+          </div>
+          <div class="hero-carousel-card" onclick="goWork('broadcast')">
+            <img src="PR/Paul_Anderson_Raccoon_City_.jpg" alt="Paul W.S. Anderson Interview">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">PR · Sony Pictures</span>
+              <span class="hero-carousel-card-title">Director Interview — Paul W.S. Anderson</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1088,75 +1209,8 @@ nav.clear .nav-hamburger span{background:var(--white);}
     </div>
   </section>
 
-  <div class="home-work">
-    <canvas id="hw-lava" aria-hidden="true"></canvas>
-    <div class="hw-bar">
-      <span class="hw-label">Selected Work</span>
-      <span class="hw-all" onclick="go('work')">All Projects <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5.5h9M6.5 2l4 3.5-4 3.5"/></svg></span>
-    </div>
-    <div class="home-masonry">
-
-      <div class="hm-card hf-a" onclick="goWork('broadcast')">
-        <video class="hm-card-vis wide" poster="Broadcast/Posters/Dear_Friday_poster.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high"></video>
-        <div class="hm-card-grad"></div>
-        <span class="hm-card-pill">Broadcast</span>
-        <div class="hm-card-info">
-          <p class="hm-card-tag">Toyota All TDA</p>
-          <p class="hm-card-title">Dear Friday, 30</p>
-        </div>
-      </div>
-
-      <div class="hm-card hf-b" onclick="goWork('social')">
-        <img class="hm-card-vis vert" src="Social/organic_social_feed_1.jpg" style="object-fit:cover;object-position:top;">
-        <div class="hm-card-grad" style="background:linear-gradient(to top,rgba(8,12,31,0.95) 0%,rgba(8,12,31,0.4) 40%,transparent 100%);opacity:1;"></div>
-        <span class="hm-card-pill">Social</span>
-        <div class="hm-card-info">
-          <p class="hm-card-tag" style="opacity:1;transform:none;">Drive Toyota</p>
-          <p class="hm-card-title" style="opacity:1;transform:none;">Organic Social Growth — 24K to 52K</p>
-        </div>
-      </div>
-
-      <div class="hm-card hf-d" onclick="goWork('partners')">
-        <video class="hm-card-vis wide" poster="Partner_Launches/Posters/Stance_Thumbnail.jpg" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high" style="object-position:center top;"></video>
-        <div class="hm-card-grad"></div>
-        <span class="hm-card-pill">Partnerships</span>
-        <div class="hm-card-info">
-          <p class="hm-card-tag">Rumble League Studios</p>
-          <p class="hm-card-title">Stance Socks x Paul George</p>
-        </div>
-      </div>
-
-      <div class="hm-card hf-e" onclick="goWork('branding')">
-        <video class="hm-card-vis wide" poster="Branding/Posters/Branding_video_Thumbnail.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high"></video>
-        <div class="hm-card-grad"></div>
-        <span class="hm-card-pill">Branding</span>
-        <div class="hm-card-info">
-          <p class="hm-card-tag">Cruisers · Denver</p>
-          <p class="hm-card-title">Cruisers — Hero Branding Video</p>
-        </div>
-      </div>
-
-      <div class="hm-card hf-f" onclick="openModal(this)" style="cursor:pointer;">
-        <img class="hm-card-vis wide" src="PR/Raccoon_City.jpg" style="object-fit:cover;" alt="Resident Evil Interview">
-        <div class="hm-card-grad"></div>
-        <span class="hm-card-pill">PR</span>
-        <div class="hm-card-info">
-          <p class="hm-card-tag">Sony Pictures</p>
-          <p class="hm-card-title">Resident Evil — Interview Piece</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Sony Pictures — Game Informer</span>
-          <span class="m-title">Resident Evil: Welcome to Raccoon City — Interview Piece</span>
-          <span class="m-src">yt:1b_bc6B6v7Q</span>
-          <span class="m-body">Press interview piece coordinated for Resident Evil: Welcome to Raccoon City. Managed the full press relationship from outreach to execution as the primary PR contact for Game Informer Magazine.</span>
-        </template>
-      </div>
-
-    </div>
-  </div>
 </div>
 
-<!-- ════════════ WORK ════════════ -->
 <div id="page-work" class="page">
   <div class="page-hero">
     <p class="eyebrow">Work</p>
@@ -1953,6 +2007,12 @@ function go(id){
   if(id==='home'){nav.className='clear';window.addEventListener('scroll',onScroll);onScroll();}
   else{window.removeEventListener('scroll',onScroll);nav.className='solid';}
   if(id==='work'){setTimeout(function(){switchCat('broadcast');},50);}
+  // Hero lava: only visible on home
+  var heroLava = document.getElementById('hero-lava');
+  if(heroLava) heroLava.style.display = (id==='home') ? '' : 'none';
+  // Global lava: show on contact only
+  var lava = document.getElementById('global-lava');
+  if(lava) lava.classList.toggle('visible', id==='contact');
   window.scrollTo(0,0);
   setTimeout(initReveals,50);
 }
@@ -2277,6 +2337,116 @@ function handleEmailClick(e){
   requestAnimationFrame(draw);
 })();
 
+// ── GLOBAL LAVA LAMP (non-hero pages) ─────────────────
+(function(){
+  function hexToRgb(h){
+    return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+  }
+  function noise(x,y,t,s){
+    return(
+      Math.sin(x*1.3+t*0.41+s*7.3)*Math.cos(y*0.9+t*0.29+s*11.9)+
+      Math.sin(x*0.7+y*1.1+t*0.19+s*16.1)*0.5+
+      Math.cos(x*1.7+t*0.37+s*5.8)*0.3
+    )/1.8;
+  }
+
+  var canvas = document.getElementById('global-lava');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  // Same palette as hero — bone base with cobalt bleed
+  var palette = ['#EDE8DE','#E2DDD3','#1B3CC4','#C8C3B8'];
+  var rgb = palette.map(hexToRgb);
+  var RES = 220;
+  var t = Math.random() * 50;
+
+  function resize(){
+    canvas.width  = RES;
+    canvas.height = Math.round(RES * window.innerHeight / window.innerWidth);
+  }
+
+  function draw(){
+    var W = canvas.width, H = canvas.height;
+    if(W===0||H===0){ resize(); requestAnimationFrame(draw); return; }
+    var img = ctx.createImageData(W, H);
+    var d = img.data;
+    for(var py=0; py<H; py++){
+      for(var px=0; px<W; px++){
+        var nx=px/W, ny=py/H;
+        var n0=(noise(nx*3.0,ny*3.0,t,0.0)+1)/2;
+        var n1=(noise(nx*2.5,ny*2.5,t,1.3)+1)/2;
+        var n2=(noise(nx*2.0,ny*4.0,t,2.7)+1)/2;
+        var n3=(noise(nx*3.5,ny*1.5,t,4.1)+1)/2;
+        var w0=Math.pow(Math.max(0,1-n0*1.6),1.5);
+        var w1=Math.pow(Math.max(0,n1-0.1)*1.4,1.8);
+        var w2=Math.pow(Math.max(0,n2-0.4)*2.0,2.5);
+        var w3=Math.pow(Math.max(0,n3-0.65)*3.0,3.0);
+        var total=w0+w1+w2+w3+0.001;
+        w0/=total; w1/=total; w2/=total; w3/=total;
+        var i=(py*W+px)*4;
+        d[i]  =Math.round(rgb[0][0]*w0+rgb[1][0]*w1+rgb[2][0]*w2+rgb[3][0]*w3);
+        d[i+1]=Math.round(rgb[0][1]*w0+rgb[1][1]*w1+rgb[2][1]*w2+rgb[3][1]*w3);
+        d[i+2]=Math.round(rgb[0][2]*w0+rgb[1][2]*w1+rgb[2][2]*w2+rgb[3][2]*w3);
+        d[i+3]=255;
+      }
+    }
+    ctx.putImageData(img,0,0);
+    t += 0.003;
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  requestAnimationFrame(draw);
+})();
+
+// ── SEAMLESS CAROUSEL LOOP ────────────────────────────
+(function(){
+  var SPEED_1 = 0.28;  // px per frame row 1 (forward)
+  var SPEED_2 = 0.24; // px per frame row 2 (reverse)
+
+  var row1 = document.querySelector('.hero-carousel-track.row-1');
+  var row2 = document.querySelector('.hero-carousel-track.row-2');
+  if(!row1 || !row2) return;
+
+  var pos1 = 0, pos2 = 0;
+
+  function tick(){
+    if(!row1.firstElementChild) return;
+
+    // Measure half width (first set of cards only)
+    var half1 = row1.scrollWidth / 2;
+    var half2 = row2.scrollWidth / 2;
+
+    pos1 -= SPEED_1;
+    pos2 += SPEED_2;
+
+    // Seamless reset — jump back exactly one set width
+    if(Math.abs(pos1) >= half1) pos1 = 0;
+    if(pos2 >= 0) pos2 = -half2;
+
+    row1.style.transform = 'translateX('+pos1.toFixed(2)+'px)';
+    row2.style.transform = 'translateX('+pos2.toFixed(2)+'px)';
+
+    requestAnimationFrame(tick);
+  }
+
+  // Init row2 at -half so it starts mid-scroll going right
+  window.addEventListener('load', function(){
+    var half2 = row2.scrollWidth / 2;
+    pos2 = -(half2 / 2);
+    requestAnimationFrame(tick);
+  });
+  // Fallback if load already fired
+  setTimeout(function(){
+    if(pos2 === 0){
+      var half2 = row2.scrollWidth / 2;
+      pos2 = -(half2 / 2);
+      requestAnimationFrame(tick);
+    }
+  }, 300);
+})();
+
 // ── HERO CURSOR ANIMATION ─────────────────────────────
 (function(){
   var nameEl = document.getElementById('hero-name');
@@ -2368,69 +2538,6 @@ function handleEmailClick(e){
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
-})();
-
-// ── SELECTED WORK LAVA LAMP ───────────────────────────
-(function(){
-  function hexToRgb(h){
-    return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
-  }
-  function noise(x,y,t,s){
-    return(
-      Math.sin(x*1.3+t*0.41+s*7.3)*Math.cos(y*0.9+t*0.29+s*11.9)+
-      Math.sin(x*0.7+y*1.1+t*0.19+s*16.1)*0.5+
-      Math.cos(x*1.7+t*0.37+s*5.8)*0.3
-    )/1.8;
-  }
-
-  var canvas = document.getElementById('hw-lava');
-  if(!canvas) return;
-  var ctx = canvas.getContext('2d');
-
-  // Dark palette with cream/cobalt spots — sits on --dark background
-  var palette = ['#0A0C14','#1B3CC4','#EDE8DE','#0D0F1A'];
-  var rgb = palette.map(hexToRgb);
-  var RES = 180;
-  var t = Math.random() * 50;
-
-  function resize(){
-    canvas.width  = RES;
-    canvas.height = Math.round(RES * window.innerHeight / window.innerWidth);
-  }
-
-  function draw(){
-    var W = canvas.width, H = canvas.height;
-    if(W===0||H===0){ resize(); requestAnimationFrame(draw); return; }
-    var img = ctx.createImageData(W, H);
-    var d = img.data;
-    for(var py=0; py<H; py++){
-      for(var px=0; px<W; px++){
-        var nx=px/W, ny=py/H;
-        var n0=(noise(nx*3.0,ny*3.0,t,0.0)+1)/2;
-        var n1=(noise(nx*2.5,ny*2.5,t,1.3)+1)/2;
-        var n2=(noise(nx*2.0,ny*4.0,t,2.7)+1)/2;
-        var n3=(noise(nx*3.5,ny*1.5,t,4.1)+1)/2;
-        var w0=Math.pow(Math.max(0,1-n0*1.6),1.5);
-        var w1=Math.pow(Math.max(0,n1-0.1)*1.4,1.8);
-        var w2=Math.pow(Math.max(0,n2-0.4)*2.0,2.5);
-        var w3=Math.pow(Math.max(0,n3-0.65)*3.0,3.0);
-        var total=w0+w1+w2+w3+0.001;
-        w0/=total; w1/=total; w2/=total; w3/=total;
-        var i=(py*W+px)*4;
-        d[i]  =Math.round(rgb[0][0]*w0+rgb[1][0]*w1+rgb[2][0]*w2+rgb[3][0]*w3);
-        d[i+1]=Math.round(rgb[0][1]*w0+rgb[1][1]*w1+rgb[2][1]*w2+rgb[3][1]*w3);
-        d[i+2]=Math.round(rgb[0][2]*w0+rgb[1][2]*w1+rgb[2][2]*w2+rgb[3][2]*w3);
-        d[i+3]=255;
-      }
-    }
-    ctx.putImageData(img,0,0);
-    t += 0.004;
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  requestAnimationFrame(draw);
 })();
 
 // ── CAROUSEL CARD MAGNETIC HOVER ──────────────────────
