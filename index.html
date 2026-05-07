@@ -56,268 +56,151 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:transparent;color:var(--ink);font-family:var(--body-font);font-weight:300;overflow-x:hidden;line-height:1.6;}
-html{background:var(--bone);}
+body{background:var(--bone);color:var(--ink);font-family:var(--body-font);font-weight:300;overflow-x:hidden;line-height:1.6;}
 
 .title-font{font-family:var(--title-font);}
 
 .page{display:none;overflow:hidden;}
-.page.active{display:block;overflow:visible;}
-#page-home{overflow:hidden;}
+.page.active{display:block;overflow:hidden;}
 
 /* ── NAV ──────────────────────────── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 3rem;height:64px;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s,border-color 0.4s;}
 nav.solid{background:rgba(237,232,222,0.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,195,184,0.5);}
 nav.clear{background:transparent;border-bottom:none;}
 .nav-logo{font-family:var(--title-font);font-size:1.45rem;font-weight:400;text-decoration:none;cursor:pointer;transition:color 0.3s;line-height:1;letter-spacing:0.02em;}
-nav.clear .nav-logo{color:var(--ink);}
+nav.clear .nav-logo{color:var(--white);}
 nav.solid .nav-logo{color:var(--ink);}
 .nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none;}
-.nav-links a{font-family:var(--title-font);font-size:1rem;font-weight:400;font-style:italic;letter-spacing:0.02em;text-transform:none;text-decoration:none;cursor:pointer;transition:color 0.2s;}
-nav.clear .nav-links a{color:var(--ink-mute);}
-nav.clear .nav-links a:hover{color:var(--ink);}
+.nav-links a{font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:color 0.2s;}
+nav.clear .nav-links a{color:rgba(250,248,244,0.72);}
+nav.clear .nav-links a:hover{color:var(--white);}
 nav.solid .nav-links a{color:var(--ink-mute);}
 nav.solid .nav-links a:hover,nav.solid .nav-links a.active{color:var(--cobalt);}
 .nav-cta{padding:0.45rem 1.3rem;}
-nav.clear .nav-cta{border:1px solid rgba(13,15,26,0.25);color:var(--ink)!important;}
-nav.clear .nav-cta:hover{background:rgba(13,15,26,0.06);}
+nav.clear .nav-cta{border:1px solid rgba(250,248,244,0.38);color:var(--white)!important;}
+nav.clear .nav-cta:hover{background:rgba(250,248,244,0.1);}
 nav.solid .nav-cta{background:var(--cobalt);color:var(--white)!important;}
 nav.solid .nav-cta:hover{background:#0f2490;}
 
-/* ── GLOBAL LAVA BACKGROUND ──────────── */
-#global-lava {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  image-rendering: auto;
-  filter: blur(8px) saturate(1.1);
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
+/* ── HERO ─────────────────────────── */
+/* ── HERO — split photo layout ─── */
+#hero{
+  position:relative;
+  min-height:100vh;
+  background:var(--bone);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  padding-top:64px;
 }
-#global-lava.visible { opacity: 1; }
-#page-home { position: relative; z-index: 1; background: transparent; }
-#page-work { background: var(--bone); position: relative; z-index: 1; }
-#page-contact { background: transparent; position: relative; z-index: 1; }
-#page-resume { background: var(--bone); position: relative; z-index: 1; }
-
-/* ── HERO — carousel ─── */
-#hero {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  padding-bottom: 3rem;
-  background: transparent;
+.hero-name-row{
+  position:relative;
+  z-index:3;
+  padding:3.5rem 3rem 0;
+  display:flex;
+  flex-direction:column;
+  gap:0.75rem;
 }
-/* Lava lamp canvas — fixed, fills full viewport */
-#hero-lava {
-  position: fixed;
-  top: -5%;
-  left: -5%;
-  width: 110%;
-  height: 110%;
-  z-index: 0;
-  image-rendering: auto;
-  filter: blur(8px) saturate(1.2);
-  pointer-events: none;
+.hero-name{
+  font-family:var(--title-font);
+  font-size:clamp(5rem,13vw,13rem);
+  font-weight:400;
+  line-height:0.88;
+  letter-spacing:0.01em;
+  color:var(--ink);
+  opacity:0;
+  animation:up 1s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
 }
-/* Name block */
-.hero-text-block {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  padding-top: 64px;
-  margin-bottom: 2.8rem;
-  pointer-events: none;
+.hero-photos-row{
+  position:relative;
+  z-index:2;
+  display:flex;
+  gap:0;
+  padding:1.5rem 3rem 0;
+  align-items:flex-end;
+  flex:1;
 }
-.hero-anim-name {
-  font-family: var(--title-font);
-  font-weight: 400;
-  color: var(--ink);
-  font-size: clamp(44px, 7.8vw, 148px);
-  letter-spacing: -0.005em;
-  line-height: 0.9;
-  white-space: nowrap;
-  user-select: none;
-  display: flex;
-  will-change: transform;
+.hero-photo{
+  overflow:hidden;
+  flex-shrink:0;
+  position:relative;
 }
-.hero-anim-producer {
-  font-family: var(--title-font);
-  font-weight: 400;
-  font-style: italic;
-  color: var(--ink-mid);
-  font-size: clamp(14px, 2vw, 36px);
-  letter-spacing: 0.02em;
-  line-height: 1;
-  white-space: nowrap;
-  user-select: none;
-  display: flex;
-  margin-top: 0.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: hero-prod-rise 0.9s cubic-bezier(0.22,1,0.36,1) 0.35s forwards;
-  will-change: transform, opacity;
+.hero-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 20%;
+  opacity:0;
+  animation:fade 1.1s 0.5s forwards;
+  transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-@keyframes hero-prod-rise { to { opacity:1; transform:translateY(0); } }
-.hero-anim-letter {
-  display: inline-block;
-  transform-origin: 50% 60%;
-  transform: translate3d(var(--tx,0px),var(--ty,0px),0) rotate(var(--rot,0deg)) scale(var(--s,1));
-  transition: transform 320ms cubic-bezier(0.22,1,0.36,1);
-  will-change: transform;
-  pointer-events: auto;
+.hero-photo:hover img{transform:scale(1.03);}
+.hero-photo-a{
+  width:48%;
+  height:clamp(400px,58vh,580px);
+  margin-right:-2rem;
+  z-index:2;
+  box-shadow:8px 0 32px rgba(13,15,26,0.18);
 }
-.hero-anim-name.is-active .hero-anim-letter,
-.hero-anim-producer.is-active .hero-anim-letter {
-  transition: transform 160ms cubic-bezier(0.22,1,0.36,1);
+.hero-photo-b{
+  width:36%;
+  height:clamp(280px,44vh,440px);
+  margin-bottom:2rem;
+  z-index:1;
 }
-.hero-anim-space { display:inline-block; width:0.32em; }
-
-/* Carousel — two rows */
-.hero-carousel-rows {
-  position: relative;
-  z-index: 4;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.hero-tagline-sub{
+  position:relative;z-index:3;
+  font-family:var(--title-font);
+  font-size:clamp(1.5rem,3.5vw,3rem);
+  font-style:italic;
+  font-weight:400;
+  color:var(--ink-mid);
+  line-height:1.2;
+  letter-spacing:0.01em;
+  opacity:0;
+  animation:up 0.8s 0.45s forwards;
 }
-.hero-carousel-wrap {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+.hero-bottom-row{
+  position:relative;z-index:3;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  padding:1.75rem 3rem 2.5rem;
 }
-.hero-carousel-track {
-  display: flex;
-  gap: 14px;
-  width: max-content;
-  will-change: transform;
+.hero-sub{
+  font-family:var(--body-font);
+  font-size:0.72rem;
+  font-weight:500;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  opacity:0;
+  animation:up 0.8s 0.75s forwards;
 }
-@keyframes hero-scroll-fwd {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+.hero-tagline{
+  font-family:var(--title-font);
+  font-size:clamp(0.9rem,1.6vw,1.2rem);
+  font-style:italic;
+  color:var(--ink-mid);
+  opacity:0;
+  animation:fade 0.8s 0.9s forwards;
 }
-@keyframes hero-scroll-rev {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+.hero-scroll-cue{
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  opacity:0;animation:fade 1s 1.3s forwards;
 }
-.hero-carousel-card {
-  flex-shrink: 0;
-  width: clamp(420px, 42vw, 620px);
-  height: clamp(280px, 36vh, 440px);
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  box-shadow: 0 6px 20px rgba(13,15,26,0.10), 0 2px 5px rgba(13,15,26,0.06);
-  transition: box-shadow 0.4s;
-  background: var(--ink);
-  will-change: transform;
-}
-.hero-carousel-card:hover {
-  box-shadow: 0 20px 44px rgba(13,15,26,0.20), 0 4px 12px rgba(13,15,26,0.10);
-}
-.hero-carousel-card video,
-.hero-carousel-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none;
-}
-.hero-carousel-card-grad {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(8,12,31,0.85) 0%, rgba(8,12,31,0.15) 55%, transparent 100%);
-  pointer-events: none;
-}
-.hero-carousel-card-info {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 0.8rem 0.9rem;
-}
-.hero-carousel-card-tag {
-  font-family: var(--body-font);
-  font-size: 0.56rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(250,248,244,0.55);
-  display: block;
-  margin-bottom: 0.18rem;
-}
-.hero-carousel-card-title {
-  font-family: var(--title-font);
-  font-size: clamp(0.72rem, 1.05vw, 0.92rem);
-  font-weight: 400;
-  font-style: italic;
-  color: var(--white);
-  display: block;
-  line-height: 1.2;
-}
-
-/* Cursor */
-.hero-anim-cursor {
-  display: none;
-}
-
-/* Marks */
-.hero-anim-marks {
-  position: absolute;
-  inset: 24px;
-  pointer-events: none;
-  color: var(--ink);
-  font-family: ui-monospace,"JetBrains Mono",SFMono-Regular,monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.28;
-  z-index: 6;
-}
-.hero-anim-marks > div { position: absolute; }
-.hero-anim-marks .tl { top:0; left:0; }
-.hero-anim-marks .tr { top:0; right:0; }
-.hero-anim-marks .bl { bottom:0; left:0; }
-.hero-anim-marks .br { bottom:0; right:0; }
-
-/* Scroll cue */
-.hero-scroll-cue {
-  position: absolute;
-  bottom: 1.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  opacity: 0; animation: fade 1s 1.4s forwards;
-  z-index: 6;
-}
-.hero-scroll-cue span { font-family:var(--body-font);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mute); }
-.scroll-line { width:1px;height:28px;background:var(--bone-dim);overflow:hidden;position:relative; }
-.scroll-line::after { content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--cobalt);animation:drop 2s 1.5s ease-in-out infinite; }
-@keyframes drop { from{top:-100%;}to{top:200%;} }
-
+.hero-scroll-cue span{font-family:var(--body-font);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mute);}
+.scroll-line{width:1px;height:32px;background:var(--bone-dim);overflow:hidden;position:relative;}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--cobalt);animation:drop 2s 1.5s ease-in-out infinite;}
+@keyframes drop{from{top:-100%;}to{top:200%;}}
 @media(max-width:768px){
-  .hero-text-block { margin-bottom: 1.5rem; }
-  .hero-anim-marks { display:none; }
-  .hero-carousel-card { width: clamp(150px,38vw,210px); height: clamp(110px,16vh,160px); }
-  .hero-carousel-rows { gap: 10px; }
-}
-@media(prefers-reduced-motion:reduce){
-  .hero-anim-letter,.hero-anim-producer { transition:none!important;animation:none!important;transform:none!important;opacity:1!important; }
-  .hero-carousel-track { animation:none!important; }
-  .hero-anim-cursor { display:none; }
-  #hero::before { animation:none!important; }
+  .hero-name{font-size:clamp(3.5rem,14vw,7rem);}
+  .hero-name-row{padding:2rem 1.25rem 0;}
+  .hero-photos-row{padding:1.5rem 1.25rem 0;gap:0.5rem;}
+  .hero-photo-a{width:55%;height:clamp(220px,40vh,360px);}
+  .hero-photo-b{width:35%;height:clamp(160px,28vh,260px);}
+  .hero-bottom-row{padding:1.25rem 1.25rem 2rem;flex-wrap:wrap;gap:1rem;}
 }
 
 /* ── HOME CONTENT ─────────────────── */
@@ -332,18 +215,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 .intro-text em{font-style:italic;color:var(--cobalt);}
 
 /* ── HOME MOODBOARD ───────────────── */
-.home-work{background:var(--dark);padding:0 0 5rem;position:relative;overflow:hidden;}
-/* Lava lamp canvas for selected work */
-#hw-lava {
-  position: absolute;
-  top: -5%; left: -5%;
-  width: 110%; height: 110%;
-  z-index: 0;
-  image-rendering: auto;
-  filter: blur(10px) saturate(0.8);
-  opacity: 0.18;
-}
-.hw-bar,.home-masonry { position: relative; z-index: 1; }
+.home-work{background:var(--dark);padding:0 0 5rem;}
 .hw-bar{display:flex;justify-content:space-between;align-items:baseline;padding:2.5rem 3rem 1.75rem;border-bottom:1px solid rgba(255,255,255,0.07);margin-bottom:2rem;}
 .hw-label{font-family:var(--body-font);font-size:0.67rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,244,0.35);}
 .hw-all{font-family:var(--body-font);font-size:0.67rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--cobalt-lt);cursor:pointer;display:flex;align-items:center;gap:0.35rem;transition:gap 0.2s,color 0.2s;}
@@ -664,10 +536,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 .schip{font-family:var(--body-font);padding:0.32rem 0.75rem;border:1px solid var(--bone-dim);font-size:0.64rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-mute);}
 
 /* ── CONTACT ──────────────────────── */
-#page-contact{
-  padding-top:64px;min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:3rem;padding-right:3rem;
-  background: transparent;
-}
+#page-contact{padding-top:64px;min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:3rem;padding-right:3rem;}
 .ct-inner{max-width:580px;width:100%;text-align:center;padding-top:2rem;padding-bottom:5rem;}
 .ct-top-rule{width:40px;height:1px;background:var(--cobalt);margin:0 auto 2rem;}
 .ct-name{font-family:var(--title-font);font-size:clamp(3.5rem,9vw,7rem);font-weight:400;line-height:1;letter-spacing:0.03em;color:var(--ink);margin-bottom:1.5rem;}
@@ -905,7 +774,6 @@ nav.clear .nav-hamburger span{background:var(--white);}
 </style>
 </head>
 <body>
-<canvas id="global-lava" aria-hidden="true"></canvas>
 
 <nav id="nav" class="solid">
   <a class="nav-logo" onclick="go('home');closeDrawer();">Connor Annand</a>
@@ -938,281 +806,95 @@ nav.clear .nav-hamburger span{background:var(--white);}
 <!-- ════════════ HOME ════════════ -->
 <div id="page-home" class="page active">
   <section id="hero">
-    <canvas id="hero-lava" aria-hidden="true"></canvas>
-
-    <!-- Name + Tagline -->
-    <div class="hero-text-block">
-      <div class="hero-anim-name" id="hero-name" aria-label="Connor Annand">
-        <span class="hero-anim-letter">C</span><span class="hero-anim-letter">O</span><span class="hero-anim-letter">N</span><span class="hero-anim-letter">N</span><span class="hero-anim-letter">O</span><span class="hero-anim-letter">R</span><span class="hero-anim-space"></span><span class="hero-anim-letter">A</span><span class="hero-anim-letter">N</span><span class="hero-anim-letter">N</span><span class="hero-anim-letter">A</span><span class="hero-anim-letter">N</span><span class="hero-anim-letter">D</span>
+    <div class="hero-name-row">
+      <h1 class="hero-name">Connor Annand</h1>
+      <p class="hero-tagline-sub">A producer driven by more than the shoot day.</p>
+    </div>
+    <div class="hero-photos-row">
+      <div class="hero-photo hero-photo-a">
+        <img src="Hero_Photos/IMG_0834.jpg" alt="Connor Annand on set" loading="eager" fetchpriority="high" onerror="this.style.background='#C8C3B8'">
       </div>
-      <div class="hero-anim-producer" id="hero-tagline" aria-label="A producer drawn to more than just the shoot day">
-        <span class="hero-anim-letter">A</span><span class="hero-anim-space"></span><span class="hero-anim-letter">p</span><span class="hero-anim-letter">r</span><span class="hero-anim-letter">o</span><span class="hero-anim-letter">d</span><span class="hero-anim-letter">u</span><span class="hero-anim-letter">c</span><span class="hero-anim-letter">e</span><span class="hero-anim-letter">r</span><span class="hero-anim-space"></span><span class="hero-anim-letter">d</span><span class="hero-anim-letter">r</span><span class="hero-anim-letter">a</span><span class="hero-anim-letter">w</span><span class="hero-anim-letter">n</span><span class="hero-anim-space"></span><span class="hero-anim-letter">t</span><span class="hero-anim-letter">o</span><span class="hero-anim-space"></span><span class="hero-anim-letter">m</span><span class="hero-anim-letter">o</span><span class="hero-anim-letter">r</span><span class="hero-anim-letter">e</span><span class="hero-anim-space"></span><span class="hero-anim-letter">t</span><span class="hero-anim-letter">h</span><span class="hero-anim-letter">a</span><span class="hero-anim-letter">n</span><span class="hero-anim-space"></span><span class="hero-anim-letter">t</span><span class="hero-anim-letter">h</span><span class="hero-anim-letter">e</span><span class="hero-anim-space"></span><span class="hero-anim-letter">s</span><span class="hero-anim-letter">h</span><span class="hero-anim-letter">o</span><span class="hero-anim-letter">o</span><span class="hero-anim-letter">t</span><span class="hero-anim-space"></span><span class="hero-anim-letter">d</span><span class="hero-anim-letter">a</span><span class="hero-anim-letter">y</span><span class="hero-anim-letter">.</span>
+      <div class="hero-photo hero-photo-b">
+        <img src="Hero_Photos/IMG_0677.jpg" alt="Connor Annand on set, camera monitor" loading="eager" fetchpriority="high" onerror="this.style.background='#C8C3B8'">
       </div>
     </div>
-
-    <!-- Carousel — two rows -->
-    <div class="hero-carousel-rows">
-
-      <!-- Row 1: scrolls left -->
-      <div class="hero-carousel-wrap">
-        <div class="hero-carousel-track row-1">
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Friday_poster.jpg" alt="Dear Friday">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Friday</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('branding')">
-            <img src="Branding/Posters/Branding_video_Thumbnail.jpg" alt="Cruisers Brand Video">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Branding · Cruisers</span>
-              <span class="hero-carousel-card-title">Cruisers Brand Video</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Snow_poster.jpg" alt="Dear Snow">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Snow</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <img src="Animation_Display_OOH/Wild_Screenshot.jpeg" alt="Minnesota Wild LEDs">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
-              <span class="hero-carousel-card-title">Minnesota Wild LEDs</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('partners')">
-            <img src="Partner_Launches/RKL_x_Round21_BB_.jpeg" alt="Round 21 Basketball">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Partnerships · Rumble League</span>
-              <span class="hero-carousel-card-title">Round 21 Basketball</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <video src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="metadata"></video>
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
-              <span class="hero-carousel-card-title">Portland Timbers LED</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="PR/Raccoon_City.jpg" alt="Resident Evil: Raccoon City">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">PR · Sony Pictures</span>
-              <span class="hero-carousel-card-title">Resident Evil: Raccoon City</span>
-            </div>
-          </div>
-          <!-- Duplicates for seamless loop -->
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Friday_poster.jpg" alt="Dear Friday">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Friday</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('branding')">
-            <img src="Branding/Posters/Branding_video_Thumbnail.jpg" alt="Cruisers Brand Video">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Branding · Cruisers</span>
-              <span class="hero-carousel-card-title">Cruisers Brand Video</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Snow_poster.jpg" alt="Dear Snow">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Snow</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <img src="Animation_Display_OOH/Wild_Screenshot.jpeg" alt="Minnesota Wild LEDs">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
-              <span class="hero-carousel-card-title">Minnesota Wild LEDs</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('partners')">
-            <img src="Partner_Launches/RKL_x_Round21_BB_.jpeg" alt="Round 21 Basketball">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Partnerships · Rumble League</span>
-              <span class="hero-carousel-card-title">Round 21 Basketball</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <video src="Animation_Display_OOH/Timbers.mp4" autoplay muted loop playsinline preload="metadata"></video>
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
-              <span class="hero-carousel-card-title">Portland Timbers LED</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="PR/Raccoon_City.jpg" alt="Resident Evil: Raccoon City">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">PR · Sony Pictures</span>
-              <span class="hero-carousel-card-title">Resident Evil: Raccoon City</span>
-            </div>
-          </div>
-        </div>
+    <div class="hero-bottom-row">
+      <p class="hero-sub">Producer &nbsp;·&nbsp; US &amp; UK</p>
+      <div class="hero-scroll-cue">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
       </div>
-
-      <!-- Row 2: scrolls right -->
-      <div class="hero-carousel-wrap">
-        <div class="hero-carousel-track row-2">
-          <div class="hero-carousel-card" onclick="goWork('partners')">
-            <img src="Partner_Launches/Posters/Stance_Thumbnail.jpg" alt="Stance Socks × Paul George">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Partnerships · Rumble League</span>
-              <span class="hero-carousel-card-title">Stance Socks × Paul George</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Crew_poster.jpg" alt="Dear Crew">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Crew</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('partners')">
-            <img src="Partner_Launches/Posters/Gatorade_Thumbnail.jpg" alt="Gatorade × RKL">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Partnerships · Rumble League</span>
-              <span class="hero-carousel-card-title">Gatorade × RKL</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('footage')">
-            <img src="Footage_Banks/Posters/Dailies1_poster.jpg" alt="Social Footage Banks">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Social · Toyota</span>
-              <span class="hero-carousel-card-title">Social Footage Banks</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Friday_poster.jpg" alt="Dear Friday">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Friday</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <video src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="metadata"></video>
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
-              <span class="hero-carousel-card-title">Buffalo Bills LED</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="PR/Paul_Anderson_Raccoon_City_.jpg" alt="Paul W.S. Anderson Interview">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">PR · Sony Pictures</span>
-              <span class="hero-carousel-card-title">Director Interview — Paul W.S. Anderson</span>
-            </div>
-          </div>
-          <!-- Duplicates for seamless loop -->
-          <div class="hero-carousel-card" onclick="goWork('partners')">
-            <img src="Partner_Launches/Posters/Stance_Thumbnail.jpg" alt="Stance Socks × Paul George">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Partnerships · Rumble League</span>
-              <span class="hero-carousel-card-title">Stance Socks × Paul George</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Crew_poster.jpg" alt="Dear Crew">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Crew</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <img src="Animation_Display_OOH/Wild_Screenshot.jpeg" alt="Minnesota Wild LEDs">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
-              <span class="hero-carousel-card-title">Minnesota Wild LEDs</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('partners')">
-            <img src="Partner_Launches/Posters/Gatorade_Thumbnail.jpg" alt="Gatorade × RKL">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Partnerships · Rumble League</span>
-              <span class="hero-carousel-card-title">Gatorade × RKL</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('footage')">
-            <img src="Footage_Banks/Posters/Dailies1_poster.jpg" alt="Social Footage Banks">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Social · Toyota</span>
-              <span class="hero-carousel-card-title">Social Footage Banks</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Friday_poster.jpg" alt="Dear Friday">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Friday</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <video src="Animation_Display_OOH/Buffalo_Bills.mp4" autoplay muted loop playsinline preload="metadata"></video>
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
-              <span class="hero-carousel-card-title">Buffalo Bills LED</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="PR/Paul_Anderson_Raccoon_City_.jpg" alt="Paul W.S. Anderson Interview">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">PR · Sony Pictures</span>
-              <span class="hero-carousel-card-title">Director Interview — Paul W.S. Anderson</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="hero-anim-cursor" id="hero-cursor" aria-hidden="true"></div>
-    <div class="hero-anim-marks">
-      <div class="bl">PORTFOLIO / 2026</div>
-    </div>
-    <div class="hero-scroll-cue">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
     </div>
   </section>
 
+  <div class="home-work">
+    <div class="hw-bar">
+      <span class="hw-label">Selected Work</span>
+      <span class="hw-all" onclick="go('work')">All Projects <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5.5h9M6.5 2l4 3.5-4 3.5"/></svg></span>
+    </div>
+    <div class="home-masonry">
+
+      <div class="hm-card hf-a" onclick="goWork('broadcast')">
+        <video class="hm-card-vis wide" poster="Broadcast/Posters/Dear_Friday_poster.jpg" src="Broadcast/Dear_Friday_30_copy.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">Broadcast</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Toyota All TDA</p>
+          <p class="hm-card-title">Dear Friday, 30</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-b" onclick="goWork('social')">
+        <img class="hm-card-vis vert" src="Social/organic_social_feed_1.jpg" style="object-fit:cover;object-position:top;">
+        <div class="hm-card-grad" style="background:linear-gradient(to top,rgba(8,12,31,0.95) 0%,rgba(8,12,31,0.4) 40%,transparent 100%);opacity:1;"></div>
+        <span class="hm-card-pill">Social</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag" style="opacity:1;transform:none;">Drive Toyota</p>
+          <p class="hm-card-title" style="opacity:1;transform:none;">Organic Social Growth — 24K to 52K</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-d" onclick="goWork('partners')">
+        <video class="hm-card-vis wide" poster="Partner_Launches/Posters/Stance_Thumbnail.jpg" src="Partner_Launches/Stance_Video.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high" style="object-position:center top;"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">Partnerships</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Rumble League Studios</p>
+          <p class="hm-card-title">Stance Socks x Paul George</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-e" onclick="goWork('branding')">
+        <video class="hm-card-vis wide" poster="Branding/Posters/Branding_video_Thumbnail.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high"></video>
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">Branding</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Cruisers · Denver</p>
+          <p class="hm-card-title">Cruisers — Hero Branding Video</p>
+        </div>
+      </div>
+
+      <div class="hm-card hf-f" onclick="openModal(this)" style="cursor:pointer;">
+        <img class="hm-card-vis wide" src="PR/Raccoon_City.jpg" style="object-fit:cover;" alt="Resident Evil Interview">
+        <div class="hm-card-grad"></div>
+        <span class="hm-card-pill">PR</span>
+        <div class="hm-card-info">
+          <p class="hm-card-tag">Sony Pictures</p>
+          <p class="hm-card-title">Resident Evil — Interview Piece</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Sony Pictures — Game Informer</span>
+          <span class="m-title">Resident Evil: Welcome to Raccoon City — Interview Piece</span>
+          <span class="m-src">yt:1b_bc6B6v7Q</span>
+          <span class="m-body">Press interview piece coordinated for Resident Evil: Welcome to Raccoon City. Managed the full press relationship from outreach to execution as the primary PR contact for Game Informer Magazine.</span>
+        </template>
+      </div>
+
+    </div>
+  </div>
 </div>
 
+<!-- ════════════ WORK ════════════ -->
 <div id="page-work" class="page">
   <div class="page-hero">
     <p class="eyebrow">Work</p>
@@ -1242,13 +924,13 @@ nav.clear .nav-hamburger span{background:var(--white);}
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear Friday, 30</p>
-          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA.</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
         </div>
         <template class="modal-data">
-          <span class="m-tag">Toyota TDA · Broadcast</span>
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
           <span class="m-title">Dear Friday, 30</span>
           <span class="m-src">Broadcast/Dear_Friday_30_copy.mp4</span>
-          <span class="m-body">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
         </template>
       </div>
 
@@ -1258,13 +940,13 @@ nav.clear .nav-hamburger span{background:var(--white);}
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear Savvy, 30</p>
-          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA.</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
         </div>
         <template class="modal-data">
-          <span class="m-tag">Toyota TDA · Broadcast</span>
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
           <span class="m-title">Dear Savvy, 30</span>
           <span class="m-src">Broadcast/Dear_Savvy_30_copy.mp4</span>
-          <span class="m-body">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed.</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed.</span>
         </template>
       </div>
 
@@ -1274,13 +956,13 @@ nav.clear .nav-hamburger span{background:var(--white);}
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear First Place, 30</p>
-          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA.</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
         </div>
         <template class="modal-data">
-          <span class="m-tag">Toyota TDA · Broadcast</span>
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
           <span class="m-title">Dear First Place, 30</span>
           <span class="m-src">Broadcast/Dear_First_Place_30_copy.mp4</span>
-          <span class="m-body">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed.</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed.</span>
         </template>
       </div>
 
@@ -1322,13 +1004,13 @@ nav.clear .nav-hamburger span{background:var(--white);}
         <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
         <div class="mb-card-desc">
           <p class="mb-card-desc-title">Dear Crew, 30</p>
-          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA.</p>
+          <p class="mb-card-desc-text">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA.</p>
         </div>
         <template class="modal-data">
-          <span class="m-tag">Toyota TDA · Broadcast</span>
+          <span class="m-tag">Toyota TDA · $2.4M Broadcast</span>
           <span class="m-title">Dear Crew, 30</span>
           <span class="m-src">Broadcast/Dear_Crew_30_copy.mp4</span>
-          <span class="m-body">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
+          <span class="m-body">From Social Producer to B Cam Producer on a $2.4M broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
         </template>
       </div>
 
@@ -2006,15 +1688,9 @@ function go(id){
   document.querySelectorAll('.nav-links a[data-p]').forEach(function(a){
     a.classList.toggle('active',a.dataset.p===id);
   });
-  if(id==='home'){nav.className='clear';window.addEventListener('scroll',onScroll);onScroll();}
+  if(id==='home'){nav.className='solid';window.addEventListener('scroll',onScroll);}
   else{window.removeEventListener('scroll',onScroll);nav.className='solid';}
   if(id==='work'){setTimeout(function(){switchCat('broadcast');},50);}
-  // Hero lava: only visible on home
-  var heroLava = document.getElementById('hero-lava');
-  if(heroLava) heroLava.style.display = (id==='home') ? '' : 'none';
-  // Global lava: show on contact only
-  var lava = document.getElementById('global-lava');
-  if(lava) lava.classList.toggle('visible', id==='contact');
   window.scrollTo(0,0);
   setTimeout(initReveals,50);
 }
@@ -2031,10 +1707,7 @@ function switchCat(id){
   window.scrollTo(0,0);
 }
 
-function onScroll(){
-  var threshold = window.innerHeight * 0.85;
-  nav.className = (window.scrollY || window.pageYOffset) > threshold ? 'solid' : 'clear';
-}
+function onScroll(){nav.className='solid';}
 
 function openModal(card){
   var tmpl=card.querySelector('template.modal-data');
@@ -2272,300 +1945,7 @@ function handleEmailClick(e){
   });
 })();
 
-// ── HERO LAVA LAMP ────────────────────────────────────
-(function(){
-  function hexToRgb(h){
-    return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
-  }
-  function noise(x,y,t,s){
-    return(
-      Math.sin(x*1.3+t*0.41+s*7.3)*Math.cos(y*0.9+t*0.29+s*11.9)+
-      Math.sin(x*0.7+y*1.1+t*0.19+s*16.1)*0.5+
-      Math.cos(x*1.7+t*0.37+s*5.8)*0.3
-    )/1.8;
-  }
-
-  var canvas = document.getElementById('hero-lava');
-  if(!canvas) return;
-  var ctx = canvas.getContext('2d');
-
-  // Light palette — bone base + cobalt + bone-mid
-  // #EDE8DE bone · #E2DDD3 bone-mid · #1B3CC4 cobalt · #C8C3B8 bone-dim
-  var palette = ['#EDE8DE','#E2DDD3','#1B3CC4','#C8C3B8'];
-  var rgb = palette.map(hexToRgb);
-  var RES = 220;
-  var t = Math.random() * 50;
-
-  function resize(){
-    canvas.width  = RES;
-    canvas.height = Math.round(RES * window.innerHeight / window.innerWidth);
-  }
-
-  function draw(){
-    var W = canvas.width, H = canvas.height;
-    if(W === 0 || H === 0){ resize(); requestAnimationFrame(draw); return; }
-    var img = ctx.createImageData(W, H);
-    var d = img.data;
-
-    for(var py=0; py<H; py++){
-      for(var px=0; px<W; px++){
-        var nx=px/W, ny=py/H;
-        var n0=(noise(nx*3.0,ny*3.0,t,0.0)+1)/2;
-        var n1=(noise(nx*2.5,ny*2.5,t,1.3)+1)/2;
-        var n2=(noise(nx*2.0,ny*4.0,t,2.7)+1)/2;
-        var n3=(noise(nx*3.5,ny*1.5,t,4.1)+1)/2;
-
-        var w0=Math.pow(Math.max(0,1-n0*1.6),1.5);
-        var w1=Math.pow(Math.max(0,n1-0.1)*1.4,1.8);
-        var w2=Math.pow(Math.max(0,n2-0.4)*2.0,2.5);
-        var w3=Math.pow(Math.max(0,n3-0.65)*3.0,3.0);
-        var total=w0+w1+w2+w3+0.001;
-        w0/=total; w1/=total; w2/=total; w3/=total;
-
-        var i=(py*W+px)*4;
-        d[i]  =Math.round(rgb[0][0]*w0+rgb[1][0]*w1+rgb[2][0]*w2+rgb[3][0]*w3);
-        d[i+1]=Math.round(rgb[0][1]*w0+rgb[1][1]*w1+rgb[2][1]*w2+rgb[3][1]*w3);
-        d[i+2]=Math.round(rgb[0][2]*w0+rgb[1][2]*w1+rgb[2][2]*w2+rgb[3][2]*w3);
-        d[i+3]=255;
-      }
-    }
-    ctx.putImageData(img,0,0);
-    t += 0.003;
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  requestAnimationFrame(draw);
-})();
-
-// ── GLOBAL LAVA LAMP (non-hero pages) ─────────────────
-(function(){
-  function hexToRgb(h){
-    return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
-  }
-  function noise(x,y,t,s){
-    return(
-      Math.sin(x*1.3+t*0.41+s*7.3)*Math.cos(y*0.9+t*0.29+s*11.9)+
-      Math.sin(x*0.7+y*1.1+t*0.19+s*16.1)*0.5+
-      Math.cos(x*1.7+t*0.37+s*5.8)*0.3
-    )/1.8;
-  }
-
-  var canvas = document.getElementById('global-lava');
-  if(!canvas) return;
-  var ctx = canvas.getContext('2d');
-
-  // Same palette as hero — bone base with cobalt bleed
-  var palette = ['#EDE8DE','#E2DDD3','#1B3CC4','#C8C3B8'];
-  var rgb = palette.map(hexToRgb);
-  var RES = 220;
-  var t = Math.random() * 50;
-
-  function resize(){
-    canvas.width  = RES;
-    canvas.height = Math.round(RES * window.innerHeight / window.innerWidth);
-  }
-
-  function draw(){
-    var W = canvas.width, H = canvas.height;
-    if(W===0||H===0){ resize(); requestAnimationFrame(draw); return; }
-    var img = ctx.createImageData(W, H);
-    var d = img.data;
-    for(var py=0; py<H; py++){
-      for(var px=0; px<W; px++){
-        var nx=px/W, ny=py/H;
-        var n0=(noise(nx*3.0,ny*3.0,t,0.0)+1)/2;
-        var n1=(noise(nx*2.5,ny*2.5,t,1.3)+1)/2;
-        var n2=(noise(nx*2.0,ny*4.0,t,2.7)+1)/2;
-        var n3=(noise(nx*3.5,ny*1.5,t,4.1)+1)/2;
-        var w0=Math.pow(Math.max(0,1-n0*1.6),1.5);
-        var w1=Math.pow(Math.max(0,n1-0.1)*1.4,1.8);
-        var w2=Math.pow(Math.max(0,n2-0.4)*2.0,2.5);
-        var w3=Math.pow(Math.max(0,n3-0.65)*3.0,3.0);
-        var total=w0+w1+w2+w3+0.001;
-        w0/=total; w1/=total; w2/=total; w3/=total;
-        var i=(py*W+px)*4;
-        d[i]  =Math.round(rgb[0][0]*w0+rgb[1][0]*w1+rgb[2][0]*w2+rgb[3][0]*w3);
-        d[i+1]=Math.round(rgb[0][1]*w0+rgb[1][1]*w1+rgb[2][1]*w2+rgb[3][1]*w3);
-        d[i+2]=Math.round(rgb[0][2]*w0+rgb[1][2]*w1+rgb[2][2]*w2+rgb[3][2]*w3);
-        d[i+3]=255;
-      }
-    }
-    ctx.putImageData(img,0,0);
-    t += 0.003;
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  requestAnimationFrame(draw);
-})();
-
-// ── SEAMLESS CAROUSEL LOOP ────────────────────────────
-(function(){
-  var SPEED_1 = 0.153;  // px per frame row 1 (forward)
-  var SPEED_2 = 0.128; // px per frame row 2 (reverse)
-
-  var row1 = document.querySelector('.hero-carousel-track.row-1');
-  var row2 = document.querySelector('.hero-carousel-track.row-2');
-  if(!row1 || !row2) return;
-
-  var pos1 = 0, pos2 = 0;
-
-  function tick(){
-    if(!row1.firstElementChild) return;
-
-    // Measure half width (first set of cards only)
-    var half1 = row1.scrollWidth / 2;
-    var half2 = row2.scrollWidth / 2;
-
-    pos1 -= SPEED_1;
-    pos2 += SPEED_2;
-
-    // Seamless reset — jump back exactly one set width
-    if(Math.abs(pos1) >= half1) pos1 = 0;
-    if(pos2 >= 0) pos2 = -half2;
-
-    row1.style.transform = 'translateX('+pos1.toFixed(2)+'px)';
-    row2.style.transform = 'translateX('+pos2.toFixed(2)+'px)';
-
-    requestAnimationFrame(tick);
-  }
-
-  // Init row2 at -half so it starts mid-scroll going right
-  window.addEventListener('load', function(){
-    var half2 = row2.scrollWidth / 2;
-    pos2 = -(half2 / 2);
-    requestAnimationFrame(tick);
-  });
-  // Fallback if load already fired
-  setTimeout(function(){
-    if(pos2 === 0){
-      var half2 = row2.scrollWidth / 2;
-      pos2 = -(half2 / 2);
-      requestAnimationFrame(tick);
-    }
-  }, 300);
-})();
-
-// ── HERO CURSOR ANIMATION ─────────────────────────────
-(function(){
-  var nameEl = document.getElementById('hero-name');
-  var prodEl = document.getElementById('hero-tagline');
-  var lineEl = document.getElementById('hero-producer');
-  var cursorEl = document.getElementById('hero-cursor');
-  if(!nameEl||!prodEl||!cursorEl) return;
-
-  var nameLetters = Array.from(nameEl.querySelectorAll('.hero-anim-letter'));
-  var prodLetters = Array.from(prodEl.querySelectorAll('.hero-anim-letter'));
-  var lineLetters = lineEl ? Array.from(lineEl.querySelectorAll('.hero-anim-letter')) : [];
-  var allLetters = nameLetters.concat(prodLetters).concat(lineLetters);
-
-  var INFLUENCE_RADIUS = 340;
-  var MAX_DRIFT = 14;
-  var MAX_TILT = 14;
-  var MAX_SCALE_BUMP = 0.10;
-  var LERP = 0.18;
-
-  var state = allLetters.map(function(){ return {tx:0,ty:0,rot:0,s:1,ttx:0,tty:0,trot:0,ts:1}; });
-  var centers = [];
-
-  function measure(){
-    centers = allLetters.map(function(el){
-      var prev = el.style.transform;
-      el.style.transform = 'none';
-      var r = el.getBoundingClientRect();
-      el.style.transform = prev;
-      return {x: r.left + r.width/2, y: r.top + r.height/2};
-    });
-  }
-  measure();
-  window.addEventListener('resize', measure);
-  if(document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-  setTimeout(measure, 1500);
-
-  var cursorX = -9999, cursorY = -9999, active = false;
-  var textBlock = nameEl.closest('.hero-text-block') || nameEl.parentElement;
-
-  function setActive(v){
-    if(active===v) return;
-    active = v;
-    nameEl.classList.toggle('is-active', v);
-    prodEl.classList.toggle('is-active', v);
-    cursorEl.classList.toggle('is-visible', v);
-  }
-
-  window.addEventListener('mousemove', function(e){
-    cursorX = e.clientX; cursorY = e.clientY;
-    cursorEl.style.transform = 'translate3d('+cursorX+'px,'+cursorY+'px,0)';
-    // Only activate when cursor is over the text block
-    var over = document.elementFromPoint(cursorX, cursorY);
-    setActive(textBlock && textBlock.contains(over));
-  });
-  window.addEventListener('mouseleave', function(){ setActive(false); });
-  window.addEventListener('touchmove', function(e){
-    var t = e.touches[0]; if(!t) return;
-    cursorX = t.clientX; cursorY = t.clientY;
-    var over = document.elementFromPoint(cursorX, cursorY);
-    setActive(textBlock && textBlock.contains(over));
-  }, {passive:true});
-  window.addEventListener('touchend', function(){ setActive(false); });
-
-  function frame(){
-    for(var i=0; i<allLetters.length; i++){
-      var c = centers[i], s = state[i];
-      if(!c) continue;
-      if(active){
-        var dx = cursorX-c.x, dy = cursorY-c.y;
-        var dist = Math.hypot(dx,dy);
-        var raw = Math.max(0,1-dist/INFLUENCE_RADIUS);
-        var w = raw*raw*(3-2*raw);
-        var ux = dist>0?dx/dist:0, uy = dist>0?dy/dist:0;
-        s.ttx = ux*MAX_DRIFT*w; s.tty = uy*MAX_DRIFT*w;
-        s.trot = ux*MAX_TILT*w; s.ts = 1+MAX_SCALE_BUMP*w;
-      } else {
-        s.ttx=0; s.tty=0; s.trot=0; s.ts=1;
-      }
-      s.tx  += (s.ttx -s.tx) *LERP;
-      s.ty  += (s.tty -s.ty) *LERP;
-      s.rot += (s.trot-s.rot)*LERP;
-      s.s   += (s.ts  -s.s)  *LERP;
-      var el = allLetters[i];
-      el.style.setProperty('--tx',  s.tx.toFixed(2)+'px');
-      el.style.setProperty('--ty',  s.ty.toFixed(2)+'px');
-      el.style.setProperty('--rot', s.rot.toFixed(2)+'deg');
-      el.style.setProperty('--s',   s.s.toFixed(3));
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-
-// ── CAROUSEL CARD HOVER — scale only ──────────────────
-(function(){
-  var cards = Array.from(document.querySelectorAll('.hero-carousel-card'));
-  var LERP = 0.08;
-  var SCALE_TARGET = 1.04;
-
-  var states = cards.map(function(){ return { sc:1, tsc:1 }; });
-
-  cards.forEach(function(card, i){
-    card.addEventListener('mouseenter', function(){ states[i].tsc = SCALE_TARGET; });
-    card.addEventListener('mouseleave', function(){ states[i].tsc = 1; });
-  });
-
-  function frame(){
-    cards.forEach(function(card, i){
-      var s = states[i];
-      s.sc += (s.tsc - s.sc) * LERP;
-      card.style.transform = 'scale('+s.sc.toFixed(3)+')';
-    });
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-
-go('home');</script>
+go('home');
+</script>
 </body>
 </html>
