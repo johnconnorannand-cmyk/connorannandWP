@@ -184,12 +184,11 @@ nav.solid .nav-cta:hover{background:#0f2490;}
   will-change: transform;
 }
 .hero-carousel-track.row-1 {
-  animation: hero-scroll-fwd 55s linear infinite;
+  animation: hero-scroll-fwd 75s linear infinite;
 }
 .hero-carousel-track.row-2 {
-  animation: hero-scroll-rev 60s linear infinite;
+  animation: hero-scroll-rev 85s linear infinite;
 }
-.hero-carousel-track:hover { animation-play-state: paused; }
 @keyframes hero-scroll-fwd {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -254,20 +253,8 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 
 /* Cursor */
 .hero-anim-cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 10px; height: 10px;
-  margin: -5px 0 0 -5px;
-  background: var(--ink);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate3d(-100px,-100px,0);
-  mix-blend-mode: multiply;
-  transition: opacity 200ms ease;
-  opacity: 0;
-  z-index: 100;
+  display: none;
 }
-.hero-anim-cursor.is-visible { opacity: 1; }
 
 /* Marks */
 .hero-anim-marks {
@@ -976,48 +963,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
             </div>
           </div>
           <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <img src="Broadcast/Posters/Zamboni_poster.jpg" alt="Minnesota Wild LEDs">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
-              <span class="hero-carousel-card-title">Minnesota Wild LEDs</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('partners')">
-            <img src="Partner_Launches/RKL_x_Round21_BB_.jpeg" alt="Round 21 Basketball">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Partnerships · Rumble League</span>
-              <span class="hero-carousel-card-title">Round 21 Basketball</span>
-            </div>
-          </div>
-          <!-- Duplicates for seamless loop -->
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Friday_poster.jpg" alt="Dear Friday">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Friday</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('branding')">
-            <img src="Branding/Posters/Branding_video_Thumbnail.jpg" alt="Cruisers Brand Video">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Branding · Cruisers</span>
-              <span class="hero-carousel-card-title">Cruisers Brand Video</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('broadcast')">
-            <img src="Broadcast/Posters/Dear_Snow_poster.jpg" alt="Dear Snow">
-            <div class="hero-carousel-card-grad"></div>
-            <div class="hero-carousel-card-info">
-              <span class="hero-carousel-card-tag">Broadcast · Toyota</span>
-              <span class="hero-carousel-card-title">Dear Snow</span>
-            </div>
-          </div>
-          <div class="hero-carousel-card" onclick="goWork('ooh')">
-            <img src="Broadcast/Posters/Zamboni_poster.jpg" alt="Minnesota Wild LEDs">
+            <img src="Animation_Display_OOH/Wild_Screenshot.jpeg" alt="Minnesota Wild LEDs">
             <div class="hero-carousel-card-grad"></div>
             <div class="hero-carousel-card-info">
               <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
@@ -1095,6 +1041,14 @@ nav.clear .nav-hamburger span{background:var(--white);}
               <span class="hero-carousel-card-title">Dear Crew</span>
             </div>
           </div>
+          <div class="hero-carousel-card" onclick="goWork('ooh')">
+            <img src="Animation_Display_OOH/Wild_Screenshot.jpeg" alt="Minnesota Wild LEDs">
+            <div class="hero-carousel-card-grad"></div>
+            <div class="hero-carousel-card-info">
+              <span class="hero-carousel-card-tag">Display & OOH · Toyota</span>
+              <span class="hero-carousel-card-title">Minnesota Wild LEDs</span>
+            </div>
+          </div>
           <div class="hero-carousel-card" onclick="goWork('partners')">
             <img src="Partner_Launches/Posters/Gatorade_Thumbnail.jpg" alt="Gatorade × RKL">
             <div class="hero-carousel-card-grad"></div>
@@ -1126,10 +1080,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
 
     <div class="hero-anim-cursor" id="hero-cursor" aria-hidden="true"></div>
     <div class="hero-anim-marks">
-      <div class="tl">CONNOR ANNAND</div>
-      <div class="tr">PRODUCER</div>
       <div class="bl">PORTFOLIO / 2026</div>
-      <div class="br">SELECTED WORK</div>
     </div>
     <div class="hero-scroll-cue">
       <span>Scroll</span>
@@ -2488,17 +2439,22 @@ function handleEmailClick(e){
   var LERP = 0.10;
   var MAX_DRIFT = 8;
   var MAX_TILT  = 6;
+  var SCALE_TARGET = 1.07;
 
   var states = cards.map(function(){
-    return { tx:0, ty:0, rx:0, ry:0, ttx:0, tty:0, trx:0, try_:0, over:false };
+    return { tx:0, ty:0, rx:0, ry:0, sc:1, ttx:0, tty:0, trx:0, try_:0, tsc:1, over:false };
   });
 
   cards.forEach(function(card, i){
-    card.addEventListener('mouseenter', function(){ states[i].over = true; });
+    card.addEventListener('mouseenter', function(){
+      states[i].over = true;
+      states[i].tsc = SCALE_TARGET;
+    });
     card.addEventListener('mouseleave', function(){
       states[i].over = false;
       states[i].ttx = 0; states[i].tty = 0;
       states[i].trx = 0; states[i].try_ = 0;
+      states[i].tsc = 1;
     });
     card.addEventListener('mousemove', function(e){
       var r = card.getBoundingClientRect();
@@ -2506,13 +2462,12 @@ function handleEmailClick(e){
       var cy = r.top  + r.height / 2;
       var dx = e.clientX - cx;
       var dy = e.clientY - cy;
-      // Normalise to -1..1
       var nx = dx / (r.width  / 2);
       var ny = dy / (r.height / 2);
       states[i].ttx  =  nx * MAX_DRIFT;
       states[i].tty  =  ny * MAX_DRIFT;
-      states[i].trx  = -ny * MAX_TILT;   // tilt around X axis (pitch)
-      states[i].try_ =  nx * MAX_TILT;   // tilt around Y axis (yaw)
+      states[i].trx  = -ny * MAX_TILT;
+      states[i].try_ =  nx * MAX_TILT;
     });
   });
 
@@ -2523,17 +2478,18 @@ function handleEmailClick(e){
       s.ty  += (s.tty  - s.ty)  * LERP;
       s.rx  += (s.trx  - s.rx)  * LERP;
       s.ry  += (s.try_ - s.ry)  * LERP;
+      s.sc  += (s.tsc  - s.sc)  * LERP;
 
       card.style.transform = (
         'translate3d('+s.tx.toFixed(2)+'px,'+s.ty.toFixed(2)+'px,0) ' +
         'rotateX('+s.rx.toFixed(2)+'deg) ' +
-        'rotateY('+s.ry.toFixed(2)+'deg)'
+        'rotateY('+s.ry.toFixed(2)+'deg) ' +
+        'scale('+s.sc.toFixed(3)+')'
       );
     });
     requestAnimationFrame(frame);
   }
 
-  // Enable 3D perspective on the carousel rows
   var rows = document.querySelectorAll('.hero-carousel-track');
   rows.forEach(function(r){ r.style.perspective = '800px'; r.style.perspectiveOrigin = 'center'; });
 
