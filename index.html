@@ -348,9 +348,9 @@ img.hm-card-vis{object-fit:cover;}
 #cat-pr .mb-card-vis.featured{min-height:400px;object-fit:cover;}
 #cat-pr .mb-card-vis.wide{min-height:280px;object-fit:cover;}
 #cat-shortfilms .masonry{columns:1;}
-#cat-branding .masonry{display:grid !important;grid-template-columns:3fr 2fr;gap:8px;}
-#cat-branding .mb-card:nth-child(1){grid-row:1/3;}
-#cat-branding .mb-card:nth-child(4){grid-column:1/3;}
+#cat-branding .masonry{display:grid !important;grid-template-columns:1fr 1fr;gap:8px;}
+#cat-branding .mb-card:nth-child(1){grid-column:1/3;}
+#cat-branding .mb-card:nth-child(1) .mb-card-vis{min-height:560px;}
 #cat-branding .mb-card-vis{width:100%;display:block;object-fit:cover;}
 #cat-broadcast video.mb-card-vis{
   will-change:transform;
@@ -614,7 +614,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
   /* Branding grid single column */
   #cat-branding .masonry{display:flex !important;flex-direction:column;gap:8px;}
   #cat-branding .mb-card:nth-child(1){grid-row:auto;grid-column:auto;}
-  #cat-branding .mb-card:nth-child(4){grid-column:auto;}
+  #cat-branding .mb-card:nth-child(1) .mb-card-vis{min-height:unset;}
 
   /* Home moodboard single column */
   .home-masonry{grid-template-columns:1fr !important;grid-template-rows:auto !important;}
@@ -886,7 +886,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
       </div>
 
       <div class="hm-card hf-f" onclick="goWork('shortfilms')">
-        <video class="hm-card-vis wide" src="Short_Films/StrangerStudios_48HFP_2026_TheDilemmist_Teaser.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high"></video>
+        <video class="hm-card-vis wide" src="Short_Films_Mini_Docs/StrangerStudios_48HFP_2026_TheDilemmist_Teaser.mp4" autoplay muted loop playsinline preload="auto" fetchpriority="high"></video>
         <div class="hm-card-grad"></div>
         <div class="hm-card-info">
           <p class="hm-card-tag">Stranger Studios</p>
@@ -906,13 +906,13 @@ nav.clear .nav-hamburger span{background:var(--white);}
   </div>
   <div class="work-cats">
     <button class="wcat active" data-cat="broadcast" onclick="switchCat('broadcast')">Broadcast Production</button>
-    <button class="wcat" data-cat="social" onclick="switchCat('social')">Social Media</button>
-    <button class="wcat" data-cat="partners" onclick="switchCat('partners')">Partner Launches</button>
-    <button class="wcat" data-cat="ooh" onclick="switchCat('ooh')">Animation, Display &amp; OOH</button>
     <button class="wcat" data-cat="branding" onclick="switchCat('branding')">Branding</button>
+    <button class="wcat" data-cat="partners" onclick="switchCat('partners')">Partner Launches</button>
+    <button class="wcat" data-cat="shortfilms" onclick="switchCat('shortfilms')">Short Films &amp; Mini Docs</button>
+    <button class="wcat" data-cat="social" onclick="switchCat('social')">Social Media</button>
+    <button class="wcat" data-cat="ooh" onclick="switchCat('ooh')">Animation, Display &amp; OOH</button>
     <button class="wcat" data-cat="footage" onclick="switchCat('footage')">Footage Banks</button>
     <button class="wcat" data-cat="pr" onclick="switchCat('pr')">PR Content Launches</button>
-    <button class="wcat" data-cat="shortfilms" onclick="switchCat('shortfilms')">Short Films &amp; Mini Docs</button>
   </div>
 
   <!-- BROADCAST — dark moodboard with floating cards -->
@@ -1494,75 +1494,6 @@ nav.clear .nav-hamburger span{background:var(--white);}
     </div>
     <div class="masonry">
 
-
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Branding/Posters/Branding_video_Thumbnail.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Cruisers — Hero Branding Video</p>
-          <p class="mb-card-desc-text">Edited, Sound Direction, and Animation. Hero video for the Cruisers cycling community brand.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Cruisers · Denver Cycling Community</span>
-          <span class="m-title">Cruisers — Hero Branding Video</span>
-          <span class="m-src">Branding/Cruisers_Hero_Branding_Video_.mp4</span>
-          <span class="m-body">Edited, Sound Direction, and Animation for the Cruisers cycling community hero brand video. Built to capture the spirit of the Denver Tuesday evening ride culture and introduce the Cruisers visual identity.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
-        </template>
-      </div>
-
-
-      <div class="mb-card" onclick="openModal(this)">
-        <img class="mb-card-vis wide" src="Branding/Cruisers_Branding_1.jpg" style="object-fit:cover;" alt="Cruisers Branding">
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Cruisers — Brand Identity</p>
-          <p class="mb-card-desc-text">Visual identity system including logo, typography, and color language for the Denver cycling community.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Cruisers · Brand Identity</span>
-          <span class="m-title">Cruisers — Brand Identity</span>
-          <span class="m-src"></span>
-          <span class="m-body">Visual identity system developed for Cruisers — a Denver-based cycling community. Work included logo development, typographic system, color language, and brand guidelines to create a cohesive look across digital and physical touchpoints.</span>
-        </template>
-      </div>
-
-
-      <div class="mb-card" onclick="openModal(this)">
-        <img class="mb-card-vis wide" src="Branding/Cruisers_Strava.jpg" style="object-fit:cover;" alt="Cruisers Strava Assets">
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Cruisers — Strava Event Iconography</p>
-          <p class="mb-card-desc-text">Custom sketch-fill icon system for Strava event templates: weather, level, ride type, and special event icons.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Cruisers · Strava Assets</span>
-          <span class="m-title">Cruisers — Strava Event Iconography</span>
-          <span class="m-src"></span>
-          <span class="m-body">Designed a custom sketch-fill icon system for Cruisers Strava event templates. Icons cover weather (sun, rain), ride level (beginner, intermediate, advanced), ride type (gravel, weekend epic), women's events, and special occasions — all in a cohesive hand-drawn aesthetic matching the Cruisers brand.</span>
-        </template>
-      </div>
-
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Branding/CuisersRebrand_Website.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest(\'.mb-card\'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Cruisers — Website Creation &amp; Development</p>
-          <p class="mb-card-desc-text">Full website creation and development for the Cruisers cycling community brand.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Cruisers · Web Development</span>
-          <span class="m-title">Cruisers — Website Creation &amp; Development</span>
-          <span class="m-src">Branding/CuisersRebrand_Website.mp4</span>
-          <span class="m-body">Full website creation and development for the Cruisers cycling community. Built to reflect the brand identity and serve the Denver cycling community across desktop and mobile.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
-        </template>
-      </div>
-
       <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis featured" src="Branding/Cruisers_Hero_Desktop-.mp4" autoplay muted loop playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
@@ -1579,6 +1510,38 @@ nav.clear .nav-hamburger span{background:var(--white);}
         </template>
       </div>
 
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis featured" poster="Branding/Posters/Branding_video_Thumbnail.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest('.mb-card'))"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Cruisers — Hero Branding Video</p>
+          <p class="mb-card-desc-text">Edited, Sound Direction, and Animation. Hero video for the Cruisers cycling community brand.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Cruisers · Denver Cycling Community</span>
+          <span class="m-title">Cruisers — Hero Branding Video</span>
+          <span class="m-src">Branding/Cruisers_Hero_Branding_Video_.mp4</span>
+          <span class="m-body">Edited, Sound Direction, and Animation for the Cruisers cycling community hero brand video. Built to capture the spirit of the Denver Tuesday evening ride culture and introduce the Cruisers visual identity.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
+        </template>
+      </div>
+
+      <div class="mb-card" onclick="openModal(this)">
+        <video class="mb-card-vis featured" src="Branding/CuisersRebrand_Website.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <div class="mb-card-overlay"></div>
+        <div class="mb-card-shield" onclick="openModal(this.closest('.mb-card'))"></div>
+        <div class="mb-card-desc">
+          <p class="mb-card-desc-title">Cruisers — Website Creation &amp; Development</p>
+          <p class="mb-card-desc-text">Full website creation and development for the Cruisers cycling community brand.</p>
+        </div>
+        <template class="modal-data">
+          <span class="m-tag">Cruisers · Web Development</span>
+          <span class="m-title">Cruisers — Website Creation &amp; Development</span>
+          <span class="m-src">Branding/CuisersRebrand_Website.mp4</span>
+          <span class="m-body">Full website creation and development for the Cruisers cycling community. Built to reflect the brand identity and serve the Denver cycling community across desktop and mobile.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
+        </template>
+      </div>
+
     </div>
   </div>
 
@@ -1591,7 +1554,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <div class="masonry">
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Short_Films/StrangerStudios_48HFP_2026_TheDilemmist_Teaser.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <video class="mb-card-vis featured" src="Short_Films_Mini_Docs/StrangerStudios_48HFP_2026_TheDilemmist_Teaser.mp4" autoplay muted loop playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest('.mb-card'))"></div>
         <div class="mb-card-desc">
@@ -1601,7 +1564,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
         <template class="modal-data">
           <span class="m-tag">Stranger Studios · 48 Hour Film Festival Denver</span>
           <span class="m-title">48 Hour Film Festival — "The Dilemmist" Trailer</span>
-          <span class="m-src">Short_Films/StrangerStudios_48HFP_2026_TheDilemmist_Teaser.mp4</span>
+          <span class="m-src">Short_Films_Mini_Docs/StrangerStudios_48HFP_2026_TheDilemmist_Teaser.mp4</span>
           <span class="m-body">Winning 48-Hour Film Festival Denver submission. Producer &amp; Location Manager for Stranger Studios.</span>
         </template>
       </div>
