@@ -87,7 +87,16 @@ nav.solid .nav-cta:hover{background:#0f2490;}
 #hero{
   position:relative;
   min-height:100vh;
-  background:var(--bone);
+  /* Bone up top, easing toward dark by the very bottom edge — the fade
+     starts around where the photos sit so it reads as one continuous
+     hand-off into Selected Work, not a hard cut after the hero ends. */
+  background:linear-gradient(to bottom,
+    var(--bone) 0%,
+    var(--bone) 52%,
+    var(--bone-dim) 70%,
+    var(--ink-mid) 87%,
+    var(--dark) 100%
+  );
   display:flex;
   flex-direction:column;
   overflow:hidden;
@@ -182,7 +191,7 @@ nav.solid .nav-cta:hover{background:#0f2490;}
   font-weight:500;
   letter-spacing:0.25em;
   text-transform:uppercase;
-  color:var(--ink-mute);
+  color:rgba(250,248,244,0.55); /* sits on the darkened lower edge of the hero now */
   opacity:0;
   animation:up 0.8s 0.75s forwards;
 }
@@ -198,8 +207,8 @@ nav.solid .nav-cta:hover{background:#0f2490;}
   display:flex;flex-direction:column;align-items:center;gap:0.5rem;
   opacity:0;animation:fade 1s 1.3s forwards;
 }
-.hero-scroll-cue span{font-family:var(--body-font);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mute);}
-.scroll-line{width:1px;height:32px;background:var(--bone-dim);overflow:hidden;position:relative;}
+.hero-scroll-cue span{font-family:var(--body-font);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,244,0.55);}
+.scroll-line{width:1px;height:32px;background:rgba(250,248,244,0.3);overflow:hidden;position:relative;}
 .scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--cobalt);animation:drop 2s 1.5s ease-in-out infinite;}
 @keyframes drop{from{top:-100%;}to{top:200%;}}
 @media(max-width:768px){
@@ -255,8 +264,9 @@ video.ss-vis{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;b
 .ss-shield{position:absolute;inset:0;z-index:1;cursor:pointer;background:transparent;}
 @media(max-width:480px){.ss-frame{margin:0 1.25rem;}}
 
-/* No fade — hard edge bone → dark is intentional */
-.home-work-fade{display:none;}
+/* The bone → dark fade now lives on #hero's own background (it eases to
+   var(--dark) by the hero's bottom edge), so Selected Work's background
+   picks up in the same solid dark with no separate seam to bridge. */
 /* gradient swatches shared across all moodboards */
 .g1{background:linear-gradient(140deg,#1B3CC4 0%,#060916 100%);}
 .g2{background:linear-gradient(140deg,#0f2490 0%,#1a2040 100%);}
@@ -304,6 +314,14 @@ video.ss-vis{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;b
 .ss-scroller .ss-panel:nth-child(even) .ss-eyebrow{justify-content:flex-end;}
 .ss-scroller .ss-panel:nth-child(even) .ss-eyebrow::before{order:2;}
 .ss-scroller .ss-panel:nth-child(even) .ss-link{justify-content:flex-end;}
+/* The clone lands on an even slot (6th) but must read exactly like
+   panel 1, not a right-aligned panel — same specificity, later in the
+   sheet, so it wins the tie. */
+.ss-scroller .ss-panel.ss-panel-clone{justify-content:flex-start;}
+.ss-scroller .ss-panel.ss-panel-clone .ss-panel-info{text-align:left;}
+.ss-scroller .ss-panel.ss-panel-clone .ss-eyebrow{justify-content:flex-start;}
+.ss-scroller .ss-panel.ss-panel-clone .ss-eyebrow::before{order:0;}
+.ss-scroller .ss-panel.ss-panel-clone .ss-link{justify-content:flex-start;}
 
 /* ── WORK PAGE ────────────────────── */
 #page-work{padding-top:64px;}
@@ -550,36 +568,23 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 .skill-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.25rem;}
 .schip{font-family:var(--body-font);padding:0.32rem 0.75rem;border:1px solid var(--bone-dim);font-size:0.64rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-mute);}
 
-/* ── CONTACT ──────────────────────── */
-#page-contact{padding-top:64px;min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:3rem;padding-right:3rem;}
-.ct-inner{max-width:580px;width:100%;text-align:center;padding-top:2rem;padding-bottom:5rem;}
-.ct-top-rule{width:40px;height:1px;background:var(--cobalt);margin:0 auto 2rem;}
-.ct-name{font-family:var(--title-font);font-size:clamp(3.5rem,9vw,7rem);font-weight:400;line-height:1;letter-spacing:0.03em;color:var(--ink);margin-bottom:1.5rem;}
-.ct-tagline{font-family:var(--title-font);font-size:clamp(1rem,2vw,1.4rem);font-weight:400;font-style:italic;color:var(--ink-mid);line-height:1.5;margin-bottom:2rem;}
-.thin-rule{width:100%;height:1px;background:var(--bone-dim);margin:2rem 0;}
-.ct-connect-label{font-family:var(--body-font);font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:0.75rem;}
-.ct-exp-line{font-family:var(--body-font);font-size:0.85rem;font-weight:300;color:var(--ink-mid);line-height:1.6;margin-bottom:2rem;}
-.ct-btns{display:flex;flex-direction:column;gap:0.85rem;align-items:center;}
-.ct-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;padding:0.95rem 2.5rem;font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,transform 0.15s,color 0.2s;width:320px;}
-.ct-btn.primary{background:var(--cobalt);color:var(--white);}
-.ct-btn.primary:hover{background:#0f2490;transform:translateY(-1px);}
-.ct-btn.secondary{background:transparent;color:var(--cobalt);border:1.5px solid var(--cobalt);}
-.ct-btn.secondary:hover{background:var(--cobalt);color:var(--white);transform:translateY(-1px);}
-.ct-btn svg{width:14px;height:14px;}
-.ct-btn-email{
-  display:block;
-  font-family:var(--title-font);
-  font-size:clamp(1rem,2.5vw,1.35rem);
-  font-weight:400;
-  font-style:italic;
-  color:var(--cobalt);
-  text-decoration:none;
-  letter-spacing:0.02em;
-  transition:color 0.2s, letter-spacing 0.2s;
-  margin-bottom:0.5rem;
-}
-.ct-btn-email:hover{color:var(--ink);letter-spacing:0.04em;}
-.ct-footer-line{font-family:var(--body-font);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bone-dim);}
+/* ── LET'S CONNECT — folded into the home page, right under Selected
+   Work, so the dark theme runs unbroken to the bottom of the page
+   instead of handing back off to the bone Contact page it replaced. ── */
+/* Generous top padding on desktop so this doesn't peek into view while
+   someone's still looking at the Selected Work carousel above it. */
+.home-connect{background:var(--dark);padding:9rem 3rem 6rem;text-align:center;}
+.hc-inner{max-width:560px;margin:0 auto;}
+.hc-title{font-family:var(--title-font);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:400;color:var(--white);line-height:1.05;letter-spacing:0.01em;margin-bottom:2.25rem;}
+.hc-title em{font-style:italic;color:var(--cobalt-lt);}
+.hc-btns{display:flex;flex-direction:column;gap:0.85rem;align-items:center;margin-bottom:2.5rem;}
+.hc-btn{display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;padding:0.95rem 2.5rem;font-family:var(--body-font);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,transform 0.15s,color 0.2s,border-color 0.2s;width:320px;max-width:100%;}
+.hc-btn.primary{background:var(--cobalt);color:var(--white);}
+.hc-btn.primary:hover{background:var(--cobalt-lt);transform:translateY(-1px);}
+.hc-btn.secondary{background:transparent;color:var(--cobalt-lt);border:1.5px solid rgba(250,248,244,0.2);}
+.hc-btn.secondary:hover{background:rgba(250,248,244,0.06);border-color:var(--cobalt-lt);color:var(--white);transform:translateY(-1px);}
+.hc-btn svg{width:14px;height:14px;}
+.hc-footer{font-family:var(--body-font);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,248,244,0.3);}
 
 /* ── ANIMATIONS ───────────────────── */
 @keyframes up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
@@ -598,7 +603,7 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
   .r-side{padding:2rem 1.25rem 3rem;}
   .resume-hdr{flex-direction:column;align-items:flex-start;gap:1.25rem;padding-left:1.25rem;}
   .dl-btn{margin-left:0;}
-  #page-contact{padding-left:1.25rem;padding-right:1.25rem;}
+  .home-connect{padding:4rem 1.25rem 6rem;}
 }
 
 /* ── MOBILE (max 768px) — single column everything ── */
@@ -640,6 +645,8 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
   .work-cats{padding:0 0.5rem;overflow-x:auto;}
   .wcat{padding:0.85rem 0.75rem;font-size:0.58rem;letter-spacing:0.1em;}
   .mb-card{margin-bottom:8px;}
+
+  .hc-btn{width:100%;}
 }
 /* ── HAMBURGER MENU ───────────────── */
 .nav-hamburger{
@@ -792,7 +799,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
   <ul class="nav-links">
     <li><a onclick="go('work')" data-p="work">Work</a></li>
     <li><a onclick="go('resume')" data-p="resume">Resume</a></li>
-    <li><a onclick="go('contact')" data-p="contact" class="nav-cta">Contact</a></li>
+    <li><a onclick="goConnect()" class="nav-cta">Contact</a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleDrawer()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -810,7 +817,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <li><a onclick="go('resume');closeDrawer();" data-p="resume">Resume</a></li>
   </ul>
   <div class="nav-drawer-cta">
-    <a onclick="go('contact');closeDrawer();">Contact</a>
+    <a onclick="goConnect();closeDrawer();">Contact</a>
   </div>
   <p class="nav-drawer-footer">connorannand.com &nbsp;·&nbsp; US &amp; UK</p>
 </div>
@@ -911,8 +918,40 @@ nav.clear .nav-hamburger span{background:var(--white);}
           <template class="modal-data"><span class="m-tag">Stranger Studios · Short Films &amp; Mini Docs</span><span class="m-title">48 Hour Film Festival — "The Dilemmist"</span><span class="m-src">Short%20Films%20Mini%20Docs/StrangerStudios_48HFP_2026_TheDilemmist_Teaser.mp4</span><span class="m-body">Winning 48-Hour Film Festival Denver submission. Producer &amp; Location Manager for Stranger Studios.</span></template>
         </div>
 
+        <!-- Silent clone of panel 1, appended so the scroller has a real
+             "next" panel after 05/05 — native scroll-snap glides into it
+             exactly like any other panel, then JS hands off to the real
+             panel 1 underneath with an invisible, un-animated jump.
+             Inert: no shield, no modal, out of tab order. -->
+        <div class="ss-panel ss-panel-clone" aria-hidden="true">
+          <video class="ss-vis" src="Branding/Cruisers_Hero_Desktop-.mp4" muted loop playsinline preload="auto"></video>
+          <div class="ss-panel-info">
+            <p class="ss-eyebrow">Branding</p>
+            <h3 class="ss-title">Cruisers Website Banner Video</h3>
+            <p class="ss-blurb">Producer/Director for Denver Cycling Club Cruisers. Banner video built for the Cruisers website homepage.</p>
+            <a class="ss-link" href="#" tabindex="-1" onclick="return false;">View Branding <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5.5h9M6.5 2l4 3.5-4 3.5"/></svg></a>
+          </div>
+        </div>
+
       </div>
       <div class="ss-cue" id="ssCue">Scroll ↓</div>
+    </div>
+  </div>
+
+  <div class="home-connect" id="home-connect">
+    <div class="hc-inner">
+      <h2 class="hc-title">Let's <em>Connect</em></h2>
+      <div class="hc-btns">
+        <a href="mailto:johnconnorannand@gmail.com" class="hc-btn primary">
+          <svg viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="10" rx="1.5"/><path d="M1 3l6 4 6-4"/></svg>
+          johnconnorannand@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/connor-annand-65248a106" target="_blank" rel="noopener" class="hc-btn secondary">
+          <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="13" height="13" rx="2"/><path d="M5 6.5V11M5 4.5v.01M7.5 11V8.5a1.5 1.5 0 013 0V11M7.5 8.5V6.5"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <p class="hc-footer">connorannand.com &nbsp;·&nbsp; US &amp; UK</p>
     </div>
   </div>
 </div>
@@ -1689,30 +1728,6 @@ nav.clear .nav-hamburger span{background:var(--white);}
 </div>
 
 <!-- ════════════ CONTACT ════════════ -->
-<div id="page-contact" class="page">
-  <div class="ct-inner">
-    <div class="ct-top-rule"></div>
-    <h1 class="ct-name">Connor Annand</h1>
-    <p class="ct-tagline">A producer driven by more than the shoot day.</p>
-    <div class="thin-rule"></div>
-    <p class="ct-connect-label">Let's Connect</p>
-    <p class="ct-exp-line">5+ years of experience, always looking to connect.</p>
-    <div class="ct-btns">
-      <a href="mailto:johnconnorannand@gmail.com" class="ct-btn primary">
-        <svg viewBox="0 0 14 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="10" rx="1.5"/><path d="M1 3l6 4 6-4"/></svg>
-        johnconnorannand@gmail.com
-      </a>
-      <a href="https://www.linkedin.com/in/connor-annand-65248a106" target="_blank" rel="noopener" class="ct-btn secondary">
-        <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="13" height="13" rx="2"/><path d="M5 6.5V11M5 4.5v.01M7.5 11V8.5a1.5 1.5 0 013 0V11M7.5 8.5V6.5"/></svg>
-        LinkedIn
-      </a>
-    </div>
-    <div class="thin-rule" style="margin-top:3rem;"></div>
-    <p class="ct-footer-line">connorannand.com &nbsp;·&nbsp; US &amp; UK</p>
-  </div>
-</div>
-
-
 <!-- VIDEO MODAL -->
 <div class="modal-backdrop" id="modal" onclick="handleBackdropClick(event)">
   <div class="modal-box">
@@ -1743,9 +1758,9 @@ const nav=document.getElementById('nav');
 
 // ── BROWSER BACK BUTTON — always returns to Home first ──────────
 // Home->subpage pushes one history entry; hopping between subpages
-// (work/resume/contact) replaces that same entry instead of stacking
-// more, so a single "back" press from anywhere always lands on Home
-// before the next "back" leaves the site.
+// (work/resume) replaces that same entry instead of stacking more, so
+// a single "back" press from anywhere always lands on Home before the
+// next "back" leaves the site.
 // Sandboxed preview embeds (about:srcdoc, cross-origin iframes) block
 // history.pushState/replaceState outright, so every call to it goes
 // through this one safe wrapper.
@@ -1756,7 +1771,7 @@ function safeHistory(method,id){
 
 function go(id,fromHistory){
   closeModal();
-  ['home','work','resume','contact'].forEach(function(p){
+  ['home','work','resume'].forEach(function(p){
     document.getElementById('page-'+p).classList.toggle('active',p===id);
   });
   document.querySelectorAll('.nav-links a[data-p]').forEach(function(a){
@@ -1787,6 +1802,21 @@ window.addEventListener('popstate',function(e){
 });
 
 function goWork(cat){go('work');setTimeout(function(){switchCat(cat);},80);}
+
+// "Contact" now just scrolls to the Let's Connect section at the bottom
+// of the home page instead of switching to a separate page.
+function goConnect(){
+  if(lastPage!=='home'){
+    go('home');
+    setTimeout(function(){
+      var el=document.getElementById('home-connect');
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    },80);
+  } else {
+    var el=document.getElementById('home-connect');
+    if(el) el.scrollIntoView({behavior:'smooth'});
+  }
+}
 
 function switchCat(id){
   document.querySelectorAll('.wcat').forEach(function(el){
@@ -2001,15 +2031,31 @@ function initSelectedStack(){
   if(!scroller) return;
   var counter=document.getElementById('ssCount');
   var cue=document.getElementById('ssCue');
-  ssPanels=scroller.querySelectorAll('.ss-panel');
+  // ssPanels is the 5 "real" panels only — the progress counter and
+  // active-video tracking key off this list. The clone (a silent copy
+  // of panel 1 appended after panel 5) is observed separately below so
+  // native scroll-snap can glide into it just like any other panel;
+  // it's never counted as a 6th step.
+  ssPanels=scroller.querySelectorAll('.ss-panel:not(.ss-panel-clone)');
+  var ssClone=scroller.querySelector('.ss-panel-clone');
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       var vid=entry.target.querySelector('video.ss-vis');
+      var isClone=entry.target===ssClone;
       if(entry.isIntersecting && entry.intersectionRatio>0.6){
-        var idx=Array.prototype.indexOf.call(ssPanels,entry.target)+1;
-        ssActiveIndex=idx-1;
-        if(counter) counter.textContent=String(idx).padStart(2,'0');
-        if(cue) cue.style.opacity = idx===1 ? '' : '0';
+        if(isClone){
+          // The clone is pixel-identical to panel 1, so swapping the
+          // scroll position back to the real thing the instant it's
+          // fully snapped-to is invisible — no animation, no jump felt.
+          // (Direct scrollTop assignment is always instant, unaffected
+          // by the page's scroll-behavior:smooth.)
+          scroller.scrollTop=0;
+        } else {
+          var idx=Array.prototype.indexOf.call(ssPanels,entry.target)+1;
+          ssActiveIndex=idx-1;
+          if(counter) counter.textContent=String(idx).padStart(2,'0');
+          if(cue) cue.style.opacity = idx===1 ? '' : '0';
+        }
         if(vid){ if(vid.readyState===0) vid.load(); vid.play().catch(function(){}); }
       } else if(vid){
         vid.pause();
@@ -2018,6 +2064,7 @@ function initSelectedStack(){
     });
   },{root:scroller,threshold:[0.6]});
   ssPanels.forEach(function(p){ io.observe(p); });
+  if(ssClone) io.observe(ssClone);
 }
 function pauseSelectedStack(){
   if(!ssPanels) return;
@@ -2080,10 +2127,12 @@ function handleEmailClick(e){
 
 (function(){
   var startPage=(location.hash||'').replace('#','');
-  if(['home','work','resume','contact'].indexOf(startPage)===-1)startPage='home';
+  var wantsConnect=(startPage==='contact'); // old bookmarked #contact links
+  if(['home','work','resume'].indexOf(startPage)===-1)startPage='home';
   safeHistory('replaceState',startPage);
   lastPage=startPage;
   go(startPage,true);
+  if(wantsConnect){ setTimeout(goConnect,150); }
 })();
 </script>
 </body>
