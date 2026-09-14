@@ -371,8 +371,6 @@ video.ss-vis{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;b
 #cat-pr .mb-card-vis.wide{min-height:280px;object-fit:cover;}
 #cat-shortfilms .masonry{columns:1;}
 #cat-branding .masonry{display:grid !important;grid-template-columns:1fr 1fr;gap:8px;}
-#cat-branding .mb-card:nth-child(1){grid-column:1/3;}
-#cat-branding .mb-card:nth-child(1) .mb-card-vis{min-height:560px;}
 #cat-branding .mb-card-vis{width:100%;display:block;object-fit:cover;}
 #cat-broadcast video.mb-card-vis{
   will-change:transform;
@@ -622,8 +620,6 @@ img.mb-card-vis{object-fit:cover;width:100%;display:block;}
 
   /* Branding grid single column */
   #cat-branding .masonry{display:flex !important;flex-direction:column;gap:8px;}
-  #cat-branding .mb-card:nth-child(1){grid-row:auto;grid-column:auto;}
-  #cat-branding .mb-card:nth-child(1) .mb-card-vis{min-height:unset;}
 
   /* Split stack — shorter side padding, taller frame */
   .ss-frame{height:82vh;margin:0 1.25rem;}
@@ -924,7 +920,7 @@ nav.clear .nav-hamburger span{background:var(--white);}
              panel 1 underneath with an invisible, un-animated jump.
              Inert: no shield, no modal, out of tab order. -->
         <div class="ss-panel ss-panel-clone" aria-hidden="true">
-          <video class="ss-vis" src="Branding/Cruisers_Hero_Desktop-.mp4" muted loop playsinline preload="auto"></video>
+          <video class="ss-vis" src="Branding/Cruisers_Hero_Desktop-.mp4" muted loop playsinline preload="none"></video>
           <div class="ss-panel-info">
             <p class="ss-eyebrow">Branding</p>
             <h3 class="ss-title">Cruisers Website Banner Video</h3>
@@ -1029,22 +1025,6 @@ nav.clear .nav-hamburger span{background:var(--white);}
         </template>
       </div>
 
-      <div class="mb-card float-f" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Parking_Spot_poster.jpg" src="Broadcast/Parking_Spot_Face-Off.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest('.mb-card'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Parking Spot Face-Off</p>
-          <p class="mb-card-desc-text">Las Vegas Knights x Denver Toyota TDA. Associate Producer.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Las Vegas Knights x Denver Toyota TDA</span>
-          <span class="m-title">Parking Spot Face-Off</span>
-          <span class="m-src">Broadcast/Parking_Spot_Face-Off.mp4</span>
-          <span class="m-body">Associate Producer. <strong>Pre-Production:</strong> Clearance for bumper sticker. <strong>Post:</strong> Booking AVO re-record, and standard post edits.</span>
-        </template>
-      </div>
-
       <div class="mb-card float-e" onclick="openModal(this)">
         <video class="mb-card-vis featured" poster="Broadcast/Posters/Dear_Snow_poster.jpg" src="Broadcast/Dear_Snow_30.mp4" autoplay muted loop playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
@@ -1074,22 +1054,6 @@ nav.clear .nav-hamburger span{background:var(--white);}
           <span class="m-title">Dear Crew, 30</span>
           <span class="m-src">Broadcast/Dear_Crew_30_copy.mp4</span>
           <span class="m-body">From Social Producer to B Cam Producer on a large-scale broadcast shoot for Toyota TDA. <strong>Pre-production:</strong> Social creative direction, scheduling, agency liaison to production company for social. <strong>Shoot:</strong> Handle a team of 12 crew members. Capturing social media footage, cable cam footage, arm car running footage, and A Cam shots when needed. <strong>Post:</strong> AVO Booking and Recording.</span>
-        </template>
-      </div>
-
-      <div class="mb-card float-a" onclick="openModal(this)">
-        <video class="mb-card-vis featured" poster="Broadcast/Posters/Zamboni_poster.jpg" src="Broadcast/Zamboni_Machine.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest('.mb-card'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Zamboni Machine</p>
-          <p class="mb-card-desc-text">Las Vegas Knights x Denver Toyota TDA. Associate Producer.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Las Vegas Knights x Denver Toyota TDA</span>
-          <span class="m-title">Zamboni Machine</span>
-          <span class="m-src">Broadcast/Zamboni_Machine.mp4</span>
-          <span class="m-body">Associate Producer. <strong>Pre-Production:</strong> Clearance for bumper sticker. <strong>Post:</strong> Booking AVO re-record, and standard post edits.</span>
         </template>
       </div>
 
@@ -1553,22 +1517,6 @@ nav.clear .nav-hamburger span{background:var(--white);}
     <div class="masonry">
 
       <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Branding/Cruisers_Hero_Desktop-.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest('.mb-card'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Cruisers Website Banner Video</p>
-          <p class="mb-card-desc-text">Producer/Director for Denver Cycling Club Cruisers.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Cruisers · Denver Cycling Community</span>
-          <span class="m-title">Cruisers Website Banner Video</span>
-          <span class="m-src">Branding/Cruisers_Hero_Desktop-.mp4</span>
-          <span class="m-body">Producer/Director for Denver Cycling Club Cruisers. Banner video built for the Cruisers website homepage.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
-        </template>
-      </div>
-
-      <div class="mb-card" onclick="openModal(this)">
         <video class="mb-card-vis featured" poster="Branding/Posters/Branding_video_Thumbnail.jpg" src="Branding/Cruisers_Hero_Branding_Video_.mp4" autoplay muted loop playsinline preload="metadata"></video>
         <div class="mb-card-overlay"></div>
         <div class="mb-card-shield" onclick="openModal(this.closest('.mb-card'))"></div>
@@ -1581,22 +1529,6 @@ nav.clear .nav-hamburger span{background:var(--white);}
           <span class="m-title">Cruisers — Hero Branding Video</span>
           <span class="m-src">Branding/Cruisers_Hero_Branding_Video_.mp4</span>
           <span class="m-body">Edited, Sound Direction, and Animation for the Cruisers cycling community hero brand video. Built to capture the spirit of the Denver Tuesday evening ride culture and introduce the Cruisers visual identity.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
-        </template>
-      </div>
-
-      <div class="mb-card" onclick="openModal(this)">
-        <video class="mb-card-vis featured" src="Branding/CuisersRebrand_Website.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        <div class="mb-card-overlay"></div>
-        <div class="mb-card-shield" onclick="openModal(this.closest('.mb-card'))"></div>
-        <div class="mb-card-desc">
-          <p class="mb-card-desc-title">Cruisers — Website Creation &amp; Development</p>
-          <p class="mb-card-desc-text">Full website creation and development for the Cruisers cycling community brand.</p>
-        </div>
-        <template class="modal-data">
-          <span class="m-tag">Cruisers · Web Development</span>
-          <span class="m-title">Cruisers — Website Creation &amp; Development</span>
-          <span class="m-src">Branding/CuisersRebrand_Website.mp4</span>
-          <span class="m-body">Full website creation and development for the Cruisers cycling community. Built to reflect the brand identity and serve the Denver cycling community across desktop and mobile.<br><br><a href="https://cruisers.cc" target="_blank" rel="noopener" style="color:var(--cobalt-lt);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Visit cruisers.cc ↗</a></span>
         </template>
       </div>
 
@@ -2043,28 +1975,58 @@ function initSelectedStack(){
       var vid=entry.target.querySelector('video.ss-vis');
       var isClone=entry.target===ssClone;
       if(entry.isIntersecting && entry.intersectionRatio>0.6){
-        if(isClone){
-          // The clone is pixel-identical to panel 1, so swapping the
-          // scroll position back to the real thing the instant it's
-          // fully snapped-to is invisible — no animation, no jump felt.
-          // (Direct scrollTop assignment is always instant, unaffected
-          // by the page's scroll-behavior:smooth.)
-          scroller.scrollTop=0;
-        } else {
+        if(!isClone){
           var idx=Array.prototype.indexOf.call(ssPanels,entry.target)+1;
           ssActiveIndex=idx-1;
           if(counter) counter.textContent=String(idx).padStart(2,'0');
           if(cue) cue.style.opacity = idx===1 ? '' : '0';
+          // The clone's video loads on-demand once panel 5 is reached,
+          // rather than eagerly at page load — it's the same file as
+          // panel 1's hero video, so preloading it up front just meant
+          // two competing downloads of the heaviest clip on first paint.
+          if(idx===ssPanels.length && ssClone){
+            var cloneVid=ssClone.querySelector('video.ss-vis');
+            if(cloneVid && cloneVid.readyState===0) cloneVid.load();
+          }
         }
         if(vid){ if(vid.readyState===0) vid.load(); vid.play().catch(function(){}); }
-      } else if(vid){
-        vid.pause();
-        vid.currentTime=0;
+      } else {
+        if(vid){ vid.pause(); vid.currentTime=0; }
       }
     });
   },{root:scroller,threshold:[0.6]});
   ssPanels.forEach(function(p){ io.observe(p); });
   if(ssClone) io.observe(ssClone);
+
+  // Only hand off from the clone back to the real panel 1 once the
+  // scroll has actually come to rest — resetting scrollTop mid-momentum
+  // fights the browser's own inertial scrolling and is what made 5/5 ->
+  // 1/5 feel janky. Waiting for the scroll to settle first makes that
+  // transition land exactly like any other panel-to-panel snap, then
+  // makes one invisible, un-animated correction underneath it.
+  //
+  // Whether we're resting on the clone is checked directly against
+  // scrollTop here (rather than a flag set by the IntersectionObserver
+  // above) because IO delivery is asynchronous and isn't guaranteed to
+  // land before "scrollend" fires — on a fast/instant snap the two can
+  // race, which previously meant the reset was sometimes missed (or
+  // fired late, on a later unrelated scroll).
+  function settleLoop(){
+    if(!ssClone) return;
+    var maxScroll=scroller.scrollHeight-scroller.clientHeight;
+    if(scroller.scrollTop>=maxScroll-2){
+      scroller.scrollTop=0;
+    }
+  }
+  if('onscrollend' in window){
+    scroller.addEventListener('scrollend', settleLoop);
+  } else {
+    var ssSettleTimer=null;
+    scroller.addEventListener('scroll', function(){
+      clearTimeout(ssSettleTimer);
+      ssSettleTimer=setTimeout(settleLoop,120);
+    });
+  }
 }
 function pauseSelectedStack(){
   if(!ssPanels) return;
